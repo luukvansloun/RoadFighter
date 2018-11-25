@@ -10,13 +10,7 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-7
-
-before_install:
-- mkdir cmake-dist
-- travis_retry wget -qO- https://cmake.org/files/v3.12/cmake-3.12.1-Linux-x86_64.tar.gz | sudo tar --strip-components=1 -C cmake-dist -xz
-- export PATH=$PWD/cmake-dist/bin:$PATH;
-- sudo apt-get -qq update
-- sudo make
+    - cmake
 
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-7" CC="gcc-7"; fi
@@ -25,4 +19,4 @@ script:
 - mkdir build
 - cd build
 - gcc -v && g++ -v && cmake --version
-- cmake .. && make RoadFighter
+- cmake -DCMAKE_CXX_COMPILER=$COMPILER .. && make
