@@ -11,10 +11,21 @@ double tick = 1.0 / 60.0;
 
 int main() {
 
-    std::shared_ptr<Entity> e;
-    e->test_f();
-
     sf::RenderWindow window(sf::VideoMode(800, 600), "RoadFighter");
+
+    sf::Texture texture;
+    if(!texture.loadFromFile("sprites/player_sprite.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite sprite(texture);
+
+    std::pair<float, float> co = Transformation::getInstance()->get_coordinates(std::make_pair(0.0, -2),
+            window.getView().getSize().x, window.getView().getSize().y);
+
+    sprite.setPosition(co.first, co.second);
+
+    sprite.setScale(0.2f, 0.2f);
+
 
     while(window.isOpen()) {
 
@@ -27,7 +38,9 @@ int main() {
         }
 
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::White);
+
+        window.draw(sprite);
         window.display();
     }
 

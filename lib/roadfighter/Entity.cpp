@@ -4,8 +4,8 @@
 
 #include "Entity.h"
 
-void Entity::test_f() {
+void roadfighter::Entity::test_f() {
     std::cout << "TEST" << std::endl;
 }
 
-Entity::Entity() : test() {}
+roadfighter::Entity::Entity() : test() {}

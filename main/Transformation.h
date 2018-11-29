@@ -13,7 +13,7 @@ class Transformation {
 public:
     static std::shared_ptr<Transformation> getInstance();
 
-//    std::pair<float, float> get_coordinates(std::pair<int, int> co, int x, int y);
+    std::pair<float, float> get_coordinates(std::pair<float, float> co, float x, float y);
 
     virtual ~Transformation();
 private:

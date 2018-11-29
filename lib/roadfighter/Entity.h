@@ -5,15 +5,16 @@
 
 #include <iostream>
 
-class Entity {
-private:
-    std::string test = "Test1";
+namespace roadfighter {
+    class Entity {
+    private:
+        std::string test = "Test1";
 
-public:
-    Entity();
+    public:
+        Entity();
 
-    void test_f();
-};
-
+        void test_f();
+    };
+}
 
 #endif //ROADFIGHTER_ENTITY_H
