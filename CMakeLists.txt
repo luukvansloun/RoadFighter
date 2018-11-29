@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.10.2)
-project(RoadFighter)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10.2)
+PROJECT(RoadFighter)
 
-set(CMAKE_CXX_STANDARD 14)
-
+SET(CMAKE_CXX_STANDARD 14)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/Modules/)
 SET(CMAKE_CXX_FLAGS  "-Wall")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
@@ -12,14 +11,17 @@ FIND_PACKAGE(SFML 2.4.2 COMPONENTS graphics system window)
 FILE(GLOB SRC src/*.cpp src/*.h)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 
-set(RF_SOURCES ./main/resources/lib/roadfighter/Entity.h ./main/resources/lib/roadfighter/Entity.cpp)
+SET(RF_INCLUDE_DIR lib/roadfighter)
+ADD_SUBDIRECTORY(lib/roadfighter)
 
-add_library(rf SHARED ${RF_SOURCES})
+INCLUDE_DIRECTORIES(${RF_INCLUDE_DIR})
 
-set(SOURCE_FILES main/cpp/main.cpp main/cpp/Transformation.cpp main/cpp/Transformation.h)
+SET(ROADFIGHTER_SRC main/main.cpp main/Transformation.h main/Transformation.cpp)
+ADD_EXECUTABLE(RoadFighter ${ROADFIGHTER_SRC})
+TARGET_LINK_LIBRARIES(RoadFighter ${SFML_LIBRARIES})
+TARGET_LINK_LIBRARIES(RoadFighter roadfighter)
+ADD_DEPENDENCIES(RoadFighter roadfighter)
 
-add_executable(RoadFighter ${SOURCE_FILES})
 
-target_link_libraries(RoadFighter ${SFML_LIBRARIES})
-target_link_libraries(RoadFighter rf)
+
 

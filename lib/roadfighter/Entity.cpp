@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 void Entity::test_f() {
-    std::cout << this->test << std::endl;
+    std::cout << "TEST" << std::endl;
 }
 
 Entity::Entity() : test() {}

@@ -8,18 +8,17 @@
 #include <iostream>
 #include <memory>
 
-
 class Transformation {
-protected:
-    Transformation();
 
 public:
+    static std::shared_ptr<Transformation> getInstance();
+
+//    std::pair<float, float> get_coordinates(std::pair<int, int> co, int x, int y);
+
     virtual ~Transformation();
-
-    static Transformation* Instance();
-
 private:
-    static Transformation* transformation;
+    static std::shared_ptr<Transformation> instance;
+
 };
 
 

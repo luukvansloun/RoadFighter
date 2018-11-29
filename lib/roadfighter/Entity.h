@@ -1,7 +1,5 @@
 //
 // Created by luuk on 26-11-18.
-//
-
 #ifndef ROADFIGHTER_ENTITY_H
 #define ROADFIGHTER_ENTITY_H
 
