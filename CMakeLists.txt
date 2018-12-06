@@ -18,8 +18,9 @@ INCLUDE_DIRECTORIES(${RF_INCLUDE_DIR})
 
 SET(ROADFIGHTER_SRC
         main/main.cpp main/Transformation.cpp main/Transformation.h
+        main/Game.cpp main/Game.h
         roadfighterSFML/PlayerCarSFML.cpp roadfighterSFML/PlayerCarSFML.h
-        roadfighterSFML/RacingCarSFML.cpp roadfighterSFML/RacingCarSFML.h roadfighterSFML/PlayerCarSFML_Factory.cpp roadfighterSFML/PlayerCarSFML_Factory.h roadfighterSFML/RacingCarSFML_Factory.cpp roadfighterSFML/RacingCarSFML_Factory.h main/Game.cpp main/Game.h)
+        roadfighterSFML/SFMLFactory.cpp roadfighterSFML/SFMLFactory.h)
 
 ADD_EXECUTABLE(RoadFighter ${ROADFIGHTER_SRC})
 TARGET_LINK_LIBRARIES(RoadFighter ${SFML_LIBRARIES})

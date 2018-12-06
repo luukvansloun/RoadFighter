@@ -9,17 +9,18 @@
 #include <memory>
 #include "Entity.h"
 
+namespace roadfighter {
+    class World : public roadfighter::Entity {
+    private:
+        float x;
+        float y;
 
-class World : public roadfighter::Entity {
-private:
-    float x;
-    float y;
+    public:
+        World();
 
-public:
-    World();
-
-    virtual ~World();
-};
+        virtual ~World();
+    };
+}
 
 
 #endif //ROADFIGHTER_WORLD_H
