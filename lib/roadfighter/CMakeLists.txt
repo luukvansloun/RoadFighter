@@ -1,7 +1,5 @@
-SET(RF_SRC ${CMAKE_CURRENT_SOURCE_DIR}/Entity.h ${CMAKE_CURRENT_SOURCE_DIR}/Entity.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/PlayerCarEntity.h ${CMAKE_CURRENT_SOURCE_DIR}/PlayerCarEntity.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/RacingCarEntity.h ${CMAKE_CURRENT_SOURCE_DIR}/RacingCarEntity.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/World.h ${CMAKE_CURRENT_SOURCE_DIR}/World.cpp)
+SET(RF_SRC EntityFactory.h EntityFactory.cpp Entity.h Entity.cpp PlayerCar.h PlayerCar.cpp RacingCar.h RacingCar.cpp
+        World.h World.cpp)
 
 SET(LIB_TYPE SHARED)
 

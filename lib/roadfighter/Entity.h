@@ -5,12 +5,12 @@
 
 #include <iostream>
 
-
-class Entity {
-public:
-    float x = 0;
-    float y = 0;
-};
-
+namespace roadfighter {
+    class Entity {
+    public:
+        float x = 0;
+        float y = 0;
+    };
+}
 
 #endif //ROADFIGHTER_ENTITY_H

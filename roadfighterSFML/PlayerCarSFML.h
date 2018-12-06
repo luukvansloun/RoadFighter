@@ -9,10 +9,12 @@
 #include <memory>
 
 #include <SFML/Graphics.hpp>
+#include <PlayerCar.h>
+#include "EntityFactory.h"
 
 namespace roadfighterSFML {
 
-    class PlayerCarSFML {
+    class PlayerCarSFML : public roadfighter::PlayerCar {
     public:
         PlayerCarSFML();
 
@@ -31,10 +33,7 @@ namespace roadfighterSFML {
         sf::Sprite sprite;
     };
 
-    class PlayerCarSFML_Factory {
-    public:
-        std::shared_ptr<PlayerCarSFML> create_entity();
-    };
+
 }
 
 #endif //ROADFIGHTER_PLAYERCARSFML_H

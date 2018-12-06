@@ -10,7 +10,7 @@
 #include "Entity.h"
 
 
-class World : public Entity {
+class World : public roadfighter::Entity {
 private:
     float x;
     float y;

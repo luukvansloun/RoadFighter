@@ -15,10 +15,3 @@ roadfighterSFML::RacingCarSFML::~RacingCarSFML() {
 void roadfighterSFML::RacingCarSFML::setup_SFML() {
 
 }
-
-
-// ABSTRACT FACTORY CLASS
-
-std::shared_ptr<roadfighterSFML::RacingCarSFML> roadfighterSFML::RacingCarSFML_Factory::create_entity() {
-    return std::shared_ptr<roadfighterSFML::RacingCarSFML>();
-}

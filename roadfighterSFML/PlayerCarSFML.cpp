@@ -34,8 +34,4 @@ void roadfighterSFML::PlayerCarSFML::set_position(float x, float y) {
 }
 
 
-// ABSTRACT FACTORY CLASS
 
-std::shared_ptr<roadfighterSFML::PlayerCarSFML> roadfighterSFML::PlayerCarSFML_Factory::create_entity() {
-    return std::make_shared<roadfighterSFML::PlayerCarSFML>();
-}

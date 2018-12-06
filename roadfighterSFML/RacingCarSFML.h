@@ -8,11 +8,12 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include "EntityFactory.h"
 
 
 namespace roadfighterSFML {
 
-    class RacingCarSFML {
+    class RacingCarSFML : public roadfighter::Entity {
     public:
         RacingCarSFML();
 
@@ -22,11 +23,6 @@ namespace roadfighterSFML {
 
     private:
         sf::Texture t;
-    };
-
-    class RacingCarSFML_Factory {
-    public:
-        std::shared_ptr<RacingCarSFML> create_entity();
     };
 }
 

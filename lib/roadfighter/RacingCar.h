@@ -10,11 +10,11 @@
 #include "Entity.h"
 
 namespace roadfighter {
-    class RacingCarEntity : public Entity {
+    class RacingCar : public Entity {
     public:
-        RacingCarEntity();
+        RacingCar();
 
-        virtual ~RacingCarEntity();
+        virtual ~RacingCar();
 
         float getX() const;
 
@@ -27,13 +27,6 @@ namespace roadfighter {
     private:
         float x;
         float y;
-    };
-
-    class RacingCarEntity_Factory {
-    public:
-        RacingCarEntity_Factory();
-
-        std::shared_ptr<RacingCarEntity> create_entity();
     };
 }
 
