@@ -8,12 +8,13 @@
 #include "Transformation.h"
 
 #include "PlayerCar.h"
-
-// 1 second divided by FPS gives time/frame
-double tick = 1.0 / 60.0;
+#include "Game.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "RoadFighter");
+
+    auto game = std::make_shared<Game>();
+
+    game->run();
 
 //    // Create Player Car
 //    auto playercar = PlayerCarFactory().create_playercar();
@@ -26,23 +27,6 @@ int main() {
 //    playercar.first->setY(pc_co.second);
 //
 //    playercar.second->setup_sfml("sprites/player_sprite.png", playercar.first->getX(), playercar.first->getY());
-
-    while(window.isOpen()) {
-
-        sf::Event event;
-
-        while(window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-
-        }
-
-//        playercar.second->setup_sfml("sprites/player_sprite.png", playercar.first->getX(), playercar.first->getY());
-
-        window.clear(sf::Color::Black);
-        window.display();
-    }
 
     return 0;
 };

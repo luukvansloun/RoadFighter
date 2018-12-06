@@ -8,13 +8,17 @@
 #include <iostream>
 #include <memory>
 #include <Entity.h>
+#include "PlayerCarSFML.h"
 
 namespace roadfighterSFML {
-    class WorldSFML : public Entity {
+    class WorldSFML : public roadfighter::Entity {
     public:
+        const std::shared_ptr<roadfighter::Entity> getPlayercar() const;
+
+        void setPlayercar(const std::shared_ptr<roadfighter::Entity> playercar);
 
     private:
-        std::shared_ptr<
+        std::shared_ptr<roadfighter::Entity> playercar;
     };
 }
 

@@ -8,16 +8,22 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include <World.h>
-#include "../roadfighterSFML/SFMLFactory.h";
+#include "../roadfighterSFML/WorldSFML.h"
+
+#include "../roadfighterSFML/SFMLFactory.h"
 
 class Game {
 public:
+    Game();
+
+    virtual ~Game();
+
+    void run();
 
 private:
     std::shared_ptr<sf::RenderWindow> window;
     std::shared_ptr<roadfighterSFML::SFMLFactory> sfml_factory;
-    std::shared_ptr<roadfighter::World> world;
+    std::shared_ptr<roadfighterSFML::WorldSFML> world;
 };
 
 

@@ -6,8 +6,6 @@
 
 
 
-World::~World() {
+roadfighter::World::~World() {}
 
-}
-
-World::World() {}
+roadfighter::World::World() {}
