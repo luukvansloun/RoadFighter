@@ -15,14 +15,14 @@ namespace roadfighterSFML {
 
     class RacingCarSFML : public roadfighter::Entity {
     public:
-        RacingCarSFML();
+        RacingCarSFML(std::shared_ptr<sf::RenderWindow> window);
 
         virtual ~RacingCarSFML();
 
-        void setup_SFML();
-
     private:
-        sf::Texture t;
+        sf::Texture texture;
+        sf::Sprite sprite;
+        std::shared_ptr<sf::RenderWindow> window;
     };
 }
 

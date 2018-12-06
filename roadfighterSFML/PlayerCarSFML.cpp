@@ -6,7 +6,9 @@
 
 // PLAYERCAR SFML CLASS
 
-roadfighterSFML::PlayerCarSFML::PlayerCarSFML() {}
+roadfighterSFML::PlayerCarSFML::PlayerCarSFML(std::shared_ptr<sf::RenderWindow> window) {
+    this->window = window;
+}
 
 roadfighterSFML::PlayerCarSFML::~PlayerCarSFML() {}
 
@@ -32,6 +34,8 @@ void roadfighterSFML::PlayerCarSFML::setSprite(const sf::Sprite &sprite) {
 void roadfighterSFML::PlayerCarSFML::set_position(float x, float y) {
     sprite.setPosition(x, y);
 }
+
+
 
 
 

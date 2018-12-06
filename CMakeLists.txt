@@ -20,7 +20,9 @@ SET(ROADFIGHTER_SRC
         main/main.cpp main/Transformation.cpp main/Transformation.h
         main/Game.cpp main/Game.h
         roadfighterSFML/PlayerCarSFML.cpp roadfighterSFML/PlayerCarSFML.h
-        roadfighterSFML/SFMLFactory.cpp roadfighterSFML/SFMLFactory.h)
+        roadfighterSFML/RacingCarSFML.cpp roadfighterSFML/RacingCarSFML.h
+        roadfighterSFML/SFMLFactory.cpp roadfighterSFML/SFMLFactory.h
+        roadfighterSFML/WorldSFML.cpp roadfighterSFML/WorldSFML.h)
 
 ADD_EXECUTABLE(RoadFighter ${ROADFIGHTER_SRC})
 TARGET_LINK_LIBRARIES(RoadFighter ${SFML_LIBRARIES})

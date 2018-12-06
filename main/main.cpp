@@ -41,11 +41,6 @@ int main() {
 //        playercar.second->setup_sfml("sprites/player_sprite.png", playercar.first->getX(), playercar.first->getY());
 
         window.clear(sf::Color::Black);
-
-
-//        window.draw(playercar.second->getSprite());
-
-
         window.display();
     }
 

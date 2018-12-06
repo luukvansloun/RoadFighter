@@ -6,12 +6,8 @@
 
 // RACINGCAR SFML CLASS
 
-roadfighterSFML::RacingCarSFML::RacingCarSFML() {}
-
-roadfighterSFML::RacingCarSFML::~RacingCarSFML() {
-
+roadfighterSFML::RacingCarSFML::RacingCarSFML(std::shared_ptr<sf::RenderWindow> window) {
+    this->window = window;
 }
 
-void roadfighterSFML::RacingCarSFML::setup_SFML() {
-
-}
+roadfighterSFML::RacingCarSFML::~RacingCarSFML() {}

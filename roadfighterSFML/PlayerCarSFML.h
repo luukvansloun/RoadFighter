@@ -16,7 +16,7 @@ namespace roadfighterSFML {
 
     class PlayerCarSFML : public roadfighter::PlayerCar {
     public:
-        PlayerCarSFML();
+        PlayerCarSFML(std::shared_ptr<sf::RenderWindow> window);
 
         virtual ~PlayerCarSFML();
 
@@ -31,6 +31,7 @@ namespace roadfighterSFML {
     private:
         sf::Texture texture;
         sf::Sprite sprite;
+        std::shared_ptr<sf::RenderWindow> window;
     };
 
 
