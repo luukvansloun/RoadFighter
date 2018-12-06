@@ -12,27 +12,15 @@
 namespace roadfighter {
     class PlayerCar : public Entity {
     public:
-        PlayerCar();
-
-        virtual ~PlayerCar();
-
-        float getX() const;
-
-        void setX(float x);
-
-        float getY() const;
-
-        void setY(float y);
-
         int getSpeed() const;
 
         void setSpeed(int speed);
 
         int getMax_speed() const;
 
+        void draw() {};
+
     private:
-        float x;
-        float y;
         int speed = 0;
         int max_speed = 400;
     };

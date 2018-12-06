@@ -7,18 +7,25 @@
 
 #include <iostream>
 #include <memory>
-#include "Entity.h"
+#include "PlayerCar.h"
 
 namespace roadfighter {
     class World : public roadfighter::Entity {
     private:
-        float x;
-        float y;
+        std::shared_ptr<roadfighter::Entity> playercar;
 
     public:
         World();
 
         virtual ~World();
+
+        const std::shared_ptr<roadfighter::Entity> &getPlayercar() const;
+
+        void setPlayercar(const std::shared_ptr<roadfighter::Entity> &playercar);
+
+        void move_player_right();
+
+        void move_player_left();
     };
 }
 

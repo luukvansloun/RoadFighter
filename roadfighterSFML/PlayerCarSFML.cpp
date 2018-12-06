@@ -7,34 +7,39 @@
 // PLAYERCAR SFML CLASS
 
 roadfighterSFML::PlayerCarSFML::PlayerCarSFML(std::shared_ptr<sf::RenderWindow> window) {
+    // Set Window
     this->window = window;
+
+    // Set Coördinates
+    this->setX(0.0);
+    this->setY(-1.0);
+
+    texture.loadFromFile("./sprites/player_sprite.png");
+
+    sprite.setTexture(texture);
+
+    sprite.setScale(0.2f, 0.2f);
+
+    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(0.0, -1.0),
+                                                             this->window->getView().getSize().x,
+                                                             this->window->getView().getSize().y);
+
+    this->sprite.setPosition(co.first, co.second);
+}
+
+void roadfighterSFML::PlayerCarSFML::change_position() {
+    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(this->getX(), this->getY()),
+                                                                this->window->getView().getSize().x,
+                                                                this->window->getView().getSize().y);
+
+    this->sprite.setPosition(co.first, co.second);
 }
 
 roadfighterSFML::PlayerCarSFML::~PlayerCarSFML() {}
 
-void roadfighterSFML::PlayerCarSFML::setup_sfml(std::string path_to_sprite, float x, float y) {
-    if(!texture.loadFromFile(path_to_sprite)) {
-        std::cout << "Faaack" << std::endl;
-    }
-    sprite.setTexture(texture);
-
-    sprite.setPosition(x, y);
-
-    sprite.setScale(0.2f, 0.2f);
+void roadfighterSFML::PlayerCarSFML::draw() {
+    this->window->draw(this->sprite);
 }
-
-const sf::Sprite &roadfighterSFML::PlayerCarSFML::getSprite() const {
-    return sprite;
-}
-
-void roadfighterSFML::PlayerCarSFML::setSprite(const sf::Sprite &sprite) {
-    PlayerCarSFML::sprite = sprite;
-}
-
-void roadfighterSFML::PlayerCarSFML::set_position(float x, float y) {
-    sprite.setPosition(x, y);
-}
-
 
 
 

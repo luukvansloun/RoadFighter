@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <PlayerCar.h>
 #include "EntityFactory.h"
+#include "../main/Transformation.h"
 
 namespace roadfighterSFML {
 
@@ -20,13 +21,9 @@ namespace roadfighterSFML {
 
         virtual ~PlayerCarSFML();
 
-        void setup_sfml(std::string path_to_sprite, float x, float y);
+        void change_position() override;
 
-        const sf::Sprite &getSprite() const;
-
-        void setSprite(const sf::Sprite &sprite);
-
-        void set_position(float x, float y);
+        void draw();
 
     private:
         sf::Texture texture;

@@ -7,9 +7,22 @@
 
 namespace roadfighter {
     class Entity {
-    public:
+    private:
         float x = 0;
         float y = 0;
+
+    public:
+        float getX() const;
+
+        void setX(float x);
+
+        float getY() const;
+
+        void setY(float y);
+
+        virtual void change_position() {};
+
+        virtual void draw() {};
     };
 }
 

@@ -8,7 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "../roadfighterSFML/WorldSFML.h"
+#include <World.h>
 
 #include "../roadfighterSFML/SFMLFactory.h"
 
@@ -23,7 +23,7 @@ public:
 private:
     std::shared_ptr<sf::RenderWindow> window;
     std::shared_ptr<roadfighterSFML::SFMLFactory> sfml_factory;
-    std::shared_ptr<roadfighterSFML::WorldSFML> world;
+    std::shared_ptr<roadfighter::World> world;
 };
 
 
