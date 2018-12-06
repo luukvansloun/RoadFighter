@@ -21,7 +21,7 @@ ADD_SUBDIRECTORY(lib/roadfighterSFML)
 
 INCLUDE_DIRECTORIES(${RF_SFML_DIR})
 
-SET(ROADFIGHTER_SRC main/main.cpp main/Transformation.h main/Transformation.cpp main/PlayerCar.cpp main/PlayerCar.h main/RacingCar.cpp main/RacingCar.h)
+SET(ROADFIGHTER_SRC main/main.cpp main/Transformation.h main/Transformation.cpp main/PlayerCar.cpp main/PlayerCar.h main/RacingCar.cpp main/RacingCar.h lib/roadfighter/World.cpp lib/roadfighter/World.h)
 ADD_EXECUTABLE(RoadFighter ${ROADFIGHTER_SRC})
 TARGET_LINK_LIBRARIES(RoadFighter ${SFML_LIBRARIES})
 TARGET_LINK_LIBRARIES(RoadFighter roadfighter)

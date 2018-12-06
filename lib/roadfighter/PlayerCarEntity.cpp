@@ -28,6 +28,14 @@ void roadfighter::PlayerCarEntity::setY(float y) {
     PlayerCarEntity::y = y;
 }
 
+int roadfighter::PlayerCarEntity::getSpeed() const {
+    return speed;
+}
+
+void roadfighter::PlayerCarEntity::setSpeed(int speed) {
+    PlayerCarEntity::speed = speed;
+}
+
 
 // ABSTRACT FACTORY CLASS
 

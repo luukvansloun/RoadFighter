@@ -10,7 +10,7 @@
 #include "Entity.h"
 
 namespace roadfighter {
-    class PlayerCarEntity : public roadfighter::Entity {
+    class PlayerCarEntity : public Entity {
     public:
         PlayerCarEntity();
 
@@ -24,9 +24,14 @@ namespace roadfighter {
 
         void setY(float y);
 
+        int getSpeed() const;
+
+        void setSpeed(int speed);
+
     private:
         float x;
         float y;
+        int speed = 0;
     };
 
     class PlayerCarEntity_Factory {

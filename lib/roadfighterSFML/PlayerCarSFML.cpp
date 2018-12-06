@@ -8,17 +8,30 @@
 
 roadfighterSFML::PlayerCarSFML::PlayerCarSFML() {}
 
-roadfighterSFML::PlayerCarSFML::~PlayerCarSFML() {
+roadfighterSFML::PlayerCarSFML::~PlayerCarSFML() {}
 
+void roadfighterSFML::PlayerCarSFML::setup_sfml(std::string path_to_sprite, float x, float y) {
+    if(!texture.loadFromFile(path_to_sprite)) {
+        std::cout << "Faaack" << std::endl;
+    }
+    sprite.setTexture(texture);
+
+    sprite.setPosition(x, y);
+
+    sprite.setScale(0.2f, 0.2f);
 }
 
-void roadfighterSFML::PlayerCarSFML::setup_SFML() {
+const sf::Sprite &roadfighterSFML::PlayerCarSFML::getSprite() const {
+    return sprite;
+}
 
+void roadfighterSFML::PlayerCarSFML::setSprite(const sf::Sprite &sprite) {
+    PlayerCarSFML::sprite = sprite;
 }
 
 
 // ABSTRACT FACTORY CLASS
 
 std::shared_ptr<roadfighterSFML::PlayerCarSFML> roadfighterSFML::PlayerCarSFML_Factory::create_entity() {
-    return std::shared_ptr<roadfighterSFML::PlayerCarSFML>();
+    return std::make_shared<roadfighterSFML::PlayerCarSFML>();
 }

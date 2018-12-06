@@ -5,16 +5,12 @@
 
 #include <iostream>
 
-namespace roadfighter {
-    class Entity {
-    private:
-        std::string test = "Test1";
 
-    public:
-        Entity();
+class Entity {
+public:
+    float x = 0;
+    float y = 0;
+};
 
-        void test_f();
-    };
-}
 
 #endif //ROADFIGHTER_ENTITY_H

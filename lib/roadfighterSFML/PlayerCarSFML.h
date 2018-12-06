@@ -18,10 +18,15 @@ namespace roadfighterSFML {
 
         virtual ~PlayerCarSFML();
 
-        void setup_SFML();
+        void setup_sfml(std::string path_to_sprite, float x, float y);
+
+        const sf::Sprite &getSprite() const;
+
+        void setSprite(const sf::Sprite &sprite);
 
     private:
-        sf::Texture t;
+        sf::Texture texture;
+        sf::Sprite sprite;
     };
 
     class PlayerCarSFML_Factory {

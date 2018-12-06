@@ -10,7 +10,7 @@
 #include "Entity.h"
 
 namespace roadfighter {
-    class RacingCarEntity : public roadfighter::Entity {
+    class RacingCarEntity : public Entity {
     public:
         RacingCarEntity();
 
