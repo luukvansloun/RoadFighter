@@ -28,10 +28,13 @@ namespace roadfighter {
 
         void setSpeed(int speed);
 
+        int getMax_speed() const;
+
     private:
         float x;
         float y;
         int speed = 0;
+        int max_speed = 400;
     };
 
     class PlayerCarEntity_Factory {

@@ -25,6 +25,8 @@ int main() {
     playercar.first->setX(pc_co.first);
     playercar.first->setY(pc_co.second);
 
+    playercar.second->setup_sfml("sprites/player_sprite.png", playercar.first->getX(), playercar.first->getY());
+
     while(window.isOpen()) {
 
         sf::Event event;
@@ -32,6 +34,24 @@ int main() {
         while(window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                playercar.first->setX(playercar.first->getX() + 3);
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                playercar.first->setX(playercar.first->getX() - 3);
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                if(playercar.first->getSpeed() < playercar.first->getMax_speed()) {
+                    playercar.first->setSpeed(playercar.first->getSpeed() + 1);
+                }
+                std::cout << playercar.first->getSpeed() << std::endl;
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                if(playercar.first->getSpeed() > 0) {
+                    playercar.first->setSpeed(playercar.first->getSpeed() - 1);
+                }
+                std::cout << playercar.first->getSpeed() << std::endl;
             }
         }
 

@@ -24,6 +24,8 @@ namespace roadfighterSFML {
 
         void setSprite(const sf::Sprite &sprite);
 
+        void set_position(float x, float y);
+
     private:
         sf::Texture texture;
         sf::Sprite sprite;

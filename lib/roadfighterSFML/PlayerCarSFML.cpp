@@ -29,6 +29,10 @@ void roadfighterSFML::PlayerCarSFML::setSprite(const sf::Sprite &sprite) {
     PlayerCarSFML::sprite = sprite;
 }
 
+void roadfighterSFML::PlayerCarSFML::set_position(float x, float y) {
+    sprite.setPosition(x, y);
+}
+
 
 // ABSTRACT FACTORY CLASS
 

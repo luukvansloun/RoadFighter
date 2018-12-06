@@ -36,6 +36,9 @@ void roadfighter::PlayerCarEntity::setSpeed(int speed) {
     PlayerCarEntity::speed = speed;
 }
 
+int roadfighter::PlayerCarEntity::getMax_speed() const {
+    return max_speed;
+}
 
 // ABSTRACT FACTORY CLASS
 
