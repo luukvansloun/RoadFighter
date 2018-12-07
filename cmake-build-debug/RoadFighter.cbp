@@ -5,7 +5,7 @@
 		<Option title="RoadFighter"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\cmake\Modules\;CMake Files\lib\;CMake Files\lib\roadfighter\;CMake Files\lib\roadfighterSFML\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\cmake\Modules\;CMake Files\lib\;CMake Files\lib\roadfighter\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug"/>
@@ -45,7 +45,6 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter"/>
-					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -70,7 +69,6 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter"/>
-					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -133,54 +131,6 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighter/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="roadfighterSFML">
-				<Option output="/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/libroadfighterSFML.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter"/>
-					<Add directory="/usr/include/c++/7"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
-					<Add directory="/usr/include/c++/7/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 roadfighterSFML"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="roadfighterSFML/fast">
-				<Option output="/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/libroadfighterSFML.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter"/>
-					<Add directory="/usr/include/c++/7"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
-					<Add directory="/usr/include/c++/7/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 roadfighterSFML/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luuk/Documents/GP/GP_Project_1819/cmake-build-debug/lib/roadfighterSFML/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 		</Build>
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/Entity.cpp">
 			<Option target="roadfighter"/>
@@ -188,40 +138,34 @@
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/Entity.h">
 			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/PlayerCarEntity.cpp">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/EntityFactory.cpp">
 			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/PlayerCarEntity.h">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/EntityFactory.h">
 			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/RacingCarEntity.cpp">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/PlayerCar.cpp">
 			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/RacingCarEntity.h">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/PlayerCar.h">
 			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML/PlayerCarSFML.cpp">
-			<Option target="roadfighterSFML"/>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/RacingCar.cpp">
+			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML/PlayerCarSFML.h">
-			<Option target="roadfighterSFML"/>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/RacingCar.h">
+			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML/RacingCarSFML.cpp">
-			<Option target="roadfighterSFML"/>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/World.cpp">
+			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML/RacingCarSFML.h">
-			<Option target="roadfighterSFML"/>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/World.h">
+			<Option target="roadfighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/PlayerCar.cpp">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/Game.cpp">
 			<Option target="RoadFighter"/>
 		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/PlayerCar.h">
-			<Option target="RoadFighter"/>
-		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/RacingCar.cpp">
-			<Option target="RoadFighter"/>
-		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/RacingCar.h">
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/Game.h">
 			<Option target="RoadFighter"/>
 		</Unit>
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/Transformation.cpp">
@@ -233,6 +177,24 @@
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/main/main.cpp">
 			<Option target="RoadFighter"/>
 		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/PlayerCarSFML.cpp">
+			<Option target="RoadFighter"/>
+		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/PlayerCarSFML.h">
+			<Option target="RoadFighter"/>
+		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/RacingCarSFML.cpp">
+			<Option target="RoadFighter"/>
+		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/RacingCarSFML.h">
+			<Option target="RoadFighter"/>
+		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/SFMLFactory.cpp">
+			<Option target="RoadFighter"/>
+		</Unit>
+		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/roadfighterSFML/SFMLFactory.h">
+			<Option target="RoadFighter"/>
+		</Unit>
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
@@ -241,9 +203,6 @@
 		</Unit>
 		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighter/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\lib\roadfighter\"/>
-		</Unit>
-		<Unit filename="/home/luuk/Documents/GP/GP_Project_1819/lib/roadfighterSFML/CMakeLists.txt">
-			<Option virtualFolder="CMake Files\lib\roadfighterSFML\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

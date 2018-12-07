@@ -16,7 +16,7 @@ Game::Game() {
 
 void Game::setupBackground() {
 
-    if(!this->bgTexture.loadFromFile("./sprites/BG.png")) {
+    if(!this->bgTexture.loadFromFile("./sprites/BG2.png")) {
         std::cout << "Could not load background image" << std::endl;
     }
 
@@ -63,7 +63,7 @@ void Game::run() {
             // Decrease player speed
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                 if(world->getPlayercar()->getSpeed() > 0) {
-                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 15);
+                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 20);
                 }
             }
         }
