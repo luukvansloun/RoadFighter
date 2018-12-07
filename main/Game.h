@@ -10,6 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include <World.h>
 
+#include "Transformation.h"
 #include "../roadfighterSFML/SFMLFactory.h"
 
 class Game {
@@ -18,12 +19,17 @@ public:
 
     virtual ~Game();
 
+    void setupBackground();
+
     void run();
 
 private:
     std::shared_ptr<sf::RenderWindow> window;
+    sf::View view;
     std::shared_ptr<roadfighterSFML::SFMLFactory> sfml_factory;
     std::shared_ptr<roadfighter::World> world;
+    sf::Texture bgTexture;
+    sf::Sprite background;
 };
 
 

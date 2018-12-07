@@ -8,15 +8,13 @@ roadfighter::World::~World() {}
 
 roadfighter::World::World() {}
 
-
-
 void roadfighter::World::move_player_right() {
-    float plus = 0.05;
+    float plus = 0.1;
     playercar->setX(playercar->getX() + plus);
 }
 
 void roadfighter::World::move_player_left() {
-    float minus = 0.05;
+    float minus = 0.1;
     playercar->setX(playercar->getX() - minus);
 }
 

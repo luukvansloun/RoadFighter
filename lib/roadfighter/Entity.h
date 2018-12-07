@@ -23,6 +23,12 @@ namespace roadfighter {
         virtual void change_position() {};
 
         virtual void draw() {};
+
+        virtual int getSpeed() const {};
+
+        virtual void setSpeed(int speed) {};
+
+        virtual int getMax_speed() const {};
     };
 }
 
