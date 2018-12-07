@@ -68,6 +68,7 @@ void Game::run() {
             }
         }
 
+        // Move Background
         if(world->getPlayercar()->getSpeed() > 0) {
             this->background.setPosition(0,
                     this->background.getPosition().y + float(world->getPlayercar()->getSpeed() * 0.01));
