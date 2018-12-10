@@ -14,7 +14,7 @@ namespace roadfighter {
     private:
         double speed = 0;
         const int max_speed = 400;
-        int distance = 0;
+        double distance = 0;
 
     public:
         double getSpeed() const;
@@ -25,7 +25,7 @@ namespace roadfighter {
 
         void draw() {};
 
-        int getDistance() const override;
+        double getDistance() const override;
 
         void update_distance(double distance) override;
     };

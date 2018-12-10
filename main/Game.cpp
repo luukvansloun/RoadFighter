@@ -99,7 +99,7 @@ void Game::run() {
         }
 
         // Update distance travelled: 16 milliseconds (per tick) times the speed
-        this->world->getPlayercar()->update_distance(0.016 * this->world->getPlayercar()->getSpeed());
+        this->world->getPlayercar()->update_distance(0.0024 * this->world->getPlayercar()->getSpeed());
 
         while(this->window->pollEvent(event)) {
             // Check if window is closed
@@ -159,7 +159,8 @@ void Game::run() {
         text.setFont(font);
 
         std::string text_string = "Distance:\n";
-        text_string += std::to_string(this->world->getPlayercar()->getDistance());
+        text_string += std::to_string(int(this->world->getPlayercar()->getDistance()));
+        text_string += "m";
 
         text.setString(text_string);
 
