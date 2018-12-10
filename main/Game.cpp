@@ -68,26 +68,24 @@ void Game::add_entity(std::string type) {
 
 void Game::run() {
     setupBackground();
-    int fps = 0;
     int game_it = 0;
 
     while(this->window->isOpen()) {
-        fps += 1;
         auto now = std::chrono::steady_clock::now();
         auto end = now + std::chrono::milliseconds(16);
 
         sf::Event event;
 
-        if(game_it != (this->game_objects.size() - 1)) {
-            // Time frame equals the time the next object should be build
-            if(this->game_objects[game_it]["time"] == fps) {
-
-                add_entity(this->game_objects[game_it]["obstacle"]);
-
-                // Update to next
-                game_it += 1;
-            }
-        }
+//        if(game_it != (this->game_objects.size() - 1)) {
+//            // Time frame equals the time the next object should be build
+//            if(this->game_objects[game_it]["distance"] == world->getPlayercar()->getDistance()) {
+//
+//                add_entity(this->game_objects[game_it]["obstacle"]);
+//
+//                // Update to next
+//                game_it += 1;
+//            }
+//        }
 
         while(this->window->pollEvent(event)) {
             // Check if window is closed
@@ -128,7 +126,16 @@ void Game::run() {
             }
         }
 
+        // Update Entities ///////////
 
+
+
+
+
+
+        //////////////////////////////
+
+        // Draw
         this->window->draw(this->background);
         world->getPlayercar()->draw();
 
@@ -136,9 +143,11 @@ void Game::run() {
             entity->draw();
         }
 
+        // Display and clear the screen
         this->window->display();
         this->window->clear(sf::Color::Black);
 
+        // Wait until the next frame is due
         std::this_thread::sleep_until(end);
     }
 }

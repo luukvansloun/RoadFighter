@@ -33,6 +33,8 @@ namespace roadfighter {
 
         void add_entity(std::shared_ptr<roadfighter::Entity> entity);
 
+        void update_entities();
+
     };
 }
 

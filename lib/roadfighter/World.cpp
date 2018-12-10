@@ -44,3 +44,9 @@ const std::vector<std::shared_ptr<roadfighter::Entity>> &roadfighter::World::get
 void roadfighter::World::add_entity(std::shared_ptr<roadfighter::Entity> entity) {
     this->entities.push_back(entity);
 }
+
+void roadfighter::World::update_entities() {
+    for(const auto& entity : this->entities) {
+
+    }
+}
