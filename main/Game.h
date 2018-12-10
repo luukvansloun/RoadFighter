@@ -30,6 +30,8 @@ public:
 
     void add_entity(std::string type);
 
+    void update_background();
+
 private:
     std::shared_ptr<sf::RenderWindow> window;
     sf::View view;

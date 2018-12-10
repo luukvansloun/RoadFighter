@@ -18,6 +18,17 @@ int roadfighter::PlayerCar::getMax_speed() const {
     return max_speed;
 }
 
+int roadfighter::PlayerCar::getDistance() const {
+    return distance;
+}
+
+void roadfighter::PlayerCar::update_distance(double distance) {
+    // Round the to add distance
+    int addition = int(distance);
+
+    PlayerCar::distance += addition;
+}
+
 
 
 

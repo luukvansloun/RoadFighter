@@ -53,6 +53,16 @@ void Game::setupBackground() {
     this->view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f));
 }
 
+void Game::update_background() {
+    if(world->getPlayercar()->getSpeed() > 0) {
+        this->background.setPosition(0,
+                this->background.getPosition().y + float(world->getPlayercar()->getSpeed() * 0.075));
+        if(background.getPosition().y >= 0) {
+            background.setPosition(0, -200);
+        }
+    }
+}
+
 void Game::add_entity(std::string type) {
     if(type == "Truck") {
         auto truck = this->sfml_factory->create_truck();
@@ -76,16 +86,20 @@ void Game::run() {
 
         sf::Event event;
 
-//        if(game_it != (this->game_objects.size() - 1)) {
-//            // Time frame equals the time the next object should be build
-//            if(this->game_objects[game_it]["distance"] == world->getPlayercar()->getDistance()) {
-//
-//                add_entity(this->game_objects[game_it]["obstacle"]);
-//
-//                // Update to next
-//                game_it += 1;
-//            }
-//        }
+        if(game_it != (this->game_objects.size() - 1)) {
+            // Time frame equals the time the next object should be build
+            int distance_check = this->game_objects[game_it]["distance"];
+            if(distance_check <= world->getPlayercar()->getDistance()) {
+
+                add_entity(this->game_objects[game_it]["obstacle"]);
+
+                // Update to next
+                game_it += 1;
+            }
+        }
+
+        // Update distance travelled: 16 milliseconds (per tick) times the speed
+        this->world->getPlayercar()->update_distance(0.016 * this->world->getPlayercar()->getSpeed());
 
         while(this->window->pollEvent(event)) {
             // Check if window is closed
@@ -107,7 +121,7 @@ void Game::run() {
         // Increase player speed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 10);
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 5);
             }
         }
         // Decrease player speed
@@ -118,15 +132,10 @@ void Game::run() {
         }
 
         // Move Background
-        if(world->getPlayercar()->getSpeed() > 0) {
-            this->background.setPosition(0,
-                    this->background.getPosition().y + float(world->getPlayercar()->getSpeed() * 0.075));
-            if(background.getPosition().y >= 0) {
-                background.setPosition(0, -200);
-            }
-        }
+        update_background();
 
         // Update Entities ///////////
+
 
 
 
@@ -143,6 +152,25 @@ void Game::run() {
             entity->draw();
         }
 
+        // TEMP DISTANCE CHECK
+        sf::Text text;
+        sf::Font font;
+        font.loadFromFile("films.icedeart.ttf");
+        text.setFont(font);
+
+        std::string text_string = "Distance:\n";
+        text_string += std::to_string(this->world->getPlayercar()->getDistance());
+
+        text.setString(text_string);
+
+        text.setCharacterSize(24);
+        text.setPosition(600, 200);
+
+        window->draw(text);
+
+
+
+
         // Display and clear the screen
         this->window->display();
         this->window->clear(sf::Color::Black);
@@ -151,6 +179,8 @@ void Game::run() {
         std::this_thread::sleep_until(end);
     }
 }
+
+
 
 
 
