@@ -10,7 +10,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <PlayerCar.h>
-#include "EntityFactory.h"
 #include "../main/Transformation.h"
 
 namespace roadfighterSFML {

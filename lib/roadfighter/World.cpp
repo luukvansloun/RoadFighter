@@ -9,8 +9,8 @@ roadfighter::World::~World() {}
 roadfighter::World::World() {}
 
 void roadfighter::World::move_player_right() {
-    float plus = 0.05;
-    if(playercar->getX() + plus > float(0.15)) {
+    float plus = 0.025;
+    if(playercar->getX() + plus > float(0.025)) {
         std::cout << "CRASH" << std::endl;
     }
     else {
@@ -19,8 +19,7 @@ void roadfighter::World::move_player_right() {
 }
 
 void roadfighter::World::move_player_left() {
-    float minus = 0.05;
-
+    float minus = 0.025;
 
     if(playercar->getX() - minus < float(-2.45)) {
         std::cout << "CRASH" << std::endl;
@@ -36,4 +35,12 @@ const std::shared_ptr<roadfighter::Entity> &roadfighter::World::getPlayercar() c
 
 void roadfighter::World::setPlayercar(const std::shared_ptr<roadfighter::Entity> &playercar) {
     World::playercar = playercar;
+}
+
+const std::vector<std::shared_ptr<roadfighter::Entity>> &roadfighter::World::getEntities() const {
+    return entities;
+}
+
+void roadfighter::World::add_entity(std::shared_ptr<roadfighter::Entity> entity) {
+    this->entities.push_back(entity);
 }

@@ -6,11 +6,11 @@
 
 // PLAYERCAR ENTITY CLASS
 
-int roadfighter::PlayerCar::getSpeed() const {
+double roadfighter::PlayerCar::getSpeed() const {
     return speed;
 }
 
-void roadfighter::PlayerCar::setSpeed(int speed) {
+void roadfighter::PlayerCar::setSpeed(double speed) {
     PlayerCar::speed = speed;
 }
 

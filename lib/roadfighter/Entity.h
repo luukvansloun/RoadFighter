@@ -24,9 +24,9 @@ namespace roadfighter {
 
         virtual void draw() {};
 
-        virtual int getSpeed() const {};
+        virtual double getSpeed() const {};
 
-        virtual void setSpeed(int speed) {};
+        virtual void setSpeed(double speed) {};
 
         virtual int getMax_speed() const {};
     };

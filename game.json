@@ -1,0 +1,40 @@
+{			
+"Elements"	:	[
+								{
+									"time"	: 60,
+									"obstacle" : "Truck"
+								},
+								{
+									"time"	: 120,
+									"obstacle" : "Lorry"
+								},
+								{
+									"time"	: 150,
+									"obstacle" : "Lorry"
+								},
+								{
+									"time"	: 210,
+									"obstacle" : "Truck"
+								},
+								{
+									"time"	: 285,
+									"obstacle" : "Truck"
+								},
+								{
+									"time"	: 330,
+									"obstacle" : "Truck"
+								},
+								{
+									"time"	: 345,
+									"obstacle" : "Lorry"
+								},
+								{
+									"time"	: 400,
+									"obstacle" : "Lorry"
+								},
+								{
+									"time"	: 450,
+									"obstacle" : "Finish"
+								}
+]
+}

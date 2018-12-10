@@ -7,12 +7,14 @@
 
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "PlayerCar.h"
 
 namespace roadfighter {
     class World : public roadfighter::Entity {
     private:
         std::shared_ptr<roadfighter::Entity> playercar;
+        std::vector<std::shared_ptr<roadfighter::Entity>> entities;
 
     public:
         World();
@@ -26,6 +28,11 @@ namespace roadfighter {
         void move_player_right();
 
         void move_player_left();
+
+        const std::vector<std::shared_ptr<Entity>> &getEntities() const;
+
+        void add_entity(std::shared_ptr<roadfighter::Entity> entity);
+
     };
 }
 

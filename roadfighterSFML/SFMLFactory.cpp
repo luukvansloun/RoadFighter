@@ -20,3 +20,11 @@ std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_player
 std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_racingcar() {
     return std::make_shared<roadfighterSFML::RacingCarSFML>(window);
 }
+
+std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_truck() {
+    return std::make_shared<roadfighterSFML::TruckSFML>(window);
+}
+
+std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_lorry() {
+    return std::make_shared<roadfighterSFML::LorrySFML>(window);
+}
