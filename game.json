@@ -2,43 +2,53 @@
 "Elements"	:	[
 								{
 									"distance"	: 60,
-									"obstacle" : "Truck"
+									"obstacle" 	: "Truck",
+									"speed_decr" 	: 0
 								},
 								{
 									"distance"	: 120,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 150,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 200,
-									"obstacle" : "Truck"
+									"obstacle" 	: "Truck",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 230,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 280,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 300,
-									"obstacle" : "Truck"
+									"obstacle" 	: "Truck",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 340,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 400,
-									"obstacle" : "Lorry"
+									"obstacle" 	: "Lorry",
+									"speed_decr"	: 0
 								},
 								{
 									"distance"	: 520,
-									"obstacle" : "End"
+									"obstacle" 	: "End",
+									"speed_decr"	: 0
 								}
 ]
 }

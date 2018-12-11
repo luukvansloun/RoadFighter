@@ -211,9 +211,9 @@ void Game::run() {
             entity->draw();
         }
 
-        for(const auto& opp : world->getOpponents()) {
-            opp->draw();
-        }
+//        for(const auto& opp : world->getOpponents()) {
+//            opp->draw();
+//        }
 
         // TEMP DISTANCE CHECK
 
