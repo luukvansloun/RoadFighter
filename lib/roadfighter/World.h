@@ -29,6 +29,8 @@ namespace roadfighter {
 
         void move_player_left();
 
+        bool move_player_up();
+
         const std::vector<std::shared_ptr<Entity>> &getEntities() const;
 
         void add_entity(std::shared_ptr<roadfighter::Entity> entity);

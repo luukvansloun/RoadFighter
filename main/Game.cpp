@@ -207,7 +207,12 @@ void Game::end_of_game() {
         }
     }
     else {
-
+        if(this->world->move_player_up()){
+            exit(0);
+        }
+        else {
+            this->world->getPlayercar()->change_position();
+        }
     }
 }
 
