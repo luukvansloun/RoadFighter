@@ -13,8 +13,9 @@ namespace roadfighter {
     class PlayerCar : public Entity {
     private:
         double speed = 0;
-        const int max_speed = 200;
+        const int max_speed = 300;
         double distance = 0;
+        int health = 3;
 
     public:
         double getSpeed() const;
@@ -28,6 +29,8 @@ namespace roadfighter {
         double getDistance() const override;
 
         void update_distance(double distance) override;
+
+        int getHealth() const;
     };
 }
 

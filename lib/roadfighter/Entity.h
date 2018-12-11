@@ -33,6 +33,8 @@ namespace roadfighter {
         virtual double getDistance() const {return 0;};
 
         virtual void update_distance(double distance) {};
+
+        virtual int getHealth() const {return 0;};
     };
 }
 

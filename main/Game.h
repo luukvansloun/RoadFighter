@@ -32,6 +32,10 @@ public:
 
     void update_background();
 
+    void finish_background();
+
+    void end_of_game();
+
 private:
     std::shared_ptr<sf::RenderWindow> window;
     sf::View view;
@@ -40,6 +44,7 @@ private:
     sf::Texture bgTexture;
     sf::Sprite background;
     std::vector<nlohmann::json> game_objects;
+    bool EOG = false;
 };
 
 

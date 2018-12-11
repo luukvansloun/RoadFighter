@@ -57,12 +57,18 @@ void Game::setupBackground() {
 
 void Game::update_background() {
     if(world->getPlayercar()->getSpeed() > 0) {
-        this->background.setPosition(0,
-                this->background.getPosition().y + float(world->getPlayercar()->getSpeed() * 0.075));
+        this->background.setPosition(0, this->background.getPosition().y +
+                                        float(world->getPlayercar()->getSpeed() * 0.075));
+
         if(background.getPosition().y >= 0) {
             background.setPosition(0, -200);
         }
     }
+}
+
+void Game::finish_background() {
+    this->bgTexture.loadFromFile("sprites/BG_Finish.png");
+    this->background.setTexture(bgTexture);
 }
 
 void Game::add_entity(std::string type) {
@@ -81,6 +87,7 @@ void Game::add_entity(std::string type) {
 void Game::run() {
     setupBackground();
     int game_it = 0;
+    bool finish = false;
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
@@ -88,15 +95,19 @@ void Game::run() {
 
         sf::Event event;
 
-        if(game_it != (this->game_objects.size() - 1)) {
+        if(game_it < this->game_objects.size()) {
             // Time frame equals the time the next object should be build
             int distance_check = this->game_objects[game_it]["distance"];
             if(distance_check <= world->getPlayercar()->getDistance()) {
+                if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
+                    finish = true;
+                }
+                else {
+                    add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
 
-                add_entity(this->game_objects[game_it]["obstacle"]);
-
-                // Update to next
-                game_it += 1;
+                    // Update to next
+                    game_it += 1;
+                }
             }
         }
 
@@ -128,15 +139,20 @@ void Game::run() {
         }
         // Decrease player speed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            if(world->getPlayercar()->getSpeed() > 0) {
+            if(world->getPlayercar()->getSpeed() > 150) {
                 world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 10);
             }
         }
 
         // Move Background
-        update_background();
+        if(!finish) {
+            update_background();
+        }
+        else {
+            end_of_game();
+        }
 
-        // Update Entity Positions ///////////
+        // Update Entity Positions
         world->update_entities();
 
         for(const auto& entity : world->getEntities()) {
@@ -152,20 +168,17 @@ void Game::run() {
         }
 
         // TEMP DISTANCE CHECK
+
         sf::Text text;
         sf::Font font;
-        font.loadFromFile("films.icedeart.ttf");
+        font.loadFromFile("Pixel-NoirCaps.ttf");
         text.setFont(font);
 
-        std::string text_string = "Distance:\n";
-        text_string += std::to_string(int(this->world->getPlayercar()->getDistance()));
-        text_string += "m";
-        text_string += "\nSpeed:\n";
-        text_string += std::to_string(this->world->getPlayercar()->getSpeed());
+        std::string text_string = "Score";
 
         text.setString(text_string);
 
-        text.setCharacterSize(24);
+        text.setCharacterSize(18);
         text.setPosition(600, 200);
 
         window->draw(text);
@@ -182,6 +195,25 @@ void Game::run() {
         std::this_thread::sleep_until(end);
     }
 }
+
+void Game::end_of_game() {
+    if(!this->EOG) {
+
+        this->background.setPosition(0, this->background.getPosition().y +
+                                        float(world->getPlayercar()->getSpeed() * 0.075));
+        if(this->background.getPosition().y >= -20) {
+            finish_background();
+            this->EOG = true;
+        }
+    }
+    else {
+
+    }
+}
+
+
+
+
 
 
 

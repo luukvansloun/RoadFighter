@@ -26,6 +26,10 @@ void roadfighter::PlayerCar::update_distance(double distance) {
     PlayerCar::distance += distance;
 }
 
+int roadfighter::PlayerCar::getHealth() const {
+    return health;
+}
+
 
 
 

@@ -13,28 +13,12 @@
 									"obstacle" : "Lorry"
 								},
 								{
-									"distance"	: 210,
+									"distance"	: 180,
 									"obstacle" : "Truck"
 								},
 								{
-									"distance"	: 285,
-									"obstacle" : "Truck"
-								},
-								{
-									"distance"	: 330,
-									"obstacle" : "Truck"
-								},
-								{
-									"distance"	: 345,
-									"obstacle" : "Lorry"
-								},
-								{
-									"distance"	: 400,
-									"obstacle" : "Lorry"
-								},
-								{
-									"distance"	: 450,
-									"obstacle" : "Finish"
+									"distance"	: 250,
+									"obstacle" : "End"
 								}
 ]
 }
