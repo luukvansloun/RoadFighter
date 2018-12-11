@@ -28,6 +28,8 @@ public:
 
     void run();
 
+    void setup_opponents();
+
     void add_entity(std::string type);
 
     void update_background();

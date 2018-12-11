@@ -6,24 +6,22 @@
 
 // RACINGCAR ENTITY CLASS
 
-roadfighter::RacingCar::RacingCar() {}
-
-roadfighter::RacingCar::~RacingCar() {
-
+double roadfighter::RacingCar::getSpeed() const {
+    return speed;
 }
 
-float roadfighter::RacingCar::getX() const {
-    return x;
+void roadfighter::RacingCar::setSpeed(double speed) {
+    RacingCar::speed = speed;
 }
 
-void roadfighter::RacingCar::setX(float x) {
-    RacingCar::x = x;
+double roadfighter::RacingCar::getDistance() const {
+    return distance;
 }
 
-float roadfighter::RacingCar::getY() const {
-    return y;
+void roadfighter::RacingCar::update_distance(double distance) {
+    RacingCar::distance += distance;
 }
 
-void roadfighter::RacingCar::setY(float y) {
-    RacingCar::y = y;
+int roadfighter::RacingCar::getHealth() const {
+    return health;
 }

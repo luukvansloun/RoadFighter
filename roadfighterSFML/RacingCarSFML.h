@@ -9,6 +9,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "EntityFactory.h"
+#include "../main/Transformation.h"
 
 
 namespace roadfighterSFML {
@@ -18,6 +19,10 @@ namespace roadfighterSFML {
         RacingCarSFML(std::shared_ptr<sf::RenderWindow> window);
 
         virtual ~RacingCarSFML();
+
+        void change_position() override;
+
+        void draw();
 
     private:
         sf::Texture texture;

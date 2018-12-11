@@ -30,7 +30,7 @@ void roadfighter::World::move_player_left() {
 }
 
 bool roadfighter::World::move_player_up() {
-    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.00075);
+    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.000375);
 
     if(new_y > 4) {
         return true;
@@ -53,8 +53,16 @@ const std::vector<std::shared_ptr<roadfighter::Entity>> &roadfighter::World::get
     return entities;
 }
 
+const std::vector<std::shared_ptr<roadfighter::Entity>> &roadfighter::World::getOpponents() const {
+    return opponents;
+}
+
 void roadfighter::World::add_entity(std::shared_ptr<roadfighter::Entity> entity) {
     this->entities.push_back(entity);
+}
+
+void roadfighter::World::add_opponent(std::shared_ptr<roadfighter::Entity> opponent) {
+    this->opponents.push_back(opponent);
 }
 
 void roadfighter::World::update_entities() {
@@ -64,5 +72,6 @@ void roadfighter::World::update_entities() {
         entity->setY(entity->getY() - y_inc);
     }
 }
+
 
 

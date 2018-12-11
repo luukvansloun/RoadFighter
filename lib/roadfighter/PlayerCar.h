@@ -18,19 +18,19 @@ namespace roadfighter {
         int health = 3;
 
     public:
-        double getSpeed() const;
+        double getSpeed() const override;
 
-        void setSpeed(double speed);
+        void setSpeed(double speed) override;
 
-        int getMax_speed() const;
+        int getMax_speed() const override;
 
-        void draw() {};
+        void draw() override {};
 
         double getDistance() const override;
 
         void update_distance(double distance) override;
 
-        int getHealth() const;
+        int getHealth() const override;
     };
 }
 

@@ -11,22 +11,23 @@
 
 namespace roadfighter {
     class RacingCar : public Entity {
-    public:
-        RacingCar();
-
-        virtual ~RacingCar();
-
-        float getX() const;
-
-        void setX(float x);
-
-        float getY() const;
-
-        void setY(float y);
-
     private:
-        float x;
-        float y;
+        double speed = 300;
+        int health = 3;
+        double distance = 0;
+
+    public:
+        double getSpeed() const override;
+
+        void setSpeed(double speed) override;
+
+        void draw() override {};
+
+        double getDistance() const override;
+
+        void update_distance(double distance) override;
+
+        int getHealth() const override;
     };
 }
 

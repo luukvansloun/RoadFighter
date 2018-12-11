@@ -15,6 +15,10 @@ Game::Game() {
     this->world = std::make_shared<roadfighter::World>();
     world->setPlayercar(sfml_factory->create_playercar());
 
+    // Create Opponent Cars
+
+    setup_opponents();
+
     // Read game from JSON file
     std::ifstream input("game.json");
 
@@ -37,6 +41,46 @@ Game::Game() {
 }
 
 Game::~Game() {}
+
+void Game::setup_opponents() {
+    for(int i = 0; i < 7; i++) {
+        this->world->add_opponent(sfml_factory->create_racingcar());
+    }
+
+    // Opponent 1 start position
+    this->world->getOpponents()[0]->setX(-1.899);
+    this->world->getOpponents()[0]->setY(1.2);
+
+
+    // Opponent 2 start position
+    this->world->getOpponents()[1]->setX(-1.899);
+    this->world->getOpponents()[1]->setY(0.2);
+
+    // Opponent 3 start position
+    this->world->getOpponents()[2]->setX(-1.899);
+    this->world->getOpponents()[2]->setY(-0.8);
+
+    // Opponent 4 start position
+    this->world->getOpponents()[3]->setX(-1.899);
+    this->world->getOpponents()[3]->setY(-1.8);
+
+    // Opponent 5 start position
+    this->world->getOpponents()[4]->setX(-0.449);
+    this->world->getOpponents()[4]->setY(1.2);
+
+    // Opponent 6 start position
+    this->world->getOpponents()[5]->setX(-0.449);
+    this->world->getOpponents()[5]->setY(0.2);
+
+    // Opponent 7 start position
+    this->world->getOpponents()[6]->setX(-0.449);
+    this->world->getOpponents()[6]->setY(-0.8);
+
+    // Change positions of all
+    for(int i = 0; i < this->world->getOpponents().size(); i++) {
+         this->world->getOpponents()[i]->change_position();
+    }
+}
 
 void Game::setupBackground() {
 
@@ -167,21 +211,25 @@ void Game::run() {
             entity->draw();
         }
 
+        for(const auto& opp : world->getOpponents()) {
+            opp->draw();
+        }
+
         // TEMP DISTANCE CHECK
 
-        sf::Text text;
-        sf::Font font;
-        font.loadFromFile("Pixel-NoirCaps.ttf");
-        text.setFont(font);
-
-        std::string text_string = "Score";
-
-        text.setString(text_string);
-
-        text.setCharacterSize(18);
-        text.setPosition(600, 200);
-
-        window->draw(text);
+//        sf::Text text;
+//        sf::Font font;
+//        font.loadFromFile("Pixel-NoirCaps.ttf");
+//        text.setFont(font);
+//
+//        std::string text_string = "Score";
+//
+//        text.setString(text_string);
+//
+//        text.setCharacterSize(18);
+//        text.setPosition(600, 200);
+//
+//        window->draw(text);
 
         // TEMP DISTANCE CHECK
 
@@ -215,6 +263,8 @@ void Game::end_of_game() {
         }
     }
 }
+
+
 
 
 

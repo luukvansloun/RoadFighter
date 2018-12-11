@@ -11,7 +11,7 @@ roadfighterSFML::PlayerCarSFML::PlayerCarSFML(std::shared_ptr<sf::RenderWindow> 
     this->window = window;
 
     // Set Coördinates
-    this->setX(float(-0.50));
+    this->setX(float(-0.449));
     this->setY(float(-1.8));
 
     // Setup Sprite
@@ -22,7 +22,7 @@ roadfighterSFML::PlayerCarSFML::PlayerCarSFML(std::shared_ptr<sf::RenderWindow> 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
 
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(-0.50, -1.8),
+    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(-0.449, -1.8),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
 
