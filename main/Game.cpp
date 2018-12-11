@@ -8,6 +8,8 @@ Game::Game() {
     // Create Game window
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "RoadFighter");
 
+//    window->setKeyRepeatEnabled(false);
+
     // Create Factory for creating SFML object entities
     this->sfml_factory = std::make_shared<roadfighterSFML::SFMLFactory>(this->window);
     this->world = std::make_shared<roadfighter::World>();
@@ -134,15 +136,12 @@ void Game::run() {
         // Move Background
         update_background();
 
-        // Update Entities ///////////
+        // Update Entity Positions ///////////
+        world->update_entities();
 
-
-
-
-
-
-
-        //////////////////////////////
+        for(const auto& entity : world->getEntities()) {
+            entity->change_position();
+        }
 
         // Draw
         this->window->draw(this->background);
@@ -161,6 +160,8 @@ void Game::run() {
         std::string text_string = "Distance:\n";
         text_string += std::to_string(int(this->world->getPlayercar()->getDistance()));
         text_string += "m";
+        text_string += "\nSpeed:\n";
+        text_string += std::to_string(this->world->getPlayercar()->getSpeed());
 
         text.setString(text_string);
 
@@ -169,6 +170,7 @@ void Game::run() {
 
         window->draw(text);
 
+        // TEMP DISTANCE CHECK
 
 
 

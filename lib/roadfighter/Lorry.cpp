@@ -3,3 +3,7 @@
 //
 
 #include "Lorry.h"
+
+double roadfighter::Lorry::getSpeed() const {
+    return speed;
+}

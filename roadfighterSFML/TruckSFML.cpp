@@ -13,7 +13,7 @@ roadfighterSFML::TruckSFML::TruckSFML(std::shared_ptr<sf::RenderWindow> window) 
     setX(rand_x);
 
     // Normal top starting Y coordinate
-    setY(float(2));
+    setY(float(5));
 
     // Setup Sprite
     texture.loadFromFile("./sprites/truck.png");
@@ -23,7 +23,7 @@ roadfighterSFML::TruckSFML::TruckSFML(std::shared_ptr<sf::RenderWindow> window) 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
 
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(rand_x, 2),
+    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(rand_x, 5),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
 

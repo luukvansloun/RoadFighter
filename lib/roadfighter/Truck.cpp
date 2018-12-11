@@ -3,3 +3,7 @@
 //
 
 #include "Truck.h"
+
+double roadfighter::Truck::getSpeed() const {
+    return speed;
+}

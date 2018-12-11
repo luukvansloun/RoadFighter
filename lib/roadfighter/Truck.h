@@ -10,11 +10,13 @@
 #include "Entity.h"
 
 namespace roadfighter {
-    class Truck : public Entity{
+    class Truck : public Entity {
     private:
-        int speed = 100;
+        const double speed = 120;
 
     public:
+        double getSpeed() const override;
+
         void draw() {};
     };
 }

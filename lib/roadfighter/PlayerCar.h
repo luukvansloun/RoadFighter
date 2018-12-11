@@ -13,7 +13,7 @@ namespace roadfighter {
     class PlayerCar : public Entity {
     private:
         double speed = 0;
-        const int max_speed = 400;
+        const int max_speed = 200;
         double distance = 0;
 
     public:

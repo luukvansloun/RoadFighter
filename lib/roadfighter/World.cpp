@@ -47,6 +47,10 @@ void roadfighter::World::add_entity(std::shared_ptr<roadfighter::Entity> entity)
 
 void roadfighter::World::update_entities() {
     for(const auto& entity : this->entities) {
+        float y_inc = (getPlayercar()->getSpeed() - entity->getSpeed()) * 0.00075;
 
+        std::cout << entity->getSpeed() << std::endl;
+        std::cout << entity->getY() - y_inc << std::endl << std::endl;
+        entity->setY(entity->getY() - y_inc);
     }
 }
