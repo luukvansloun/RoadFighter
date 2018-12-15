@@ -23,6 +23,10 @@ roadfighterSFML::TruckSFML::TruckSFML(std::shared_ptr<sf::RenderWindow> window) 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
 
+    // Set width and height for later collision detection
+    this->width = sprite.getGlobalBounds().width;
+    this->height = sprite.getGlobalBounds().height;
+
     auto co = Transformation::get_instance().get_coordinates(std::make_pair(rand_x, 5),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
@@ -40,5 +44,13 @@ void roadfighterSFML::TruckSFML::change_position() {
 
 void roadfighterSFML::TruckSFML::draw() {
     this->window->draw(this->sprite);
+}
+
+float roadfighterSFML::TruckSFML::getWidth() const {
+    return width;
+}
+
+float roadfighterSFML::TruckSFML::getHeight() const {
+    return height;
 }
 

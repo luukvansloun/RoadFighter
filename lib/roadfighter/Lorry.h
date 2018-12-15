@@ -18,6 +18,10 @@ namespace roadfighter {
         double getSpeed() const override;
 
         void draw() {};
+
+        virtual float getWidth() const {return 0;};
+
+        virtual float getHeight() const {return 0;};
     };
 }
 

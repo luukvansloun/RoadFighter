@@ -30,6 +30,10 @@ namespace roadfighter {
         int getHealth() const override;
 
         void decrease_speed(int val);
+
+        virtual float getWidth() const {return 0;};
+
+        virtual float getHeight() const {return 0;};
     };
 }
 

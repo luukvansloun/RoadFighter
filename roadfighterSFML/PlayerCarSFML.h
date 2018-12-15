@@ -15,6 +15,13 @@
 namespace roadfighterSFML {
 
     class PlayerCarSFML : public roadfighter::PlayerCar {
+    private:
+        float width;
+        float height;
+        sf::Texture texture;
+        sf::Sprite sprite;
+        std::shared_ptr<sf::RenderWindow> window;
+
     public:
         PlayerCarSFML(std::shared_ptr<sf::RenderWindow> window);
 
@@ -24,10 +31,9 @@ namespace roadfighterSFML {
 
         void draw();
 
-    private:
-        sf::Texture texture;
-        sf::Sprite sprite;
-        std::shared_ptr<sf::RenderWindow> window;
+        float getWidth() const;
+
+        float getHeight() const;
     };
 
 

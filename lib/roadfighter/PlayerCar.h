@@ -36,6 +36,10 @@ namespace roadfighter {
         int getFuel() const override;
 
         void setFuel(int fuel) override;
+
+        virtual float getWidth() const {return 0;};
+
+        virtual float getHeight() const {return 0;};
     };
 }
 

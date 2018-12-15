@@ -41,6 +41,10 @@ namespace roadfighter {
         virtual int getFuel() const {return 0;};
 
         virtual void setFuel(int fuel) {};
+
+        virtual float getWidth() const {return 0;};
+
+        virtual float getHeight() const {return 0;};
     };
 }
 

@@ -145,7 +145,6 @@ void Game::run() {
         if(one >= two) {
             one = std::chrono::milliseconds(0);
             this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
-            std::cout << this->world->getPlayercar()->getFuel() << std::endl;
             if(this->world->getPlayercar()->getFuel() <= 0) {
                 std::cout << "Out of fuel" << std::endl;
                 exit(0);

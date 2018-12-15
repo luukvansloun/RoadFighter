@@ -45,6 +45,9 @@ namespace roadfighter {
         const std::vector<std::shared_ptr<Entity>> &getOpponents() const;
 
         void draw() override;
+
+        bool detect_collision(std::shared_ptr<roadfighter::Entity> entity_one,
+                              std::shared_ptr<roadfighter::Entity> entity_two);
     };
 }
 

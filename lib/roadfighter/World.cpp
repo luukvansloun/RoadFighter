@@ -70,11 +70,18 @@ void roadfighter::World::add_opponent(std::shared_ptr<roadfighter::Entity> oppon
 }
 
 void roadfighter::World::update_entities() {
-    for(const auto& entity : this->entities) {
-        float y_inc = (getPlayercar()->getSpeed() - entity->getSpeed()) * 0.00075;
+    auto it = this->entities.begin();
 
-        entity->setY(entity->getY() - y_inc);
-        entity->change_position();
+    while(it != this->entities.end()) {
+        float y_inc = (getPlayercar()->getSpeed() - it->get()->getSpeed()) * 0.00075;
+        if((it->get()->getY() - y_inc) >= 800) {
+            it = this->entities.erase(it);
+        }
+        else {
+            it->get()->setY(it->get()->getY() - y_inc);
+            it->get()->change_position();
+            ++it;
+        }
     }
 }
 
@@ -96,6 +103,32 @@ void roadfighter::World::draw() {
     for(const auto& opponent : opponents) {
         opponent->draw();
     }
+}
+
+bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> entity_one,
+                                          std::shared_ptr<roadfighter::Entity> entity_two) {
+
+    // Both entities with the y-coödinate plus it's height
+    float one_y_height = entity_one->getY() + entity_one->getHeight();
+    float two_y_height = entity_two->getY() + entity_two->getHeight();
+
+    // Both entities with the x-coördinate plus it's width
+    float one_x_width = entity_one->getX() + entity_one->getWidth();
+    float two_x_width = entity_two->getX() + entity_two->getWidth();
+
+    // Check if Y-axes cross
+    if((entity_one->getY() >= entity_two->getY() and entity_one->getY() <= two_y_height) or
+            (one_y_height >= entity_two->getY() and one_y_height <= two_y_height)) {
+        // Check if X-axes cross
+        if((entity_one->getX() >= entity_two->getX() and entity_one->getX() <= two_x_width) or
+           (one_x_width >= entity_two->getX() and one_x_width <= two_x_width)) {
+            // All axes cross, so there's collision
+            return true;
+        }
+    }
+
+    // No collision detected
+    return false;
 }
 
 

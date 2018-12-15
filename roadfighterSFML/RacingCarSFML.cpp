@@ -16,6 +16,10 @@ roadfighterSFML::RacingCarSFML::RacingCarSFML(std::shared_ptr<sf::RenderWindow> 
 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
+
+    // Set width and height for later collision detection
+    this->width = sprite.getGlobalBounds().width;
+    this->height = sprite.getGlobalBounds().height;
 }
 
 void roadfighterSFML::RacingCarSFML::change_position() {
@@ -31,3 +35,11 @@ void roadfighterSFML::RacingCarSFML::draw() {
 }
 
 roadfighterSFML::RacingCarSFML::~RacingCarSFML() {}
+
+float roadfighterSFML::RacingCarSFML::getWidth() const {
+    return width;
+}
+
+float roadfighterSFML::RacingCarSFML::getHeight() const {
+    return height;
+}
