@@ -28,6 +28,8 @@ namespace roadfighter {
         void update_distance(double distance) override;
 
         int getHealth() const override;
+
+        void decrease_speed(int val);
     };
 }
 

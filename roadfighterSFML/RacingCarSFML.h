@@ -8,13 +8,14 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <RacingCar.h>
 #include "EntityFactory.h"
 #include "../main/Transformation.h"
 
 
 namespace roadfighterSFML {
 
-    class RacingCarSFML : public roadfighter::Entity {
+    class RacingCarSFML : public roadfighter::RacingCar {
     public:
         RacingCarSFML(std::shared_ptr<sf::RenderWindow> window);
 

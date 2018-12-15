@@ -16,10 +16,6 @@ namespace roadfighter {
         std::shared_ptr<roadfighter::Entity> playercar;
         std::vector<std::shared_ptr<roadfighter::Entity>> entities;
         std::vector<std::shared_ptr<roadfighter::Entity>> opponents;
-    public:
-        const std::vector<std::shared_ptr<Entity>> &getOpponents() const;
-
-        void setOpponents(const std::vector<std::shared_ptr<Entity>> &opponents);
 
     public:
         World();
@@ -44,6 +40,9 @@ namespace roadfighter {
 
         void update_entities();
 
+        void update_opponents();
+
+        const std::vector<std::shared_ptr<Entity>> &getOpponents() const;
     };
 }
 

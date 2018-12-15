@@ -16,11 +16,10 @@ Game::Game() {
     world->setPlayercar(sfml_factory->create_playercar());
 
     // Create Opponent Cars
-
     setup_opponents();
 
     // Read game from JSON file
-    std::ifstream input("game.json");
+    std::ifstream input("test.json");
 
     if(!input.is_open()) {
         std::cout << "Couldn't open game json" << std::endl;
@@ -132,10 +131,19 @@ void Game::run() {
     setupBackground();
     int game_it = 0;
     bool finish = false;
+    auto one = std::chrono::milliseconds(0);
+    auto two = std::chrono::milliseconds(1000);
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
         auto end = now + std::chrono::milliseconds(16);
+
+        one = one + std::chrono::milliseconds(16);
+
+        if(one >= two) {
+            one = std::chrono::milliseconds(0);
+            std::cout << world->getPlayercar()->getDistance() << std::endl;
+        }
 
         sf::Event event;
 
@@ -146,6 +154,15 @@ void Game::run() {
                 if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
                     finish = true;
                 }
+                else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
+                    int speed_decrease = 160;
+                    for(const auto & opp : world->getOpponents()) {
+                        opp->decrease_speed(speed_decrease);
+                        speed_decrease -= 20;
+                    }
+                    game_it += 1;
+                }
+
                 else {
                     add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
 
@@ -156,7 +173,7 @@ void Game::run() {
         }
 
         // Update distance travelled: 16 milliseconds (per tick) times the speed
-        this->world->getPlayercar()->update_distance(0.0024 * this->world->getPlayercar()->getSpeed());
+        this->world->getPlayercar()->update_distance(0.0044 * this->world->getPlayercar()->getSpeed());
 
         while(this->window->pollEvent(event)) {
             // Check if window is closed
@@ -196,11 +213,16 @@ void Game::run() {
             end_of_game();
         }
 
-        // Update Entity Positions
+        // Update Entity and Opponent Positions
         world->update_entities();
+        world->update_opponents();
 
         for(const auto& entity : world->getEntities()) {
             entity->change_position();
+        }
+
+        for(const auto& opp : world->getOpponents()) {
+            opp->change_position();
         }
 
         // Draw
@@ -211,9 +233,9 @@ void Game::run() {
             entity->draw();
         }
 
-//        for(const auto& opp : world->getOpponents()) {
-//            opp->draw();
-//        }
+        for(const auto& opp : world->getOpponents()) {
+            opp->draw();
+        }
 
         // TEMP DISTANCE CHECK
 

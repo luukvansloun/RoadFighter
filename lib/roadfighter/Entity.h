@@ -24,7 +24,7 @@ namespace roadfighter {
 
         virtual void draw() {};
 
-        virtual double getSpeed() const {return 0;};
+        virtual double getSpeed() const {};
 
         virtual void setSpeed(double speed) {};
 
@@ -35,6 +35,8 @@ namespace roadfighter {
         virtual void update_distance(double distance) {};
 
         virtual int getHealth() const {return 0;};
+
+        virtual void decrease_speed(int val) {};
     };
 }
 

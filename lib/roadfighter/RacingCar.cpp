@@ -25,3 +25,7 @@ void roadfighter::RacingCar::update_distance(double distance) {
 int roadfighter::RacingCar::getHealth() const {
     return health;
 }
+
+void roadfighter::RacingCar::decrease_speed(int val) {
+    RacingCar::speed -= val;
+}

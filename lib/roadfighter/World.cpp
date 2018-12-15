@@ -73,5 +73,13 @@ void roadfighter::World::update_entities() {
     }
 }
 
+void roadfighter::World::update_opponents() {
+    for(const auto& opponent : this->opponents) {
+        float y_inc = (getPlayercar()->getSpeed() - opponent->getSpeed()) * 0.00075;
+
+        opponent->setY(opponent->getY() - y_inc);
+    }
+}
+
 
 

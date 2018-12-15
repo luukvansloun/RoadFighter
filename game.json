@@ -2,53 +2,43 @@
 "Elements"	:	[
 								{
 									"distance"	: 60,
-									"obstacle" 	: "Truck",
-									"speed_decr" 	: 0
+									"obstacle" 	: "Truck"
 								},
 								{
 									"distance"	: 120,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Lorry"
 								},
 								{
 									"distance"	: 150,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Opponent"
 								},
 								{
 									"distance"	: 200,
-									"obstacle" 	: "Truck",
-									"speed_decr"	: 0
+									"obstacle" 	: "Truck"
 								},
 								{
 									"distance"	: 230,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Lorry"
 								},
 								{
 									"distance"	: 280,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Lorry"
 								},
 								{
 									"distance"	: 300,
-									"obstacle" 	: "Truck",
-									"speed_decr"	: 0
+									"obstacle" 	: "Truck"
 								},
 								{
 									"distance"	: 340,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Lorry"
 								},
 								{
 									"distance"	: 400,
-									"obstacle" 	: "Lorry",
-									"speed_decr"	: 0
+									"obstacle" 	: "Lorry"
 								},
 								{
 									"distance"	: 520,
-									"obstacle" 	: "End",
-									"speed_decr"	: 0
+									"obstacle" 	: "End"
 								}
 ]
 }
