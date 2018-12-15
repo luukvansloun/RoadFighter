@@ -74,7 +74,7 @@ void roadfighter::World::update_entities() {
 
     while(it != this->entities.end()) {
         float y_inc = (getPlayercar()->getSpeed() - it->get()->getSpeed()) * 0.00075;
-        if((it->get()->getY() - y_inc) >= 800) {
+        if((it->get()->getY() - y_inc) <= -5) {
             it = this->entities.erase(it);
         }
         else {
