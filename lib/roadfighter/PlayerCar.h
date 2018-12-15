@@ -16,6 +16,7 @@ namespace roadfighter {
         const int max_speed = 300;
         double distance = 0;
         int health = 3;
+        int fuel = 100;
 
     public:
         double getSpeed() const override;
@@ -31,6 +32,10 @@ namespace roadfighter {
         void update_distance(double distance) override;
 
         int getHealth() const override;
+
+        int getFuel() const override;
+
+        void setFuel(int fuel) override;
     };
 }
 

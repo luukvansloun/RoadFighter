@@ -9,7 +9,7 @@ roadfighterSFML::LorrySFML::LorrySFML(std::shared_ptr<sf::RenderWindow> window) 
     this->window = window;
 
     // Random generated X coordinate
-    float rand_x = Random::getInstance()->get_random_x();
+    float rand_x = Random::get_instance().get_random_x();
     setX(rand_x);
 
     // Normal top starting Y coordinate
@@ -23,7 +23,7 @@ roadfighterSFML::LorrySFML::LorrySFML(std::shared_ptr<sf::RenderWindow> window) 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
 
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(rand_x, 5),
+    auto co = Transformation::get_instance().get_coordinates(std::make_pair(rand_x, 5),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
 
@@ -31,7 +31,7 @@ roadfighterSFML::LorrySFML::LorrySFML(std::shared_ptr<sf::RenderWindow> window) 
 }
 
 void roadfighterSFML::LorrySFML::change_position() {
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(this->getX(), this->getY()),
+    auto co = Transformation::get_instance().get_coordinates(std::make_pair(this->getX(), this->getY()),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
 

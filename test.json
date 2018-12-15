@@ -1,7 +1,131 @@
 {
   "Elements"	:	[
     {
-      "distance"	: 1500,
+      "distance"	: 120,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 180,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 220,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 280,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 300,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 330,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 390,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 450,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 490,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 510,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 540,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 560,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 600,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 610,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 625,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 650,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 700,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 720,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 760,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 785,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 810,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 830,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 860,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 880,
+      "obstacle" 	: "Lorry"
+    },
+    {
+      "distance"	: 905,
+      "obstacle" 	: "Truck"
+    },
+    {
+      "distance"	: 1000,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 1400,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 1800,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 2200,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 2600,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 3000,
+      "obstacle" 	: "Opponent"
+    },
+    {
+      "distance"	: 4600,
       "obstacle" 	: "End"
     }
   ]

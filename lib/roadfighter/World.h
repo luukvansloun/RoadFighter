@@ -43,6 +43,8 @@ namespace roadfighter {
         void update_opponents();
 
         const std::vector<std::shared_ptr<Entity>> &getOpponents() const;
+
+        void draw() override;
     };
 }
 

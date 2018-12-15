@@ -22,16 +22,15 @@ roadfighterSFML::PlayerCarSFML::PlayerCarSFML(std::shared_ptr<sf::RenderWindow> 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
 
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(-0.449, -1.8),
+    auto co = Transformation::get_instance().get_coordinates(std::make_pair(-0.449, -1.8),
                                                              this->window->getView().getSize().x,
                                                              this->window->getView().getSize().y);
 
     this->sprite.setPosition(co.first, co.second);
-
 }
 
 void roadfighterSFML::PlayerCarSFML::change_position() {
-    auto co = Transformation::getInstance()->get_coordinates(std::make_pair(this->getX(), this->getY()),
+    auto co = Transformation::get_instance().get_coordinates(std::make_pair(this->getX(), this->getY()),
                                                                 this->window->getView().getSize().x,
                                                                 this->window->getView().getSize().y);
 

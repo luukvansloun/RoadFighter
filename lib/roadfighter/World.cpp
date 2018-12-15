@@ -9,17 +9,19 @@ roadfighter::World::~World() {}
 roadfighter::World::World() {}
 
 void roadfighter::World::move_player_right() {
-    float plus = 0.025;
+    float plus = 0.05;
     if(playercar->getX() + plus > float(0.025)) {
         std::cout << "CRASH" << std::endl;
     }
     else {
         playercar->setX(playercar->getX() + plus);
     }
+
+    playercar->change_position();
 }
 
 void roadfighter::World::move_player_left() {
-    float minus = 0.025;
+    float minus = 0.05;
 
     if(playercar->getX() - minus < float(-2.45)) {
         std::cout << "CRASH" << std::endl;
@@ -27,6 +29,8 @@ void roadfighter::World::move_player_left() {
     else {
         playercar->setX(playercar->getX() - minus);
     }
+
+    playercar->change_position();
 }
 
 bool roadfighter::World::move_player_up() {
@@ -70,6 +74,7 @@ void roadfighter::World::update_entities() {
         float y_inc = (getPlayercar()->getSpeed() - entity->getSpeed()) * 0.00075;
 
         entity->setY(entity->getY() - y_inc);
+        entity->change_position();
     }
 }
 
@@ -78,6 +83,18 @@ void roadfighter::World::update_opponents() {
         float y_inc = (getPlayercar()->getSpeed() - opponent->getSpeed()) * 0.00075;
 
         opponent->setY(opponent->getY() - y_inc);
+        opponent->change_position();
+    }
+}
+
+void roadfighter::World::draw() {
+    playercar->draw();
+
+    for(const auto& entity : entities) {
+        entity->draw();
+    }
+    for(const auto& opponent : opponents) {
+        opponent->draw();
     }
 }
 

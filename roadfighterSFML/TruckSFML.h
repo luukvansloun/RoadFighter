@@ -9,8 +9,8 @@
 #include <memory>
 #include <Truck.h>
 #include <SFML/Graphics.hpp>
-#include "../main/Transformation.h"
-#include "../main/Random.h"
+#include "../main/Singletons/Transformation.h"
+#include "../main/Singletons/Random.h"
 
 namespace roadfighterSFML {
     class TruckSFML : public roadfighter::Truck {

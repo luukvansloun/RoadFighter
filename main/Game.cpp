@@ -76,8 +76,8 @@ void Game::setup_opponents() {
     this->world->getOpponents()[6]->setY(-0.8);
 
     // Change positions of all
-    for(int i = 0; i < this->world->getOpponents().size(); i++) {
-         this->world->getOpponents()[i]->change_position();
+    for(const auto& opponent : this->world->getOpponents()) {
+        opponent->change_position();
     }
 }
 
@@ -89,7 +89,7 @@ void Game::setupBackground() {
 
     this->background.setTexture(bgTexture);
 
-    auto bg_co = Transformation::getInstance()->get_coordinates(std::make_pair(-4, 5), this->window->getView().getSize().x,
+    auto bg_co = Transformation::get_instance().get_coordinates(std::make_pair(-4, 5), this->window->getView().getSize().x,
                                                                 this->window->getView().getSize().y);
 
     this->background.setPosition(bg_co.first, bg_co.second);
@@ -130,9 +130,11 @@ void Game::add_entity(std::string type) {
 void Game::run() {
     setupBackground();
     int game_it = 0;
+    int opp = 0;
+    int speed_decrease = 160;
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
-    auto two = std::chrono::milliseconds(1000);
+    auto two = std::chrono::milliseconds(750);
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
@@ -142,7 +144,12 @@ void Game::run() {
 
         if(one >= two) {
             one = std::chrono::milliseconds(0);
-            std::cout << world->getPlayercar()->getDistance() << std::endl;
+            this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
+            std::cout << this->world->getPlayercar()->getFuel() << std::endl;
+            if(this->world->getPlayercar()->getFuel() <= 0) {
+                std::cout << "Out of fuel" << std::endl;
+                exit(0);
+            }
         }
 
         sf::Event event;
@@ -155,11 +162,11 @@ void Game::run() {
                     finish = true;
                 }
                 else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
-                    int speed_decrease = 160;
-                    for(const auto & opp : world->getOpponents()) {
-                        opp->decrease_speed(speed_decrease);
-                        speed_decrease -= 20;
-                    }
+                    this->world->getOpponents()[opp]->decrease_speed(speed_decrease);
+
+                    speed_decrease -= 20;
+                    opp += 1;
+
                     game_it += 1;
                 }
 
@@ -185,23 +192,21 @@ void Game::run() {
         // Move player to the right
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             world->move_player_right();
-            world->getPlayercar()->change_position();
         }
         // Move player to the left
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             world->move_player_left();
-            world->getPlayercar()->change_position();
         }
         // Increase player speed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 5);
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
             }
         }
         // Decrease player speed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            if(world->getPlayercar()->getSpeed() > 150) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 10);
+            if(world->getPlayercar()->getSpeed() > 0) {
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 5);
             }
         }
 
@@ -217,43 +222,31 @@ void Game::run() {
         world->update_entities();
         world->update_opponents();
 
-        for(const auto& entity : world->getEntities()) {
-            entity->change_position();
-        }
-
-        for(const auto& opp : world->getOpponents()) {
-            opp->change_position();
-        }
-
         // Draw
         this->window->draw(this->background);
-        world->getPlayercar()->draw();
+        world->draw();
 
-        for(const auto& entity : world->getEntities()) {
-            entity->draw();
-        }
+        // TEMP FUEL CHECK
 
-        for(const auto& opp : world->getOpponents()) {
-            opp->draw();
-        }
+        sf::Text text;
+        sf::Font font;
+        font.loadFromFile("Pixel-NoirCaps.ttf");
+        text.setFont(font);
 
-        // TEMP DISTANCE CHECK
+        std::string text_string = "Speed: ";
+        text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
 
-//        sf::Text text;
-//        sf::Font font;
-//        font.loadFromFile("Pixel-NoirCaps.ttf");
-//        text.setFont(font);
-//
-//        std::string text_string = "Score";
-//
-//        text.setString(text_string);
-//
-//        text.setCharacterSize(18);
-//        text.setPosition(600, 200);
-//
-//        window->draw(text);
+        text_string += "Fuel: ";
+        text_string += std::to_string(this->world->getPlayercar()->getFuel());
 
-        // TEMP DISTANCE CHECK
+        text.setString(text_string);
+
+        text.setCharacterSize(15);
+        text.setPosition(575, 200);
+
+        window->draw(text);
+
+        // TEMP FUEL CHECK
 
 
 

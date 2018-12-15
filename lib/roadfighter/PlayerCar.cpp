@@ -30,6 +30,14 @@ int roadfighter::PlayerCar::getHealth() const {
     return health;
 }
 
+int roadfighter::PlayerCar::getFuel() const {
+    return fuel;
+}
+
+void roadfighter::PlayerCar::setFuel(int fuel) {
+    PlayerCar::fuel = fuel;
+}
+
 
 
 

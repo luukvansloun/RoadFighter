@@ -4,18 +4,7 @@
 
 #include "Random.h"
 
-Random::~Random() {}
-
-
-std::shared_ptr<Random> Random::instance = nullptr;
-
-std::shared_ptr<Random> Random::getInstance() {
-    if(instance == nullptr) {
-        instance = std::make_shared<Random>();
-    }
-
-    return instance;
-}
+Random::Random() {};
 
 float Random::get_random_x() {
     auto leftmost_x = float(-2.45);
