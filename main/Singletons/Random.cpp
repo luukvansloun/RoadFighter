@@ -17,3 +17,8 @@ float Random::get_random_x() {
     return leftmost_x + rand_x;
 
 }
+
+bool Random::get_direction() {
+    // Chances to go left or right are 50%
+    return (rand() % 100) < 50;
+}

@@ -143,7 +143,6 @@ void Game::run() {
         one = one + std::chrono::milliseconds(16);
 
         if(one >= two) {
-            std::cout << this->world->getEntities().size() << std::endl;
             one = std::chrono::milliseconds(0);
             this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
             if(this->world->getPlayercar()->getFuel() <= 0) {

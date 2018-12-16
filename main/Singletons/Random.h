@@ -24,6 +24,8 @@ public:
 
     float get_random_x();
 
+    bool get_direction();
+
 };
 
 

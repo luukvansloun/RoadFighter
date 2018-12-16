@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 #include "PlayerCar.h"
+#include "../../main/Singletons/Random.h"
 
 namespace roadfighter {
     class World : public roadfighter::Entity {
@@ -16,6 +17,8 @@ namespace roadfighter {
         std::shared_ptr<roadfighter::Entity> playercar;
         std::vector<std::shared_ptr<roadfighter::Entity>> entities;
         std::vector<std::shared_ptr<roadfighter::Entity>> opponents;
+        float left_border = -2.45;
+        float right_border = 0.025;
 
     public:
         World();
@@ -48,6 +51,12 @@ namespace roadfighter {
 
         bool detect_collision(std::shared_ptr<roadfighter::Entity> entity_one,
                               std::shared_ptr<roadfighter::Entity> entity_two);
+
+        bool check_left(std::shared_ptr<roadfighter::Entity> opponent,
+                        std::shared_ptr<roadfighter::Entity> entity);
+
+        bool check_right(std::shared_ptr<roadfighter::Entity> opponent,
+                         std::shared_ptr<roadfighter::Entity> entity);
     };
 }
 

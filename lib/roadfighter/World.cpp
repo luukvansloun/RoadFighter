@@ -88,8 +88,52 @@ void roadfighter::World::update_entities() {
 void roadfighter::World::update_opponents() {
     for(const auto& opponent : this->opponents) {
         float y_inc = (getPlayercar()->getSpeed() - opponent->getSpeed()) * 0.00075;
-
         opponent->setY(opponent->getY() - y_inc);
+
+        if(!this->entities.empty()) {
+            for(const auto& entity : this->entities) {
+                if(detect_collision(opponent, entity)) {
+                    std::cout << "Collision" << std::endl;
+                    bool collision = true;
+                    while(collision) {
+                        bool left_free = check_left(opponent, entity);
+                        bool right_free = check_right(opponent, entity);
+
+                        // See if collision will happen to both sides
+                        if(!left_free and !right_free){
+                            collision = true;
+                        }
+                        else {
+                            collision = false;
+                        }
+
+                        // If both options are available
+                        if(left_free and right_free) {
+                            // Let Random decide a new position (false == left, right == true)
+                            if(Random::get_instance().get_direction()) {
+                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
+                                opponent->setX(new_x_co);
+                            }
+                            else {
+                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
+                                opponent->setX(new_x_co);
+                            }
+                        }
+                        if(!left_free and !right_free) {
+                            // See what side has the most room to minimise collision chances
+                            if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
+                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
+                                opponent->setX(new_x_co);
+                            }
+                            else {
+                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
+                                opponent->setX(new_x_co);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         opponent->change_position();
     }
 }
@@ -109,12 +153,12 @@ bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> e
                                           std::shared_ptr<roadfighter::Entity> entity_two) {
 
     // Both entities with the y-coödinate plus it's height
-    float one_y_height = entity_one->getY() + entity_one->getHeight();
-    float two_y_height = entity_two->getY() + entity_two->getHeight();
+    float one_y_height = entity_one->getY() + (entity_one->getHeight() * 0.01);
+    float two_y_height = entity_two->getY() + (entity_two->getHeight() * 0.01);
 
     // Both entities with the x-coördinate plus it's width
-    float one_x_width = entity_one->getX() + entity_one->getWidth();
-    float two_x_width = entity_two->getX() + entity_two->getWidth();
+    float one_x_width = entity_one->getX() + (entity_one->getWidth() * 0.01);
+    float two_x_width = entity_two->getX() + (entity_two->getWidth() * 0.01);
 
     // Check if Y-axes cross
     if((entity_one->getY() >= entity_two->getY() and entity_one->getY() <= two_y_height) or
@@ -126,9 +170,62 @@ bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> e
             return true;
         }
     }
-
     // No collision detected
     return false;
+}
+
+bool roadfighter::World::check_left(std::shared_ptr<roadfighter::Entity> opponent,
+        std::shared_ptr<roadfighter::Entity> entity) {
+    bool world_free = false;
+    bool no_collision = true;
+
+    // Check if there's enough space to move into without hitting the side of the road
+    if(opponent->getX() - (opponent->getWidth() + 0.10) > this->left_border) {
+        world_free = true;
+    }
+
+    // Create temp opponent to check if new X coördinate causes collision with another entity
+    auto tempCar = opponent;
+    float new_x_co = tempCar->getX() - (tempCar->getWidth() * 0.01) - 0.10;
+    tempCar->setX(new_x_co);
+
+    // Check for collision if moved to the left
+    for(const auto& ent : this->entities) {
+        if(detect_collision(tempCar, ent)) {
+            if(ent != entity) {
+                no_collision = false;
+            }
+        }
+    }
+
+    return (world_free and no_collision);
+}
+
+bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> opponent,
+                                     std::shared_ptr<roadfighter::Entity> entity) {
+    bool world_free = false;
+    bool no_collision = true;
+
+    // Check if there's enough space to move into without hitting the side of the road
+    if(opponent->getX() + (opponent->getWidth() + 0.10) > this->right_border) {
+        world_free = true;
+    }
+
+    // Create temp opponent to check if new X coördinate causes collision with another entity
+    auto tempCar = opponent;
+    float new_x_co = tempCar->getX() + (tempCar->getWidth() * 0.01) + 0.10;
+    tempCar->setX(new_x_co);
+
+    // Check for collision if moved to the left
+    for(const auto& ent : this->entities) {
+        if(detect_collision(tempCar, ent)) {
+            if(ent != entity) {
+                no_collision = false;
+            }
+        }
+    }
+
+    return (world_free and no_collision);
 }
 
 
