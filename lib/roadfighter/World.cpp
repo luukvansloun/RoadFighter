@@ -93,8 +93,6 @@ void roadfighter::World::update_opponents() {
         if(!this->entities.empty()) {
             for(const auto& entity : this->entities) {
                 if(detect_collision(opponent, entity)) {
-                    std::cout << "Collision" << std::endl;
-                    std::cout << "Opponent: " << opponent->getX() << " - " << opponent->getY() << std::endl;
                     bool collision = true;
                     while(collision) {
                         bool left_free = check_left(opponent, entity);
@@ -112,30 +110,32 @@ void roadfighter::World::update_opponents() {
                         if(left_free and right_free) {
                             // Let Random decide a new position (false == left, right == true)
                             if(Random::get_instance().get_direction()) {
-                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
+                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
                             }
                             else {
-                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
+                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
                             }
                         }
                         else if(!left_free and !right_free) {
                             // See what side has the most room to minimise collision chances
                             if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
+                                float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
+                                opponent->setX(new_x_co);
                             }
                             else {
-                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
+                                float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
+                                opponent->setX(new_x_co);
                             }
                         }
                         else if(right_free) {
-                            opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
+                            float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
+                            opponent->setX(new_x_co);
                         }
                         else if(left_free) {
-                            opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
+                            float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
+                            opponent->setX(new_x_co);
                         }
-
                     }
-                    std::cout << "Opponent: " << opponent->getX() << " - " << opponent->getY() << std::endl;
                 }
             }
         }
@@ -191,7 +191,7 @@ bool roadfighter::World::check_left(std::shared_ptr<roadfighter::Entity> opponen
 
     // Create temp opponent to check if new X coördinate causes collision with another entity
     auto tempCar = opponent;
-    float new_x_co = tempCar->getX() - (tempCar->getWidth() * 0.01) - 0.10;
+    float new_x_co = tempCar->getX() - (tempCar->getWidth() * 0.01) - 0.05;
     tempCar->setX(new_x_co);
 
     // Check for collision if moved to the left
@@ -218,7 +218,7 @@ bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> oppone
 
     // Create temp opponent to check if new X coördinate causes collision with another entity
     auto tempCar = opponent;
-    float new_x_co = tempCar->getX() + (tempCar->getWidth() * 0.01) + 0.10;
+    float new_x_co = tempCar->getX() + (tempCar->getWidth() * 0.01) + 0.05;
     tempCar->setX(new_x_co);
 
     // Check for collision if moved to the left
