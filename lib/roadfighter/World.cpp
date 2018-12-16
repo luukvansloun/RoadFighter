@@ -94,6 +94,7 @@ void roadfighter::World::update_opponents() {
             for(const auto& entity : this->entities) {
                 if(detect_collision(opponent, entity)) {
                     std::cout << "Collision" << std::endl;
+                    std::cout << "Opponent: " << opponent->getX() << " - " << opponent->getY() << std::endl;
                     bool collision = true;
                     while(collision) {
                         bool left_free = check_left(opponent, entity);
@@ -111,26 +112,30 @@ void roadfighter::World::update_opponents() {
                         if(left_free and right_free) {
                             // Let Random decide a new position (false == left, right == true)
                             if(Random::get_instance().get_direction()) {
-                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
                             }
                             else {
-                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
                             }
                         }
-                        if(!left_free and !right_free) {
+                        else if(!left_free and !right_free) {
                             // See what side has the most room to minimise collision chances
                             if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
                             }
                             else {
-                                float new_x_co = opponent->getX() - (opponent->getWidth() * 0.01) - 0.10;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
                             }
                         }
+                        else if(right_free) {
+                            opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.10);
+                        }
+                        else if(left_free) {
+                            opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.10);
+                        }
+
                     }
+                    std::cout << "Opponent: " << opponent->getX() << " - " << opponent->getY() << std::endl;
                 }
             }
         }
