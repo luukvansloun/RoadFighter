@@ -110,30 +110,27 @@ void roadfighter::World::update_opponents() {
                         if(left_free and right_free) {
                             // Let Random decide a new position (false == left, right == true)
                             if(Random::get_instance().get_direction()) {
-                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
+                                opponent->setX(opponent->getX() + 0.05);
                             }
                             else {
-                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
+                                opponent->setX(opponent->getX() - 0.05);
                             }
                         }
                         else if(!left_free and !right_free) {
                             // See what side has the most room to minimise collision chances
                             if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() - 0.05);
                             }
                             else {
-                                float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
-                                opponent->setX(new_x_co);
+                                opponent->setX(opponent->getX() + 0.05);
                             }
                         }
                         else if(right_free) {
-                            float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
-                            opponent->setX(new_x_co);
+                            opponent->setX(opponent->getX() + 0.05);
+
                         }
                         else if(left_free) {
-                            float new_x_co = opponent->getX() + (opponent->getWidth() * 0.01) + 0.05;
-                            opponent->setX(new_x_co);
+                            opponent->setX(opponent->getX() - 0.05);
                         }
                     }
                 }
