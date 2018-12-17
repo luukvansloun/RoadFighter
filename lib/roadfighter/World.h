@@ -8,6 +8,8 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <chrono>
+#include <thread>
 #include "PlayerCar.h"
 #include "../../main/Singletons/Random.h"
 
@@ -59,7 +61,7 @@ namespace roadfighter {
 
         bool check_right(std::shared_ptr<roadfighter::Entity> opponent,
                          std::shared_ptr<roadfighter::Entity> entity);
-        
+
         void crashing(std::shared_ptr<roadfighter::Entity> entity);
     };
 }

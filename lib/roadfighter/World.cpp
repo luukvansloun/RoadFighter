@@ -75,7 +75,12 @@ void roadfighter::World::update_entities() {
     while(entity != this->entities.end()) {
         if(entity->get()->getCrash().first) {
             this->crashing(*entity);
-            ++entity;
+            if(!entity->get()->getCrash().first) {
+                entity = this->entities.erase(entity);
+            }
+            else {
+                ++entity;
+            }
         }
         else {
             if(entity->get()->getSpeed() < 200) {
@@ -180,26 +185,24 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
         if(entity->getCrash().second == "right") {
             float new_x = entity->getX() + 0.05;
             if(new_x >= this->right_border) {
-                std::cout << "CRASH!!!" << std::endl;
                 entity->setSpeed(0);
                 entity->setCrash(std::make_pair(false, ""));
             }
             else {
                 entity->setX(new_x);
-                entity->setSpeed(entity->getSpeed() - 10);
+                entity->setSpeed(entity->getSpeed() - 15);
                 entity->change_position();
             }
         }
         else if(entity->getCrash().second == "left") {
             float new_x = entity->getX() - 0.05;
             if(new_x <= this->left_border) {
-                std::cout << "CRASH!!!" << std::endl;
                 entity->setSpeed(0);
                 entity->setCrash(std::make_pair(false, ""));
             }
             else {
                 entity->setX(new_x);
-                entity->setSpeed(entity->getSpeed() - 10);
+                entity->setSpeed(entity->getSpeed() - 15);
                 entity->change_position();
             }
         }
