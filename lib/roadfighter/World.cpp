@@ -9,7 +9,7 @@ roadfighter::World::~World() {}
 roadfighter::World::World() {}
 
 void roadfighter::World::move_player_right() {
-    float plus = 0.05;
+    float plus = 0.0375;
     if(playercar->getX() + plus > float(0.025)) {
         std::cout << "CRASH" << std::endl;
     }
@@ -21,7 +21,7 @@ void roadfighter::World::move_player_right() {
 }
 
 void roadfighter::World::move_player_left() {
-    float minus = 0.05;
+    float minus = 0.0375;
 
     if(playercar->getX() - minus < float(-2.45)) {
         std::cout << "CRASH" << std::endl;
@@ -110,27 +110,24 @@ void roadfighter::World::update_opponents() {
                         if(left_free and right_free) {
                             // Let Random decide a new position (false == left, right == true)
                             if(Random::get_instance().get_direction()) {
-                                opponent->setX(opponent->getX() + 0.05);
+                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
                             }
                             else {
-                                opponent->setX(opponent->getX() - 0.05);
+                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
                             }
                         }
                         else if(!left_free and !right_free) {
                             // See what side has the most room to minimise collision chances
                             if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                opponent->setX(opponent->getX() - 0.05);
+                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
                             }
                             else {
-                                opponent->setX(opponent->getX() + 0.05);
+                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
                             }
                         }
                         else if(right_free) {
-                            opponent->setX(opponent->getX() + 0.05);
+                            opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
 
-                        }
-                        else if(left_free) {
-                            opponent->setX(opponent->getX() - 0.05);
                         }
                     }
                 }
@@ -182,7 +179,7 @@ bool roadfighter::World::check_left(std::shared_ptr<roadfighter::Entity> opponen
     bool no_collision = true;
 
     // Check if there's enough space to move into without hitting the side of the road
-    if(opponent->getX() - (opponent->getWidth() + 0.10) > this->left_border) {
+    if(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05  > this->left_border) {
         world_free = true;
     }
 
@@ -209,7 +206,7 @@ bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> oppone
     bool no_collision = true;
 
     // Check if there's enough space to move into without hitting the side of the road
-    if(opponent->getX() + (opponent->getWidth() + 0.10) > this->right_border) {
+    if(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05 < this->right_border) {
         world_free = true;
     }
 

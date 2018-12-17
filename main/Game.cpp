@@ -131,7 +131,6 @@ void Game::run() {
     setupBackground();
     int game_it = 0;
     int opp = 0;
-    int speed_decrease = 160;
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
@@ -161,16 +160,16 @@ void Game::run() {
                     finish = true;
                 }
                 else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
-                    this->world->getOpponents()[opp]->decrease_speed(speed_decrease);
-
-                    speed_decrease -= 20;
+                    this->world->getOpponents()[opp]->decrease_speed(100);
                     opp += 1;
 
                     game_it += 1;
                 }
 
                 else {
-                    add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
+                    if(world->getEntities().size() < 3) {
+                        add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
+                    }
 
                     // Update to next
                     game_it += 1;
@@ -198,14 +197,16 @@ void Game::run() {
         }
         // Increase player speed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            // TODO Move to World
             if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2);
             }
         }
         // Decrease player speed
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            // TODO Move to World
             if(world->getPlayercar()->getSpeed() > 0) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 5);
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
             }
         }
 

@@ -12,7 +12,7 @@
 namespace roadfighter {
     class Truck : public Entity {
     private:
-        const double speed = 120;
+        const double speed = 200;
 
     public:
         double getSpeed() const override;
