@@ -199,7 +199,7 @@ void Game::run() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             // TODO Move to World
             if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2);
+                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
             }
         }
         // Decrease player speed

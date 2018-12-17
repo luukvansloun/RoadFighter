@@ -5,19 +5,19 @@
       "obstacle" 	: "Truck"
     },
     {
-      "distance"	: 140,
+      "distance"	: 180,
       "obstacle" 	: "Truck"
     },
     {
-      "distance"	: 190,
+      "distance"	: 260,
       "obstacle" 	: "Lorry"
     },
     {
-      "distance"	: 320,
+      "distance"	: 310,
       "obstacle" 	: "Lorry"
     },
     {
-      "distance"	: 375,
+      "distance"	: 370,
       "obstacle" 	: "Truck"
     },
     {
@@ -25,7 +25,7 @@
       "obstacle" 	: "Truck"
     },
     {
-      "distance"	: 545,
+      "distance"	: 500,
       "obstacle" 	: "Truck"
     },
     {
@@ -33,7 +33,7 @@
       "obstacle" 	: "Lorry"
     },
     {
-      "distance"	: 625,
+      "distance"	: 650,
       "obstacle" 	: "Truck"
     },
     {
@@ -81,16 +81,8 @@
       "obstacle" 	: "Truck"
     },
     {
-      "distance"	: 1290,
-      "obstacle" 	: "Truck"
-    },
-    {
       "distance"	: 1330,
       "obstacle" 	: "Lorry"
-    },
-    {
-      "distance"	: 1385,
-      "obstacle" 	: "Truck"
     },
     {
       "distance"	: 1400,
@@ -114,10 +106,6 @@
     },
     {
       "distance"	: 1620,
-      "obstacle" 	: "Truck"
-    },
-    {
-      "distance"	: 1680,
       "obstacle" 	: "Truck"
     },
     {

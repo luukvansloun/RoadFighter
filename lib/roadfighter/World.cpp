@@ -70,26 +70,37 @@ void roadfighter::World::add_opponent(std::shared_ptr<roadfighter::Entity> oppon
 }
 
 void roadfighter::World::update_entities() {
-    auto it = this->entities.begin();
+    auto entity = this->entities.begin();
 
-    while(it != this->entities.end()) {
-        float y_inc = (getPlayercar()->getSpeed() - it->get()->getSpeed()) * 0.00075;
-        if((it->get()->getY() - y_inc) <= -5) {
-            it = this->entities.erase(it);
+    while(entity != this->entities.end()) {
+        float y_inc = (getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075;
+        if((entity->get()->getY() - y_inc) <= -3) {
+            entity = this->entities.erase(entity);
         }
         else {
-            it->get()->setY(it->get()->getY() - y_inc);
-            it->get()->change_position();
-            ++it;
+            entity->get()->setY(entity->get()->getY() - y_inc);
+            entity->get()->change_position();
+            ++entity;
         }
     }
 }
 
 void roadfighter::World::update_opponents() {
-    for(const auto& opponent : this->opponents) {
-        float y_inc = (getPlayercar()->getSpeed() - opponent->getSpeed()) * 0.00075;
-        opponent->setY(opponent->getY() - y_inc);
+    auto opponent = this->opponents.begin();
 
+    while(opponent != this->opponents.end()) {
+        float y_inc = (getPlayercar()->getSpeed() - opponent->get()->getSpeed()) * 0.00075;
+
+        if((opponent->get()->getY() - y_inc ) <= -3) {
+            opponent = this->opponents.erase(opponent);
+        }
+        else {
+            opponent->get()->setY(opponent->get()->getY() - y_inc);
+            ++opponent;
+        }
+    }
+
+    for(const auto& opponent : this->opponents) {
         if(!this->entities.empty()) {
             for(const auto& entity : this->entities) {
                 if(detect_collision(opponent, entity)) {
@@ -110,25 +121,20 @@ void roadfighter::World::update_opponents() {
                         if(left_free and right_free) {
                             // Let Random decide a new position (false == left, right == true)
                             if(Random::get_instance().get_direction()) {
-                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
+                                opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));
                             }
                             else {
-                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
-                            }
+                                opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
                         }
                         else if(!left_free and !right_free) {
                             // See what side has the most room to minimise collision chances
                             if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                opponent->setX(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05);
-                            }
+                                opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
                             else {
-                                opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
-                            }
+                                opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                            }
                         }
                         else if(right_free) {
-                            opponent->setX(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05);
-
-                        }
+                            opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                        }
                     }
                 }
             }
@@ -179,13 +185,13 @@ bool roadfighter::World::check_left(std::shared_ptr<roadfighter::Entity> opponen
     bool no_collision = true;
 
     // Check if there's enough space to move into without hitting the side of the road
-    if(opponent->getX() - (opponent->getWidth() * 0.01) - 0.05  > this->left_border) {
+    if(opponent->getX() - ((entity->getX() + (entity->getWidth() * 0.01) - opponent->getX()) + 0.10) > this->left_border) {
         world_free = true;
     }
 
     // Create temp opponent to check if new X coördinate causes collision with another entity
     auto tempCar = opponent;
-    float new_x_co = tempCar->getX() - (tempCar->getWidth() * 0.01) - 0.05;
+    float new_x_co = tempCar->getX() - ((entity->getX() + (entity->getWidth() * 0.01) - tempCar->getX()) + 0.10);
     tempCar->setX(new_x_co);
 
     // Check for collision if moved to the left
@@ -205,14 +211,17 @@ bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> oppone
     bool world_free = false;
     bool no_collision = true;
 
+
+
     // Check if there's enough space to move into without hitting the side of the road
-    if(opponent->getX() + (opponent->getWidth() * 0.01) + 0.05 < this->right_border) {
+    if(opponent->getX() + (opponent->getWidth() * 0.01) + ((entity->getX() + (entity->getWidth() * 0.01) -
+                    opponent->getX()) + 0.10) < this->right_border) {
         world_free = true;
     }
 
     // Create temp opponent to check if new X coördinate causes collision with another entity
     auto tempCar = opponent;
-    float new_x_co = tempCar->getX() + (tempCar->getWidth() * 0.01) + 0.05;
+    float new_x_co = tempCar->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - tempCar->getX()) + 0.10);
     tempCar->setX(new_x_co);
 
     // Check for collision if moved to the left
