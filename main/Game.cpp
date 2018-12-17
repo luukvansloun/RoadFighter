@@ -189,26 +189,28 @@ void Game::run() {
             }
         }
 
-        // Move player to the right
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            world->move_player_right();
-        }
-        // Move player to the left
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            world->move_player_left();
-        }
-        // Increase player speed
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            // TODO Move to World
-            if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
+        if(!world->getPlayercar()->getCrash().first) {
+            // Move player to the right
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                world->move_player_right();
             }
-        }
-        // Decrease player speed
-        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            // TODO Move to World
-            if(world->getPlayercar()->getSpeed() > 0) {
-                world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
+            // Move player to the left
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                world->move_player_left();
+            }
+            // Increase player speed
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                // TODO Move to World
+                if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
+                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
+                }
+            }
+            // Decrease player speed
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                // TODO Move to World
+                if(world->getPlayercar()->getSpeed() > 0) {
+                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
+                }
             }
         }
 

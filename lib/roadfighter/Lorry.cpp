@@ -7,3 +7,7 @@
 double roadfighter::Lorry::getSpeed() const {
     return speed;
 }
+
+void roadfighter::Lorry::setSpeed(double speed) {
+    Lorry::speed = speed;
+}
