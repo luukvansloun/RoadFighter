@@ -130,7 +130,7 @@ void Game::add_entity(std::string type) {
 void Game::run() {
     setupBackground();
     int game_it = 0;
-    int opp = 0;
+    int opp = 6;
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
@@ -156,12 +156,15 @@ void Game::run() {
             // Time frame equals the time the next object should be build
             int distance_check = this->game_objects[game_it]["distance"];
             if(distance_check <= world->getPlayercar()->getDistance()) {
+                std::cout << world->getPlayercar()->getDistance() << std::endl;
                 if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
                     finish = true;
                 }
                 else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
+
+
                     this->world->getOpponents()[opp]->decrease_speed(100);
-                    opp += 1;
+                    opp -= 1;
 
                     game_it += 1;
                 }
