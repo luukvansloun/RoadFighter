@@ -19,3 +19,11 @@ float roadfighter::Entity::getY() const {
 void roadfighter::Entity::setY(float y) {
     Entity::y = y;
 }
+
+const std::pair<bool, std::string> &roadfighter::Entity::getCrash() const {
+    return crash;
+}
+
+void roadfighter::Entity::setCrash(const std::pair<bool, std::string> &crash) {
+    Entity::crash = crash;
+}

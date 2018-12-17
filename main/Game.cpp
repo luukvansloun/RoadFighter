@@ -156,7 +156,6 @@ void Game::run() {
             // Time frame equals the time the next object should be build
             int distance_check = this->game_objects[game_it]["distance"];
             if(distance_check <= world->getPlayercar()->getDistance()) {
-                std::cout << world->getPlayercar()->getDistance() << std::endl;
                 if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
                     finish = true;
                 }
@@ -222,6 +221,7 @@ void Game::run() {
         }
 
         // Update Entity and Opponent Positions
+        world->update_playercar();
         world->update_entities();
         world->update_opponents();
 

@@ -73,14 +73,19 @@ void roadfighter::World::update_entities() {
     auto entity = this->entities.begin();
 
     while(entity != this->entities.end()) {
-        float y_inc = (getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075;
-        if((entity->get()->getY() - y_inc) <= -3) {
-            entity = this->entities.erase(entity);
+        if(entity->get()->getCrash().first) {
+            this->crashing(*entity);
         }
         else {
-            entity->get()->setY(entity->get()->getY() - y_inc);
-            entity->get()->change_position();
-            ++entity;
+            float y_inc = (getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075;
+            if((entity->get()->getY() - y_inc) <= -3) {
+                entity = this->entities.erase(entity);
+            }
+            else {
+                entity->get()->setY(entity->get()->getY() - y_inc);
+                entity->get()->change_position();
+                ++entity;
+            }
         }
     }
 }
@@ -99,7 +104,6 @@ void roadfighter::World::update_opponents() {
     }
 
     if(!this->opponents.empty()) {
-
         for(const auto& opponent : this->opponents) {
             if(!this->entities.empty()) {
                 for(const auto& entity : this->entities) {
@@ -141,6 +145,64 @@ void roadfighter::World::update_opponents() {
             }
             opponent->change_position();
         }
+    }
+}
+
+void roadfighter::World::update_playercar() {
+    if(this->playercar->getCrash().first) {
+        this->crashing(playercar);
+    }
+    else {
+        auto all_entities = this->entities;
+        all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());
+
+        for(const auto& entity : all_entities) {
+            if(detect_collision(this->playercar, entity)) {
+                if(this->playercar->getX() >= (entity->getX() + (entity->getWidth() * 0.005))) {
+                    this->playercar->setCrash(std::make_pair(true, "right"));
+                    entity->setCrash(std::make_pair(true, "left"));
+                }
+                else {
+                    this->playercar->setCrash(std::make_pair(true, "left"));
+                    entity->setCrash(std::make_pair(true, "right"));
+                }
+            }
+        }
+    }
+}
+
+void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
+    if(entity->getCrash().first and entity->getSpeed() > 0) {
+        if(entity->getCrash().second == "right") {
+            float new_x = entity->getX() + 0.05;
+            if(new_x >= this->right_border) {
+                std::cout << "CRASH!!!" << std::endl;
+                entity->setSpeed(0);
+                entity->setCrash(std::make_pair(false, ""));
+            }
+            else {
+                entity->setX(new_x);
+                entity->setSpeed(entity->getSpeed() - 10);
+                entity->change_position();
+            }
+        }
+        else if(entity->getCrash().second == "left") {
+            float new_x = entity->getX() - 0.05;
+            if(new_x <= this->left_border) {
+                std::cout << "CRASH!!!" << std::endl;
+                entity->setSpeed(0);
+                entity->setCrash(std::make_pair(false, ""));
+            }
+            else {
+                entity->setX(new_x);
+                entity->setSpeed(entity->getSpeed() - 10);
+                entity->change_position();
+            }
+        }
+    }
+    else {
+        // TODO Animation for explosion
+        entity->setCrash(std::make_pair(false, ""));
     }
 }
 
@@ -212,8 +274,6 @@ bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> oppone
     bool world_free = false;
     bool no_collision = true;
 
-
-
     // Check if there's enough space to move into without hitting the side of the road
     if(opponent->getX() + (opponent->getWidth() * 0.01) + ((entity->getX() + (entity->getWidth() * 0.01) -
                     opponent->getX()) + 0.10) < this->right_border) {
@@ -236,6 +296,8 @@ bool roadfighter::World::check_right(std::shared_ptr<roadfighter::Entity> oppone
 
     return (world_free and no_collision);
 }
+
+
 
 
 

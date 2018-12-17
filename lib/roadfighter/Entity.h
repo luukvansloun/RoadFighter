@@ -10,6 +10,7 @@ namespace roadfighter {
     private:
         float x = 0;
         float y = 0;
+        std::pair<bool, std::string> crash = std::make_pair(false, "");
 
     public:
         float getX() const;
@@ -19,6 +20,10 @@ namespace roadfighter {
         float getY() const;
 
         void setY(float y);
+
+        const std::pair<bool, std::string> &getCrash() const;
+
+        void setCrash(const std::pair<bool, std::string> &crash);
 
         virtual void change_position() {};
 
