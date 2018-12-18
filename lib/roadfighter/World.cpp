@@ -11,7 +11,8 @@ roadfighter::World::World() {}
 void roadfighter::World::move_player_right() {
     float plus = 0.0375;
     if(playercar->getX() + plus > float(0.025)) {
-        std::cout << "CRASH" << std::endl;
+        playercar->setCrashed(true);
+        playercar->setSpeed(0);
     }
     else {
         playercar->setX(playercar->getX() + plus);
@@ -24,7 +25,8 @@ void roadfighter::World::move_player_left() {
     float minus = 0.0375;
 
     if(playercar->getX() - minus < float(-2.45)) {
-        std::cout << "CRASH" << std::endl;
+        playercar->setCrashed(true);
+        playercar->setSpeed(0);
     }
     else {
         playercar->setX(playercar->getX() - minus);
@@ -73,27 +75,33 @@ void roadfighter::World::update_entities() {
     auto entity = this->entities.begin();
 
     while(entity != this->entities.end()) {
-        if(entity->get()->getCrash().first) {
-            this->crashing(*entity);
-            if(!entity->get()->getCrash().first) {
+        entity->get()->update(entity->get()->isCrashed());
+        if(entity->get()->isCrashed()) {
+            if(entity->get()->explosion_finished()) {
                 entity = this->entities.erase(entity);
             }
             else {
                 ++entity;
             }
         }
+        else if(entity->get()->getCrash().first) {
+            this->crashing(*entity);
+            ++entity;
+        }
         else {
-            if(entity->get()->getSpeed() < 200) {
+            if(entity->get()->getSpeed() < 200 and !entity->get()->isCrashed()) {
                 entity->get()->setSpeed(entity->get()->getSpeed() + 10);
             }
-            float y_inc = (getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075;
-            if((entity->get()->getY() - y_inc) <= -3) {
-                entity = this->entities.erase(entity);
-            }
             else {
-                entity->get()->setY(entity->get()->getY() - y_inc);
-                entity->get()->change_position();
-                ++entity;
+                float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
+                if((entity->get()->getY() - y_inc) <= -3) {
+                    entity = this->entities.erase(entity);
+                }
+                else {
+                    entity->get()->setY(entity->get()->getY() - y_inc);
+                    entity->get()->change_position();
+                    ++entity;
+                }
             }
         }
     }

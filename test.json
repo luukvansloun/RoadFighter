@@ -2,11 +2,11 @@
   "Elements"	:	[
     {
       "distance"	: 100,
-      "obstacle" 	: "Truck"
+      "obstacle" 	: "Lorry"
     },
     {
       "distance"	: 180,
-      "obstacle" 	: "Truck"
+      "obstacle" 	: "Lorry"
     },
     {
       "distance"	: 260,

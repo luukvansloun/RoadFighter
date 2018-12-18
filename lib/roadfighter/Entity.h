@@ -57,6 +57,8 @@ namespace roadfighter {
         virtual float getHeight() const {return 0;};
 
         virtual void update(bool crashed) {};
+
+        virtual bool explosion_finished() {return false;};
     };
 }
 

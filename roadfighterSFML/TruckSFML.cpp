@@ -16,12 +16,17 @@ roadfighterSFML::TruckSFML::TruckSFML(std::shared_ptr<sf::RenderWindow> window) 
     setY(float(5));
 
     // Setup Sprite
+    sprite.setSize(sf::Vector2f(56.0f, 81.0f));
+
     texture.loadFromFile("./sprites/truck.png");
 
-    sprite.setTexture(texture);
+    sprite.setTexture(&texture);
 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
+
+    // Setup explosion
+    this->explosion = std::make_shared<roadfighterSFML::Explosion>();
 
     // Set width and height for later collision detection
     this->width = sprite.getGlobalBounds().width;
@@ -52,5 +57,16 @@ float roadfighterSFML::TruckSFML::getWidth() const {
 
 float roadfighterSFML::TruckSFML::getHeight() const {
     return height;
+}
+
+void roadfighterSFML::TruckSFML::update(bool crashed) {
+    if(crashed) {
+        this->explosion->Update();
+    }
+    this->sprite.setTextureRect(explosion->texture_rect);
+}
+
+bool roadfighterSFML::TruckSFML::explosion_finished() {
+    return explosion->finished;
 }
 
