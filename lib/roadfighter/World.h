@@ -19,8 +19,8 @@ namespace roadfighter {
         std::shared_ptr<roadfighter::Entity> playercar;
         std::vector<std::shared_ptr<roadfighter::Entity>> entities;
         std::vector<std::shared_ptr<roadfighter::Entity>> opponents;
-        float left_border = -2.35;
-        float right_border = 0.015;
+        float left_border = -2.45;
+        float right_border = 0.025;
 
     public:
         World();

@@ -201,6 +201,7 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
             if(new_x <= this->left_border) {
                 entity->setSpeed(0);
                 entity->setCrash(std::make_pair(false, ""));
+                entity->setCrashed(true);
             }
             else {
                 entity->setX(new_x);
