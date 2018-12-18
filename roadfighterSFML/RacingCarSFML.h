@@ -11,6 +11,7 @@
 #include <RacingCar.h>
 #include "EntityFactory.h"
 #include "../main/Singletons/Transformation.h"
+#include "Explosion.h"
 
 
 namespace roadfighterSFML {
@@ -20,8 +21,9 @@ namespace roadfighterSFML {
         float width;
         float height;
         sf::Texture texture;
-        sf::Sprite sprite;
+        sf::RectangleShape sprite;
         std::shared_ptr<sf::RenderWindow> window;
+        std::shared_ptr<roadfighterSFML::Explosion> explosion;
 
     public:
         RacingCarSFML(std::shared_ptr<sf::RenderWindow> window);
@@ -30,11 +32,15 @@ namespace roadfighterSFML {
 
         void change_position() override;
 
-        void draw();
+        void draw() override;
 
-        float getWidth() const;
+        float getWidth() const override;
 
-        float getHeight() const;
+        float getHeight() const override;
+
+        void update(bool crashed) override;
+
+        bool explosion_finished() override;
     };
 }
 

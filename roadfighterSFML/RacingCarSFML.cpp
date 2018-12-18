@@ -10,12 +10,17 @@ roadfighterSFML::RacingCarSFML::RacingCarSFML(std::shared_ptr<sf::RenderWindow> 
     this->window = window;
 
     // Setup Sprite
-    texture.loadFromFile("./sprites/racingcar.png");
+    sprite.setSize(sf::Vector2f(56.0f, 81.0f));
 
-    sprite.setTexture(texture);
+    texture.loadFromFile("./sprites/opponent.png");
+
+    sprite.setTexture(&texture);
 
     // Scale down to 80% of the original image size
     sprite.setScale(0.8f, 0.8f);
+
+    // Setup explosion
+    this->explosion = std::make_shared<roadfighterSFML::Explosion>();
 
     // Set width and height for later collision detection
     this->width = sprite.getGlobalBounds().width;
@@ -42,4 +47,15 @@ float roadfighterSFML::RacingCarSFML::getWidth() const {
 
 float roadfighterSFML::RacingCarSFML::getHeight() const {
     return height;
+}
+
+void roadfighterSFML::RacingCarSFML::update(bool crashed) {
+    if(crashed) {
+        this->explosion->Update();
+    }
+    this->sprite.setTextureRect(explosion->texture_rect);
+}
+
+bool roadfighterSFML::RacingCarSFML::explosion_finished() {
+    return explosion->finished;
 }

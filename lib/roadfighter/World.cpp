@@ -108,61 +108,112 @@ void roadfighter::World::update_entities() {
 }
 
 void roadfighter::World::update_opponents() {
+//    auto opp = this->opponents.begin();
+//    while(opp != this->opponents.end()) {
+//        opp->get()->update(opp->get()->isCrashed());
+//        if(opp->get()->isCrashed()) {
+//            if(opp->get()->explosion_finished()) {
+//                opp = this->entities.erase(opp);
+//            }
+//            else {
+//                ++opp;
+//            }
+//        }
+//        else if(opp->get()->getCrash().first) {
+//            this->crashing(*opp);
+//            ++opp;
+//        }
+//        else {
+//            float y_inc = (getPlayercar()->getSpeed() - opp->get()->getSpeed()) * 0.00075;
+//            if((opp->get()->getY() - y_inc ) <= -3) {
+//                opp = this->opponents.erase(opp);
+//            }
+//            else {
+//                opp->get()->setY(opp->get()->getY() - y_inc);
+//                ++opp;
+//            }
+//        }
+//    }
+
     auto opp = this->opponents.begin();
+
     while(opp != this->opponents.end()) {
-        float y_inc = (getPlayercar()->getSpeed() - opp->get()->getSpeed()) * 0.00075;
-        if((opp->get()->getY() - y_inc ) <= -3) {
-            opp = this->opponents.erase(opp);
+        opp->get()->update(opp->get()->isCrashed());
+        if(opp->get()->isCrashed()) {
+            if(opp->get()->explosion_finished()) {
+                opp = this->opponents.erase(opp);
+            }
+            else {
+                ++opp;
+            }
         }
-        else {
-            opp->get()->setY(opp->get()->getY() - y_inc);
+        else if(opp->get()->getCrash().first) {
+            this->crashing(*opp);
             ++opp;
         }
-    }
-
-    if(!this->opponents.empty()) {
-        for(const auto& opponent : this->opponents) {
-            if(!this->entities.empty()) {
-                for(const auto& entity : this->entities) {
-                    if(detect_collision(opponent, entity)) {
-                        bool collision = true;
-                        while(collision) {
-                            bool left_free = check_left(opponent, entity);
-                            bool right_free = check_right(opponent, entity);
-
-                            // See if collision will happen to both sides
-                            if(!left_free and !right_free){
-                                collision = true;
-                            }
-                            else {
-                                collision = false;
-                            }
-
-                            // If both options are available
-                            if(left_free and right_free) {
-                                // Let Random decide a new position (false == left, right == true)
-                                if(Random::get_instance().get_direction()) {
-                                    opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));
-                                }
-                                else {
-                                    opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
-                            }
-                            else if(!left_free and !right_free) {
-                                // See what side has the most room to minimise collision chances
-                                if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
-                                    opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
-                                else {
-                                    opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                            }
-                            }
-                            else if(right_free) {
-                                opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                        }
-                        }
-                    }
+        else {
+            if(opp->get()->getSpeed() < 200 and !opp->get()->isCrashed()) {
+                opp->get()->setSpeed(opp->get()->getSpeed() + 10);
+            }
+            else {
+                float y_inc = float(getPlayercar()->getSpeed() - opp->get()->getSpeed()) * 0.00075f;
+                if((opp->get()->getY() - y_inc) <= -3) {
+                    opp = this->opponents.erase(opp);
+                }
+                else {
+                    opp->get()->setY(opp->get()->getY() - y_inc);
+                    opp->get()->change_position();
+                    ++opp;
                 }
             }
-            opponent->change_position();
         }
     }
+
+//    if(!this->opponents.empty()) {
+//        for(const auto& opponent : this->opponents) {
+//            if(!opponent->getCrash().first) {
+//                if(!this->entities.empty()) {
+//                    for(const auto& entity : this->entities) {
+//                        if(detect_collision(opponent, entity)) {
+//                            bool collision = true;
+//                            while(collision) {
+//                                bool left_free = check_left(opponent, entity);
+//                                bool right_free = check_right(opponent, entity);
+//
+//                                // See if collision will happen to both sides
+//                                if(!left_free and !right_free){
+//                                    collision = true;
+//                                }
+//                                else {
+//                                    collision = false;
+//                                }
+//
+//                                // If both options are available
+//                                if(left_free and right_free) {
+//                                    // Let Random decide a new position (false == left, right == true)
+//                                    if(Random::get_instance().get_direction()) {
+//                                        opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));
+//                                    }
+//                                    else {
+//                                        opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
+//                                }
+//                                else if(!left_free and !right_free) {
+//                                    // See what side has the most room to minimise collision chances
+//                                    if((opponent->getX() - this->left_border) >= (this->right_border - opponent->getX())) {
+//                                        opponent->setX(opponent->getX() - (((opponent->getX() + (opponent->getWidth() * 0.01)) - entity->getX()) + 0.10));                            }
+//                                    else {
+//                                        opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                            }
+//                                }
+//                                else if(right_free) {
+//                                    opponent->setX(opponent->getX() + (((entity->getX() + (entity->getWidth() * 0.01)) - opponent->getX()) + 0.10));                        }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            opponent->change_position();
+//        }
+//    }
 }
 
 void roadfighter::World::update_playercar() {
