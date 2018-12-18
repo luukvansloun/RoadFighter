@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <PlayerCar.h>
 #include "../main/Singletons/Transformation.h"
+#include "Explosion.h"
 
 namespace roadfighterSFML {
 
@@ -19,8 +20,9 @@ namespace roadfighterSFML {
         float width;
         float height;
         sf::Texture texture;
-        sf::Sprite sprite;
+        sf::RectangleShape sprite;
         std::shared_ptr<sf::RenderWindow> window;
+        std::shared_ptr<roadfighterSFML::Explosion> explosion;
 
     public:
         PlayerCarSFML(std::shared_ptr<sf::RenderWindow> window);
@@ -34,6 +36,8 @@ namespace roadfighterSFML {
         float getWidth() const;
 
         float getHeight() const;
+
+        void update(bool crashed);
     };
 
 

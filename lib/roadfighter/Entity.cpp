@@ -27,3 +27,11 @@ const std::pair<bool, std::string> &roadfighter::Entity::getCrash() const {
 void roadfighter::Entity::setCrash(const std::pair<bool, std::string> &crash) {
     Entity::crash = crash;
 }
+
+bool roadfighter::Entity::isCrashed() const {
+    return crashed;
+}
+
+void roadfighter::Entity::setCrashed(bool crashed) {
+    Entity::crashed = crashed;
+}

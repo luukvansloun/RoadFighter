@@ -158,6 +158,7 @@ void roadfighter::World::update_opponents() {
 }
 
 void roadfighter::World::update_playercar() {
+    playercar->update(playercar->isCrashed());
     if(this->playercar->getCrash().first) {
         this->crashing(playercar);
     }
@@ -187,6 +188,7 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
             if(new_x >= this->right_border) {
                 entity->setSpeed(0);
                 entity->setCrash(std::make_pair(false, ""));
+                entity->setCrashed(true);
             }
             else {
                 entity->setX(new_x);

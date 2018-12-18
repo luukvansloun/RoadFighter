@@ -189,7 +189,7 @@ void Game::run() {
             }
         }
 
-        if(!world->getPlayercar()->getCrash().first) {
+        if(!world->getPlayercar()->isCrashed()) {
             // Move player to the right
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
                 world->move_player_right();
