@@ -15,6 +15,8 @@ namespace roadfighter {
         double speed = 200;
 
     public:
+        std::string get_type() override;
+
         double getSpeed() const override;
 
         void setSpeed(double speed) override;

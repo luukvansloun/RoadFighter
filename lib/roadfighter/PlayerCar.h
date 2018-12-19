@@ -19,6 +19,8 @@ namespace roadfighter {
         int fuel = 100;
 
     public:
+        std::string get_type();
+
         double getSpeed() const override;
 
         void setSpeed(double speed) override;
@@ -40,6 +42,7 @@ namespace roadfighter {
         virtual float getWidth() const {return 0;};
 
         virtual float getHeight() const {return 0;};
+
     };
 }
 

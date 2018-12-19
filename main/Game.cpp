@@ -223,9 +223,10 @@ void Game::run() {
         }
 
         // Update Entity and Opponent Positions
-        world->update_playercar();
-        world->update_entities();
-        world->update_opponents();
+//        world->update_playercar();
+//        world->update_entities();
+//        world->update_opponents();
+        world->update_all();
 
         // Draw
         this->window->draw(this->background);

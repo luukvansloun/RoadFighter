@@ -71,6 +71,105 @@ void roadfighter::World::add_opponent(std::shared_ptr<roadfighter::Entity> oppon
     this->opponents.push_back(opponent);
 }
 
+void roadfighter::World::update_all() {
+    auto all_entities = this->entities;
+    all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());
+    all_entities.push_back(this->playercar);
+
+    for(const auto& entity_one : all_entities) {
+        for(const auto& entity_two : all_entities) {
+            if(entity_one != entity_two) {
+                if(detect_collision(entity_one, entity_two)) {
+                    if(entity_one->getX() >= (entity_two->getX() + (entity_two->getWidth() * 0.005))) {
+                        entity_one->setCrash(std::make_pair(true, "right"));
+                        entity_two->setCrash(std::make_pair(true, "left"));
+                    }
+                    else {
+                        entity_one->setCrash(std::make_pair(true, "left"));
+                        entity_two->setCrash(std::make_pair(true, "right"));
+                    }
+                }
+            }
+        }
+    }
+
+    // Check Player
+    playercar->update(playercar->isCrashed());
+    if(this->playercar->getCrash().first) {
+        this->crashing(playercar);
+    }
+
+    // Check Opponents
+
+    auto opp = this->opponents.begin();
+
+    while(opp != this->opponents.end()) {
+        opp->get()->update(opp->get()->isCrashed());
+        if(opp->get()->isCrashed()) {
+            if(opp->get()->explosion_finished()) {
+                opp = this->opponents.erase(opp);
+            }
+            else {
+                ++opp;
+            }
+        }
+        else if(opp->get()->getCrash().first) {
+            this->crashing(*opp);
+            ++opp;
+        }
+        else {
+            if(opp->get()->getSpeed() < 200 and !opp->get()->isCrashed()) {
+                opp->get()->setSpeed(opp->get()->getSpeed() + 10);
+            }
+            else {
+                float y_inc = float(getPlayercar()->getSpeed() - opp->get()->getSpeed()) * 0.00075f;
+                if((opp->get()->getY() - y_inc) <= -3) {
+                    opp = this->opponents.erase(opp);
+                }
+                else {
+                    opp->get()->setY(opp->get()->getY() - y_inc);
+                    opp->get()->change_position();
+                    ++opp;
+                }
+            }
+        }
+    }
+
+    auto entity = this->entities.begin();
+
+    while(entity != this->entities.end()) {
+        entity->get()->update(entity->get()->isCrashed());
+        if(entity->get()->isCrashed()) {
+            if(entity->get()->explosion_finished()) {
+                entity = this->entities.erase(entity);
+            }
+            else {
+                ++entity;
+            }
+        }
+        else if(entity->get()->getCrash().first) {
+            this->crashing(*entity);
+            ++entity;
+        }
+        else {
+            if(entity->get()->getSpeed() < 200 and !entity->get()->isCrashed()) {
+                entity->get()->setSpeed(entity->get()->getSpeed() + 10);
+            }
+            else {
+                float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
+                if((entity->get()->getY() - y_inc) <= -3) {
+                    entity = this->entities.erase(entity);
+                }
+                else {
+                    entity->get()->setY(entity->get()->getY() - y_inc);
+                    entity->get()->change_position();
+                    ++entity;
+                }
+            }
+        }
+    }
+}
+
 void roadfighter::World::update_entities() {
     auto entity = this->entities.begin();
 
@@ -169,6 +268,7 @@ void roadfighter::World::update_opponents() {
         }
     }
 
+    // TODO CHECK IF STILL USEFULL
 //    if(!this->opponents.empty()) {
 //        for(const auto& opponent : this->opponents) {
 //            if(!opponent->getCrash().first) {
@@ -216,28 +316,52 @@ void roadfighter::World::update_opponents() {
 //    }
 }
 
+// TODO SAVE FOR LATER
+//void roadfighter::World::update_playercar() {
+//    playercar->update(playercar->isCrashed());
+//    if(this->playercar->getCrash().first) {
+//        this->crashing(playercar);
+//    }
+//    else {
+//        auto all_entities = this->entities;
+//        all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());
+//
+//        for(const auto& entity : all_entities) {
+//            if(detect_collision(this->playercar, entity)) {
+//                if(this->playercar->getX() >= (entity->getX() + (entity->getWidth() * 0.005))) {
+//                    this->playercar->setCrash(std::make_pair(true, "right"));
+//                    entity->setCrash(std::make_pair(true, "left"));
+//                }
+//                else {
+//                    this->playercar->setCrash(std::make_pair(true, "left"));
+//                    entity->setCrash(std::make_pair(true, "right"));
+//                }
+//            }
+//        }
+//    }
+//}
+
 void roadfighter::World::update_playercar() {
     playercar->update(playercar->isCrashed());
     if(this->playercar->getCrash().first) {
         this->crashing(playercar);
     }
-    else {
-        auto all_entities = this->entities;
-        all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());
-
-        for(const auto& entity : all_entities) {
-            if(detect_collision(this->playercar, entity)) {
-                if(this->playercar->getX() >= (entity->getX() + (entity->getWidth() * 0.005))) {
-                    this->playercar->setCrash(std::make_pair(true, "right"));
-                    entity->setCrash(std::make_pair(true, "left"));
-                }
-                else {
-                    this->playercar->setCrash(std::make_pair(true, "left"));
-                    entity->setCrash(std::make_pair(true, "right"));
-                }
-            }
-        }
-    }
+//
+//    auto all_entities = this->entities;
+//    all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());
+//
+//    for(const auto& entity_one : all_entities) {
+//        if(detect_collision(playercar, entity_one)) {
+//            if(playercar->getX() >= (entity_one->getX() + (entity_one->getWidth() * 0.005))) {
+//                playercar->setCrash(std::make_pair(true, "right"));
+//                entity_one->setCrash(std::make_pair(true, "left"));
+//            }
+//            else {
+//                playercar->setCrash(std::make_pair(true, "left"));
+//                entity_one->setCrash(std::make_pair(true, "right"));
+//            }
+//        }
+//    }
 }
 
 void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {

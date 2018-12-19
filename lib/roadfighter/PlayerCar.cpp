@@ -38,6 +38,10 @@ void roadfighter::PlayerCar::setFuel(int fuel) {
     PlayerCar::fuel = fuel;
 }
 
+std::string roadfighter::PlayerCar::get_type() {
+    return "PlayerCar";
+}
+
 
 
 

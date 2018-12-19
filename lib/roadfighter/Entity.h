@@ -30,6 +30,8 @@ namespace roadfighter {
 
         void setCrashed(bool crashed);
 
+        virtual std::string get_type() {return "";};
+
         virtual void change_position() {};
 
         virtual void draw() {};

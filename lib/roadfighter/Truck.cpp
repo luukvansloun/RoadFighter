@@ -11,3 +11,9 @@ double roadfighter::Truck::getSpeed() const {
 void roadfighter::Truck::setSpeed(double speed) {
     Truck::speed = speed;
 }
+
+std::string roadfighter::Truck::get_type() {
+    return "Truck";
+}
+
+
