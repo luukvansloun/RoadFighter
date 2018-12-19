@@ -120,10 +120,20 @@ void Game::add_entity(std::string type) {
 
         this->world->add_entity(truck);
     }
-    if(type == "Lorry") {
+    else if(type == "Lorry") {
         auto lorry = this->sfml_factory->create_lorry();
 
         this->world->add_entity(lorry);
+    }
+    else if(type == "Bullet") {
+        auto bullet = this->sfml_factory->create_bullet();
+
+        bullet->setX(world->getPlayercar()->getX() + (world->getPlayercar()->getWidth() * 0.005f) -
+                             (bullet->getWidth() * 0.005f));
+
+        bullet->setY(world->getPlayercar()->getY() + (bullet->getHeight() * 0.005f));
+
+        this->world->add_entity(bullet);
     }
 }
 
@@ -135,7 +145,7 @@ void Game::run() {
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
     auto three = std::chrono::milliseconds(0);
-    auto four = std::chrono::milliseconds(2500);
+    auto four = std::chrono::milliseconds(1500);
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
@@ -216,7 +226,7 @@ void Game::run() {
                 }
             }
             // Shoot bullet
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                 if(!world->getPlayercar()->isShoot()) {
                     std::cout << "BULLET" << std::endl;
                     world->getPlayercar()->setShoot(true);
@@ -224,6 +234,7 @@ void Game::run() {
                 else {
                     if(three >= four) {
                         three = std::chrono::seconds(0);
+                        add_entity("Bullet");
                         world->getPlayercar()->setShoot(false);
                     }
                 }

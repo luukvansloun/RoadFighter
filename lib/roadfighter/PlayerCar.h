@@ -20,7 +20,7 @@ namespace roadfighter {
         bool shoot = false;
 
     public:
-        std::string get_type();
+        std::string get_type() override;
 
         double getSpeed() const override;
 

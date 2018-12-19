@@ -80,13 +80,27 @@ void roadfighter::World::update_all() {
         for(const auto& entity_two : all_entities) {
             if(entity_one != entity_two) {
                 if(detect_collision(entity_one, entity_two)) {
-                    if(entity_one->getX() >= (entity_two->getX() + (entity_two->getWidth() * 0.005))) {
-                        entity_one->setCrash(std::make_pair(true, "right"));
-                        entity_two->setCrash(std::make_pair(true, "left"));
+                    if(entity_one->get_type() != "Bullet" and entity_two->get_type() != "Bullet") {
+                        if (entity_one->getX() >= (entity_two->getX() + (entity_two->getWidth() * 0.005))) {
+                            entity_one->setCrash(std::make_pair(true, "right"));
+                            entity_two->setCrash(std::make_pair(true, "left"));
+                        }
+                        else {
+                            entity_one->setCrash(std::make_pair(true, "left"));
+                            entity_two->setCrash(std::make_pair(true, "right"));
+                        }
                     }
                     else {
-                        entity_one->setCrash(std::make_pair(true, "left"));
-                        entity_two->setCrash(std::make_pair(true, "right"));
+                        if(entity_one->get_type() == "Bullet") {
+                            if(entity_two->get_type() != "PlayerCar") {
+                                entity_two->setCrashed(true);
+                            }
+                        }
+                        else {
+                            if(entity_one->get_type() != "PlayerCar") {
+                                entity_one->setCrashed(true);
+                            }
+                        }
                     }
                 }
             }
@@ -138,34 +152,48 @@ void roadfighter::World::update_all() {
     auto entity = this->entities.begin();
 
     while(entity != this->entities.end()) {
-        entity->get()->update(entity->get()->isCrashed());
-        if(entity->get()->isCrashed()) {
-            if(entity->get()->explosion_finished()) {
-                entity = this->entities.erase(entity);
-            }
-            else {
-                ++entity;
-            }
-        }
-        else if(entity->get()->getCrash().first) {
-            this->crashing(*entity);
-            ++entity;
-        }
-        else {
-            if(entity->get()->getSpeed() < 200 and !entity->get()->isCrashed()) {
-                entity->get()->setSpeed(entity->get()->getSpeed() + 10);
-            }
-            else {
-                float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
-                if((entity->get()->getY() - y_inc) <= -3) {
+        if(entity->get()->get_type() != "Bullet") {
+            entity->get()->update(entity->get()->isCrashed());
+            if(entity->get()->isCrashed()) {
+                if(entity->get()->explosion_finished()) {
                     entity = this->entities.erase(entity);
                 }
                 else {
-                    entity->get()->setY(entity->get()->getY() - y_inc);
-                    entity->get()->change_position();
                     ++entity;
                 }
             }
+            else if(entity->get()->getCrash().first) {
+                this->crashing(*entity);
+                ++entity;
+            }
+            else {
+                if(entity->get()->getSpeed() < 200 and !entity->get()->isCrashed()) {
+                    entity->get()->setSpeed(entity->get()->getSpeed() + 10);
+                }
+                else {
+                    float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
+                    if((entity->get()->getY() - y_inc) <= -3) {
+                        entity = this->entities.erase(entity);
+                    }
+                    else {
+                        entity->get()->setY(entity->get()->getY() - y_inc);
+                        entity->get()->change_position();
+                        ++entity;
+                    }
+                }
+            }
+        }
+        else {
+            float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
+            if((entity->get()->getY() - y_inc) >= 3) {
+                entity = this->entities.erase(entity);
+            }
+            else {
+                entity->get()->setY(entity->get()->getY() - y_inc);
+                entity->get()->change_position();
+                ++entity;
+            }
+
         }
     }
 }
@@ -403,6 +431,9 @@ void roadfighter::World::draw() {
     playercar->draw();
 
     for(const auto& entity : entities) {
+        if(entity->get_type() == "Bullet") {
+            std::cout << "YEP" << std::endl;
+        }
         entity->draw();
     }
     for(const auto& opponent : opponents) {
