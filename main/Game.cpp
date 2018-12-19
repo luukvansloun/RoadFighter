@@ -134,12 +134,15 @@ void Game::run() {
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
+    auto three = std::chrono::milliseconds(0);
+    auto four = std::chrono::milliseconds(2500);
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
         auto end = now + std::chrono::milliseconds(16);
 
-        one = one + std::chrono::milliseconds(16);
+        one += std::chrono::milliseconds(16);
+        three += std::chrono::milliseconds(16);
 
         if(one >= two) {
             one = std::chrono::milliseconds(0);
@@ -210,6 +213,19 @@ void Game::run() {
                 // TODO Move to World
                 if(world->getPlayercar()->getSpeed() > 0) {
                     world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
+                }
+            }
+            // Shoot bullet
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                if(!world->getPlayercar()->isShoot()) {
+                    std::cout << "BULLET" << std::endl;
+                    world->getPlayercar()->setShoot(true);
+                }
+                else {
+                    if(three >= four) {
+                        three = std::chrono::seconds(0);
+                        world->getPlayercar()->setShoot(false);
+                    }
                 }
             }
         }

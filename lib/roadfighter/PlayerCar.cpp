@@ -42,6 +42,14 @@ std::string roadfighter::PlayerCar::get_type() {
     return "PlayerCar";
 }
 
+bool roadfighter::PlayerCar::isShoot() const {
+    return shoot;
+}
+
+void roadfighter::PlayerCar::setShoot(bool shoot) {
+    PlayerCar::shoot = shoot;
+}
+
 
 
 

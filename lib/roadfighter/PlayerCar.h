@@ -17,6 +17,7 @@ namespace roadfighter {
         double distance = 0;
         int health = 3;
         int fuel = 100;
+        bool shoot = false;
 
     public:
         std::string get_type();
@@ -42,6 +43,10 @@ namespace roadfighter {
         virtual float getWidth() const {return 0;};
 
         virtual float getHeight() const {return 0;};
+
+        bool isShoot() const override;
+
+        void setShoot(bool shoot) override;
 
     };
 }

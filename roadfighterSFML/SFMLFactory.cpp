@@ -28,3 +28,7 @@ std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_truck(
 std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_lorry() {
     return std::make_shared<roadfighterSFML::LorrySFML>(window);
 }
+
+std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_bullet() {
+    return std::make_shared<roadfighterSFML::BulletSFML>(window);
+}

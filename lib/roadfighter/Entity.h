@@ -61,6 +61,10 @@ namespace roadfighter {
         virtual void update(bool crashed) {};
 
         virtual bool explosion_finished() {return false;};
+
+        virtual bool isShoot() const {return false;};
+
+        virtual void setShoot(bool shoot) {};
     };
 }
 

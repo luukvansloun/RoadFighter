@@ -24,7 +24,7 @@ SET(ROADFIGHTER_SRC
         roadfighterSFML/PlayerCarSFML.cpp roadfighterSFML/PlayerCarSFML.h
         roadfighterSFML/RacingCarSFML.cpp roadfighterSFML/RacingCarSFML.h
         roadfighterSFML/SFMLFactory.cpp roadfighterSFML/SFMLFactory.h
-        roadfighterSFML/TruckSFML.cpp roadfighterSFML/TruckSFML.h roadfighterSFML/LorrySFML.cpp roadfighterSFML/LorrySFML.h roadfighterSFML/Explosion.cpp roadfighterSFML/Explosion.h)
+        roadfighterSFML/TruckSFML.cpp roadfighterSFML/TruckSFML.h roadfighterSFML/LorrySFML.cpp roadfighterSFML/LorrySFML.h roadfighterSFML/Explosion.cpp roadfighterSFML/Explosion.h roadfighterSFML/BulletSFML.cpp roadfighterSFML/BulletSFML.h)
 
 ADD_EXECUTABLE(RoadFighter ${ROADFIGHTER_SRC})
 TARGET_LINK_LIBRARIES(RoadFighter ${SFML_LIBRARIES})

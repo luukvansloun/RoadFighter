@@ -15,6 +15,7 @@
 #include "RacingCarSFML.h"
 #include "TruckSFML.h"
 #include "LorrySFML.h"
+#include "BulletSFML.h"
 
 namespace roadfighterSFML {
 
@@ -31,6 +32,8 @@ namespace roadfighterSFML {
         std::shared_ptr<roadfighter::Entity> create_truck() override;
 
         std::shared_ptr<roadfighter::Entity> create_lorry() override;
+
+        std::shared_ptr<roadfighter::Entity> create_bullet() override;
 
     private:
         std::shared_ptr<sf::RenderWindow> window;

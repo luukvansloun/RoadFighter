@@ -15,6 +15,7 @@ public:
     virtual std::shared_ptr<roadfighter::Entity> create_racingcar() = 0;
     virtual std::shared_ptr<roadfighter::Entity> create_truck() = 0;
     virtual std::shared_ptr<roadfighter::Entity> create_lorry() = 0;
+    virtual std::shared_ptr<roadfighter::Entity> create_bullet() = 0;
 };
 
 
