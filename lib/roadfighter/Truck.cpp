@@ -16,4 +16,13 @@ std::string roadfighter::Truck::get_type() {
     return "Truck";
 }
 
+int roadfighter::Truck::getHealth() const {
+    return health;
+}
+
+void roadfighter::Truck::setHealth(int health) {
+    Truck::health = health;
+}
+
+
 

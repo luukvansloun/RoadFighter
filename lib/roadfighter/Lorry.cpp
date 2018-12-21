@@ -15,3 +15,11 @@ void roadfighter::Lorry::setSpeed(double speed) {
 std::string roadfighter::Lorry::get_type() {
     return "Lorry";
 }
+
+int roadfighter::Lorry::getHealth() const {
+    return health;
+}
+
+void roadfighter::Lorry::setHealth(int health) {
+    Lorry::health = health;
+}

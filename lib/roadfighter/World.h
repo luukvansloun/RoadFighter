@@ -44,12 +44,6 @@ namespace roadfighter {
 
         void add_opponent(std::shared_ptr<roadfighter::Entity> opponent);
 
-        void update_entities();
-
-        void update_opponents();
-
-        void update_playercar();
-
         void update_all();
 
         const std::vector<std::shared_ptr<Entity>> &getOpponents() const;
@@ -58,12 +52,6 @@ namespace roadfighter {
 
         bool detect_collision(std::shared_ptr<roadfighter::Entity> entity_one,
                               std::shared_ptr<roadfighter::Entity> entity_two);
-
-        bool check_left(std::shared_ptr<roadfighter::Entity> opponent,
-                        std::shared_ptr<roadfighter::Entity> entity);
-
-        bool check_right(std::shared_ptr<roadfighter::Entity> opponent,
-                         std::shared_ptr<roadfighter::Entity> entity);
 
         void crashing(std::shared_ptr<roadfighter::Entity> entity);
     };

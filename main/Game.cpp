@@ -131,7 +131,7 @@ void Game::add_entity(std::string type) {
         bullet->setX(world->getPlayercar()->getX() + (world->getPlayercar()->getWidth() * 0.005f) -
                              (bullet->getWidth() * 0.005f));
 
-        bullet->setY(world->getPlayercar()->getY() + (bullet->getHeight() * 0.005f));
+        bullet->setY(world->getPlayercar()->getY() + (bullet->getHeight() * 0.005f) + 0.10f);
 
         this->world->add_entity(bullet);
     }
@@ -145,7 +145,7 @@ void Game::run() {
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
     auto three = std::chrono::milliseconds(0);
-    auto four = std::chrono::milliseconds(1500);
+    auto four = std::chrono::milliseconds(250);
 
     while(this->window->isOpen()) {
         auto now = std::chrono::steady_clock::now();
@@ -275,7 +275,10 @@ void Game::run() {
         text_string += std::to_string(this->world->getPlayercar()->getFuel())  + "\n\n\n\n";
 
         text_string += "Bullets: ";
-        text_string += std::to_string(this->world->getPlayercar()->getBullets());
+        text_string += std::to_string(this->world->getPlayercar()->getBullets())  + "\n\n\n\n";
+
+        text_string += "Health: ";
+        text_string += std::to_string(this->world->getPlayercar()->getHealth());
 
         text.setString(text_string);
 

@@ -26,6 +26,11 @@ int roadfighter::RacingCar::getHealth() const {
     return health;
 }
 
+void roadfighter::RacingCar::setHealth(int health) {
+    RacingCar::health = health;
+}
+
+
 void roadfighter::RacingCar::decrease_speed(int val) {
     RacingCar::speed -= val;
 }
@@ -33,3 +38,4 @@ void roadfighter::RacingCar::decrease_speed(int val) {
 std::string roadfighter::RacingCar::get_type() {
     return "RacingCar";
 }
+

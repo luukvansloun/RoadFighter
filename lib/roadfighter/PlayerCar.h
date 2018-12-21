@@ -18,7 +18,7 @@ namespace roadfighter {
         int health = 3;
         int fuel = 100;
         bool shoot = false;
-        int bullets = 10;
+        int bullets = 25;
 
     public:
         std::string get_type() override;
@@ -36,6 +36,8 @@ namespace roadfighter {
         void update_distance(double distance) override;
 
         int getHealth() const override;
+
+        void setHealth(int health) override;
 
         int getFuel() const override;
 

@@ -13,6 +13,7 @@ namespace roadfighter {
     class Lorry : public Entity {
     private:
         double speed = 200;
+        int health = 3;
 
     public:
         std::string get_type() override;
@@ -26,6 +27,10 @@ namespace roadfighter {
         virtual float getWidth() const {return 0;};
 
         virtual float getHeight() const {return 0;};
+
+        int getHealth() const override;
+
+        void setHealth(int health) override;
     };
 }
 

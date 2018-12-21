@@ -48,6 +48,8 @@ namespace roadfighter {
 
         virtual int getHealth() const {return 0;};
 
+        virtual void setHealth(int health) {};
+
         virtual void decrease_speed(int val) {};
 
         virtual int getFuel() const {return 0;};
