@@ -107,6 +107,44 @@ void roadfighter::World::update_all() {
         }
     }
 
+//    auto entity_one = all_entities.begin();
+//    auto entity_two = all_entities.begin();
+//
+//    while(entity_one != all_entities.end()) {
+//        while(entity_two != all_entities.end()) {
+//            if(entity_one != entity_two) {
+//                if(detect_collision(*entity_one, *entity_two)) {
+//                    if(entity_one->get()->get_type() != "Bullet" and entity_two->get()->get_type() != "Bullet") {
+//                        if (entity_one->get()->getX() >= (entity_two->get()->getX() + (entity_two->get()->getWidth() * 0.005))) {
+//                            entity_one->get()->setCrash(std::make_pair(true, "right"));
+//                            entity_two->get()->setCrash(std::make_pair(true, "left"));
+//                        }
+//                        else {
+//                            entity_one->get()->setCrash(std::make_pair(true, "left"));
+//                            entity_two->get()->setCrash(std::make_pair(true, "right"));
+//                        }
+//                    }
+//                    else {
+//                        if(entity_one->get()->get_type() == "Bullet") {
+//                            if(entity_two->get()->get_type() != "PlayerCar") {
+//                                entity_two->get()->setCrashed(true);
+//                                entity_one = all_entities.erase(entity_one);
+//                            }
+//                        }
+//                        else {
+//                            if(entity_one->get()->get_type() != "PlayerCar") {
+//                                entity_one->get()->setCrashed(true);
+//                                entity_two = all_entities.erase(entity_two);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            ++entity_two;
+//        }
+//        ++entity_one;
+//    }
+
     // Check Player
     playercar->update(playercar->isCrashed());
     if(this->playercar->getCrash().first) {
@@ -431,9 +469,6 @@ void roadfighter::World::draw() {
     playercar->draw();
 
     for(const auto& entity : entities) {
-        if(entity->get_type() == "Bullet") {
-            std::cout << "YEP" << std::endl;
-        }
         entity->draw();
     }
     for(const auto& opponent : opponents) {
@@ -452,14 +487,16 @@ bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> e
     float one_x_width = entity_one->getX() + (entity_one->getWidth() * 0.01);
     float two_x_width = entity_two->getX() + (entity_two->getWidth() * 0.01);
 
-    // Check if Y-axes cross
-    if((entity_one->getY() >= entity_two->getY() and entity_one->getY() <= two_y_height) or
-            (one_y_height >= entity_two->getY() and one_y_height <= two_y_height)) {
-        // Check if X-axes cross
-        if((entity_one->getX() >= entity_two->getX() and entity_one->getX() <= two_x_width) or
-           (one_x_width >= entity_two->getX() and one_x_width <= two_x_width)) {
-            // All axes cross, so there's collision
-            return true;
+    if(!entity_one->isCrashed() and !entity_two->isCrashed()) {
+        // Check if Y-axes cross
+        if((entity_one->getY() >= entity_two->getY() and entity_one->getY() <= two_y_height) or
+           (one_y_height >= entity_two->getY() and one_y_height <= two_y_height)) {
+            // Check if X-axes cross
+            if((entity_one->getX() >= entity_two->getX() and entity_one->getX() <= two_x_width) or
+               (one_x_width >= entity_two->getX() and one_x_width <= two_x_width)) {
+                // All axes cross, so there's collision
+                return true;
+            }
         }
     }
     // No collision detected

@@ -65,6 +65,10 @@ namespace roadfighter {
         virtual bool isShoot() const {return false;};
 
         virtual void setShoot(bool shoot) {};
+
+        virtual int getBullets() const {return 0;};
+
+        virtual void setBullets(int bullets) {};
     };
 }
 

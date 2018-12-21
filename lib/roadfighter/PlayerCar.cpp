@@ -50,6 +50,14 @@ void roadfighter::PlayerCar::setShoot(bool shoot) {
     PlayerCar::shoot = shoot;
 }
 
+int roadfighter::PlayerCar::getBullets() const {
+    return bullets;
+}
+
+void roadfighter::PlayerCar::setBullets(int bullets) {
+    PlayerCar::bullets = bullets;
+}
+
 
 
 

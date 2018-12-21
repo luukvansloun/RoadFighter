@@ -10,6 +10,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <algorithm>
 #include "PlayerCar.h"
 #include "../../main/Singletons/Random.h"
 

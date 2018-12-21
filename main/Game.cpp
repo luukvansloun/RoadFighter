@@ -228,14 +228,16 @@ void Game::run() {
             // Shoot bullet
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                 if(!world->getPlayercar()->isShoot()) {
-                    std::cout << "BULLET" << std::endl;
                     world->getPlayercar()->setShoot(true);
                 }
                 else {
                     if(three >= four) {
                         three = std::chrono::seconds(0);
-                        add_entity("Bullet");
-                        world->getPlayercar()->setShoot(false);
+                        if(world->getPlayercar()->getBullets() > 0) {
+                            add_entity("Bullet");
+                            world->getPlayercar()->setBullets(world->getPlayercar()->getBullets() - 1);
+                            world->getPlayercar()->setShoot(false);
+                        }
                     }
                 }
             }
@@ -270,7 +272,10 @@ void Game::run() {
         text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
 
         text_string += "Fuel: ";
-        text_string += std::to_string(this->world->getPlayercar()->getFuel());
+        text_string += std::to_string(this->world->getPlayercar()->getFuel())  + "\n\n\n\n";
+
+        text_string += "Bullets: ";
+        text_string += std::to_string(this->world->getPlayercar()->getBullets());
 
         text.setString(text_string);
 
