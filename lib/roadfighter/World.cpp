@@ -95,6 +95,7 @@ void roadfighter::World::update_all() {
                         else {
                             if(entity_one->get_type() == "Bullet") {
                                 if(entity_two->get_type() != "PlayerCar") {
+                                    entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_two->setCrash(std::make_pair(true, "center"));
                                 }
@@ -102,6 +103,7 @@ void roadfighter::World::update_all() {
                             else {
                                 if(entity_one->get_type() != "PlayerCar") {
                                     entity_one->setHealth(entity_one->getHealth() - 1);
+                                    entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_one->setCrash(std::make_pair(true, "center"));
                                 }
                             }
@@ -119,7 +121,6 @@ void roadfighter::World::update_all() {
     }
 
     // Check Opponents
-
     auto opp = this->opponents.begin();
 
     while(opp != this->opponents.end()) {
@@ -189,16 +190,20 @@ void roadfighter::World::update_all() {
             }
         }
         else {
-            float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
-            if((entity->get()->getY() - y_inc) >= 3) {
+            if(entity->get()->getHealth() == 0) {
                 entity = this->entities.erase(entity);
             }
             else {
-                entity->get()->setY(entity->get()->getY() - y_inc);
-                entity->get()->change_position();
-                ++entity;
+                float y_inc = float(getPlayercar()->getSpeed() - entity->get()->getSpeed()) * 0.00075f;
+                if((entity->get()->getY() - y_inc) >= 3) {
+                    entity = this->entities.erase(entity);
+                }
+                else {
+                    entity->get()->setY(entity->get()->getY() - y_inc);
+                    entity->get()->change_position();
+                    ++entity;
+                }
             }
-
         }
     }
 }

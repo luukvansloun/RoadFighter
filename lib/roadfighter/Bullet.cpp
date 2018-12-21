@@ -15,3 +15,11 @@ void roadfighter::Bullet::setSpeed(double speed) {
 std::string roadfighter::Bullet::get_type() {
     return "Bullet";
 }
+
+int roadfighter::Bullet::getHealth() const {
+    return health;
+}
+
+void roadfighter::Bullet::setHealth(int health) {
+    Bullet::health = health;
+}

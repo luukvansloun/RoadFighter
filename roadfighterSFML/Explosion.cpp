@@ -5,8 +5,8 @@
 #include "Explosion.h"
 
 roadfighterSFML::Explosion::Explosion() {
-    total_time = std::chrono::milliseconds(1600);
-    switch_time = std::chrono::milliseconds(200);
+    total_time = std::chrono::milliseconds(800);
+    switch_time = std::chrono::milliseconds(100);
     current_time = std::chrono::milliseconds(0);
     current_image = 0;
 
