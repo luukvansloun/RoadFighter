@@ -275,10 +275,7 @@ void Game::run() {
         text_string += std::to_string(this->world->getPlayercar()->getFuel())  + "\n\n\n\n";
 
         text_string += "Bullets: ";
-        text_string += std::to_string(this->world->getPlayercar()->getBullets())  + "\n\n\n\n";
-
-        text_string += "Health: ";
-        text_string += std::to_string(this->world->getPlayercar()->getHealth());
+        text_string += std::to_string(this->world->getPlayercar()->getBullets());
 
         text.setString(text_string);
 

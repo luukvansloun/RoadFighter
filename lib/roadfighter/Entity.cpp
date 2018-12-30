@@ -20,18 +20,18 @@ void roadfighter::Entity::setY(float y) {
     Entity::y = y;
 }
 
-const std::pair<bool, std::string> &roadfighter::Entity::getCrash() const {
-    return crash;
-}
-
-void roadfighter::Entity::setCrash(const std::pair<bool, std::string> &crash) {
-    Entity::crash = crash;
-}
-
 bool roadfighter::Entity::isCrashed() const {
     return crashed;
 }
 
 void roadfighter::Entity::setCrashed(bool crashed) {
     Entity::crashed = crashed;
+}
+
+const roadfighter::Entity::crash_struct &roadfighter::Entity::getCrash() const {
+    return crash;
+}
+
+void roadfighter::Entity::setCrash(const roadfighter::Entity::crash_struct &crash) {
+    Entity::crash = crash;
 }

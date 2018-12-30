@@ -79,17 +79,22 @@ void roadfighter::World::update_all() {
     for(const auto& entity_one : all_entities) {
         for(const auto& entity_two : all_entities) {
             if(entity_one != entity_two) {
-                if(!entity_one->getCrash().first and !entity_two->getCrash().first) {
+                if(!entity_one->getCrash().crash and !entity_two->getCrash().crash) {
                     if(detect_collision(entity_one, entity_two)) {
                         if(entity_one->get_type() != "Bullet" and entity_two->get_type() != "Bullet") {
                             if (entity_one->getX() >= (entity_two->getX() + (entity_two->getWidth() * 0.005))) {
-                                entity_one->setCrash(std::make_pair(true, "right"));
-                                entity_two->setCrash(std::make_pair(true, "left"));
+                                entity_one->setHealth(entity_one->getHealth() - 1);
+                                entity_two->setHealth(entity_two->getHealth() - 1);
+
+                                entity_one->setCrash({true, "right", entity_two});
+                                entity_two->setCrash({true, "left", entity_one});
                             }
                             else {
-                                entity_one->setCrash(std::make_pair(true, "left"));
+                                entity_one->setHealth(entity_one->getHealth() - 1);
+                                entity_two->setHealth(entity_two->getHealth() - 1);
 
-                                entity_two->setCrash(std::make_pair(true, "right"));
+                                entity_one->setCrash({true, "left", entity_two});
+                                entity_two->setCrash({true, "right", entity_one});
                             }
                         }
                         else {
@@ -97,14 +102,14 @@ void roadfighter::World::update_all() {
                                 if(entity_two->get_type() != "PlayerCar") {
                                     entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_two->setHealth(entity_two->getHealth() - 1);
-                                    entity_two->setCrash(std::make_pair(true, "center"));
+                                    entity_two->setCrash({true, "center", entity_one});
                                 }
                             }
                             else {
                                 if(entity_one->get_type() != "PlayerCar") {
                                     entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_two->setHealth(entity_two->getHealth() - 1);
-                                    entity_one->setCrash(std::make_pair(true, "center"));
+                                    entity_one->setCrash({true, "center", entity_two});
                                 }
                             }
                         }
@@ -116,7 +121,7 @@ void roadfighter::World::update_all() {
 
     // Check Player
     playercar->update(playercar->isCrashed());
-    if(this->playercar->getCrash().first) {
+    if(this->playercar->getCrash().crash) {
         this->crashing(playercar);
     }
 
@@ -133,7 +138,7 @@ void roadfighter::World::update_all() {
                 ++opp;
             }
         }
-        else if(opp->get()->getCrash().first) {
+        else if(opp->get()->getCrash().crash) {
             this->crashing(*opp);
             ++opp;
         }
@@ -168,7 +173,7 @@ void roadfighter::World::update_all() {
                     ++entity;
                 }
             }
-            else if(entity->get()->getCrash().first) {
+            else if(entity->get()->getCrash().crash) {
                 this->crashing(*entity);
                 ++entity;
             }
@@ -209,17 +214,17 @@ void roadfighter::World::update_all() {
 }
 
 void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
-    if(entity->getCrash().first and entity->getSpeed() > 0) {
-        if(entity->getCrash().second == "right") {
+    if(entity->getCrash().crash and entity->getSpeed() > 0) {
+        if(entity->getCrash().direction == "right") {
             float new_x = entity->getX() + 0.05;
             if(new_x >= this->right_border) {
                 entity->setSpeed(0);
-                entity->setCrash(std::make_pair(false, ""));
+                entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else if(entity->getHealth() == 0) {
                 entity->setSpeed(0);
-                entity->setCrash(std::make_pair(false, ""));
+                entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else {
@@ -228,16 +233,16 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->change_position();
             }
         }
-        else if(entity->getCrash().second == "left") {
+        else if(entity->getCrash().direction == "left") {
             float new_x = entity->getX() - 0.05;
             if(new_x <= this->left_border) {
                 entity->setSpeed(0);
-                entity->setCrash(std::make_pair(false, ""));
+                entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else if(entity->getHealth() == 0) {
                 entity->setSpeed(0);
-                entity->setCrash(std::make_pair(false, ""));
+                entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else {
@@ -247,10 +252,10 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
             }
         }
         // Collision with a bullet
-        else if(entity->getCrash().second == "center") {
+        else if(entity->getCrash().direction == "center") {
             if(entity->getHealth() == 0) {
                 entity->setSpeed(0);
-                entity->setCrash(std::make_pair(false, ""));
+                entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             entity->setSpeed(entity->getSpeed() - 25);
@@ -259,7 +264,7 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
     }
     else {
         // TODO Animation for explosion
-        entity->setCrash(std::make_pair(false, ""));
+        entity->setCrash({false, "", nullptr});
     }
 }
 

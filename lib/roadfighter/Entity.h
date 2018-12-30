@@ -4,13 +4,21 @@
 #define ROADFIGHTER_ENTITY_H
 
 #include <iostream>
+#include <memory>
 
 namespace roadfighter {
     class Entity {
+    public:
+        struct crash_struct {
+            bool crash = false;
+            std::string direction = "";
+            std::shared_ptr<roadfighter::Entity> type = nullptr;
+        };
+
     private:
         float x = 0;
         float y = 0;
-        std::pair<bool, std::string> crash = std::make_pair(false, "");
+        crash_struct crash;
         bool crashed = false;
 
     public:
@@ -22,9 +30,9 @@ namespace roadfighter {
 
         void setY(float y);
 
-        const std::pair<bool, std::string> &getCrash() const;
+        const crash_struct &getCrash() const;
 
-        void setCrash(const std::pair<bool, std::string> &crash);
+        void setCrash(const crash_struct &crash);
 
         bool isCrashed() const;
 
