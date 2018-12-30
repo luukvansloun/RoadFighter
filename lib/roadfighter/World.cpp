@@ -222,14 +222,27 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-            else if(entity->getHealth() == 0) {
+            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else {
                 entity->setX(new_x);
-                entity->setSpeed(entity->getSpeed() - 25);
+                if(entity->get_type() == "PlayerCar") {
+                    if(entity->getCrash().type->get_type() == "Truck") {
+                        entity->setSpeed(entity->getSpeed() - 25);
+                    }
+                    else if(entity->getCrash().type->get_type() == "Lorry" or
+                            entity->getCrash().type->get_type() == "RacingCar") {
+                        if(entity->getSpeed() >= 100) {
+                            entity->setSpeed(entity->getSpeed() - 25);
+                        }
+                    }
+                }
+                else {
+                    entity->setSpeed(entity->getSpeed() - 25);
+                }
                 entity->change_position();
             }
         }
@@ -240,14 +253,27 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-            else if(entity->getHealth() == 0) {
+            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
             else {
                 entity->setX(new_x);
-                entity->setSpeed(entity->getSpeed() - 25);
+                if(entity->get_type() == "PlayerCar") {
+                    if(entity->getCrash().type->get_type() == "Truck") {
+                        entity->setSpeed(entity->getSpeed() - 25);
+                    }
+                    else if(entity->getCrash().type->get_type() == "Lorry" or
+                            entity->getCrash().type->get_type() == "RacingCar") {
+                        if(entity->getSpeed() >= 100) {
+                            entity->setSpeed(entity->getSpeed() - 25);
+                        }
+                    }
+                }
+                else {
+                    entity->setSpeed(entity->getSpeed() - 25);
+                }
                 entity->change_position();
             }
         }
