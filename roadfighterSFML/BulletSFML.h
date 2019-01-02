@@ -9,8 +9,8 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <Bullet.h>
-#include "../main/Singletons/Transformation.h"
-#include "../main/Singletons/Random.h"
+#include <Transformation.h>
+#include <Random.h>
 
 
 namespace roadfighterSFML {

@@ -5,8 +5,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "Singletons/Transformation.h"
-#include "Singletons/Random.h"
+#include "Transformation.h"
+#include "Random.h"
 
 #include "PlayerCar.h"
 #include "Game.h"

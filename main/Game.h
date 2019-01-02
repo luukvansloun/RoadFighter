@@ -15,7 +15,7 @@
 #include <vector>
 
 #include "json.hpp"
-#include "Singletons/Transformation.h"
+#include "Transformation.h"
 #include "../roadfighterSFML/SFMLFactory.h"
 
 class Game {

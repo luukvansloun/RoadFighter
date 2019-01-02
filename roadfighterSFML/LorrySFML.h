@@ -9,8 +9,8 @@
 #include <memory>
 #include <Lorry.h>
 #include <SFML/Graphics.hpp>
-#include "../main/Singletons/Transformation.h"
-#include "../main/Singletons/Random.h"
+#include <Transformation.h>
+#include <Random.h>
 #include "Explosion.h"
 
 namespace roadfighterSFML {

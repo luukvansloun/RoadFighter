@@ -18,8 +18,8 @@ INCLUDE_DIRECTORIES(${RF_INCLUDE_DIR})
 
 SET(ROADFIGHTER_SRC
         main/main.cpp main/Game.cpp main/Game.h
-        main/Singletons/Transformation.cpp main/Singletons/Transformation.h
-        main/Singletons/Random.cpp main/Singletons/Random.h
+        lib/roadfighter/Transformation.cpp lib/roadfighter/Transformation.h
+        lib/roadfighter/Random.cpp lib/roadfighter/Random.h
 
         roadfighterSFML/PlayerCarSFML.cpp roadfighterSFML/PlayerCarSFML.h
         roadfighterSFML/RacingCarSFML.cpp roadfighterSFML/RacingCarSFML.h

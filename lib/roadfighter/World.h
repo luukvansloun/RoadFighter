@@ -12,7 +12,7 @@
 #include <thread>
 #include <algorithm>
 #include "PlayerCar.h"
-#include "../../main/Singletons/Random.h"
+#include "Random.h"
 
 namespace roadfighter {
     class World : public roadfighter::Entity {

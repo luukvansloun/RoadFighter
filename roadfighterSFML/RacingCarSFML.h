@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include <RacingCar.h>
 #include "EntityFactory.h"
-#include "../main/Singletons/Transformation.h"
+#include <Transformation.h>
 #include "Explosion.h"
 
 
