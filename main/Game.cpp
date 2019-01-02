@@ -139,6 +139,7 @@ void Game::add_entity(std::string type) {
 
 void Game::run() {
     setupBackground();
+    int test = 0;
     int game_it = 0;
     int opp = 6;
     bool finish = false;
@@ -265,7 +266,16 @@ void Game::run() {
         font.loadFromFile("Pixel-NoirCaps.ttf");
         text.setFont(font);
 
-        std::string text_string = "Speed: ";
+        std::string text_string = "High Scores: \n\n";
+        for(int i = 0; i < 3; i++) {
+            text_string += "000000\n";
+        }
+        text_string +=  "\n\n";
+        text_string += "Your Score: \n\n";
+        test += 1;
+        text_string += std::to_string(test) + "\n\n\n\n\n\n\n\n";
+
+        text_string += "Speed: ";
         text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
 
         text_string += "Fuel: ";
@@ -276,8 +286,8 @@ void Game::run() {
 
         text.setString(text_string);
 
-        text.setCharacterSize(15);
-        text.setPosition(575, 200);
+        text.setCharacterSize(11);
+        text.setPosition(600, 50);
 
         window->draw(text);
 
