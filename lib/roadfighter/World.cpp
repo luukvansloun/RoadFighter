@@ -83,16 +83,10 @@ void roadfighter::World::update_all() {
                     if(detect_collision(entity_one, entity_two)) {
                         if(entity_one->get_type() != "Bullet" and entity_two->get_type() != "Bullet") {
                             if (entity_one->getX() >= (entity_two->getX() + (entity_two->getWidth() * 0.005))) {
-                                entity_one->setHealth(entity_one->getHealth() - 1);
-                                entity_two->setHealth(entity_two->getHealth() - 1);
-
                                 entity_one->setCrash({true, "right", entity_two});
                                 entity_two->setCrash({true, "left", entity_one});
                             }
                             else {
-                                entity_one->setHealth(entity_one->getHealth() - 1);
-                                entity_two->setHealth(entity_two->getHealth() - 1);
-
                                 entity_one->setCrash({true, "left", entity_two});
                                 entity_two->setCrash({true, "right", entity_one});
                             }
@@ -100,15 +94,11 @@ void roadfighter::World::update_all() {
                         else {
                             if(entity_one->get_type() == "Bullet") {
                                 if(entity_two->get_type() != "PlayerCar") {
-                                    entity_one->setHealth(entity_one->getHealth() - 1);
-                                    entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_two->setCrash({true, "center", entity_one});
                                 }
                             }
                             else {
                                 if(entity_one->get_type() != "PlayerCar") {
-                                    entity_one->setHealth(entity_one->getHealth() - 1);
-                                    entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_one->setCrash({true, "center", entity_two});
                                 }
                             }
@@ -216,17 +206,17 @@ void roadfighter::World::update_all() {
 void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
     if(entity->getCrash().crash and entity->getSpeed() > 0) {
         if(entity->getCrash().direction == "right") {
-            float new_x = entity->getX() + 0.05;
+            float new_x = entity->getX() + 0.05f;
             if(new_x >= this->right_border) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
-                entity->setSpeed(0);
-                entity->setCrash({false, "", nullptr});
-                entity->setCrashed(true);
-            }
+//            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
+//                entity->setSpeed(0);
+//                entity->setCrash({false, "", nullptr});
+//                entity->setCrashed(true);
+//            }
             else {
                 entity->setX(new_x);
                 if(entity->get_type() == "PlayerCar") {
@@ -253,11 +243,11 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
-                entity->setSpeed(0);
-                entity->setCrash({false, "", nullptr});
-                entity->setCrashed(true);
-            }
+//            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
+//                entity->setSpeed(0);
+//                entity->setCrash({false, "", nullptr});
+//                entity->setCrashed(true);
+//            }
             else {
                 entity->setX(new_x);
                 if(entity->get_type() == "PlayerCar") {
