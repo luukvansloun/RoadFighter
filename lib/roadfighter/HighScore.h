@@ -9,6 +9,8 @@
 #include <memory>
 #include <vector>
 #include <fstream>
+#include <sstream>
+#include <algorithm>
 #include "Observer.h"
 #include "Entity.h"
 
@@ -16,14 +18,11 @@ namespace roadfighter {
     class HighScore : public Observer {
     private:
         int current_score = 0;
+        bool current_in_hs = false;
         std::vector<int> highscores;
 
     public:
         HighScore();
-
-        int getCurrent_score() const;
-
-        void setCurrent_score(int current_score);
 
         const std::vector<int> &getHighscores() const;
 

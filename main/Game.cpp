@@ -277,9 +277,14 @@ void Game::run() {
         text.setFont(font);
 
         std::string text_string = "High Scores: \n\n";
-        for(int i = 0; i < 3; i++) {
-            text_string += "000000\n";
-        }
+        std::vector<int> temppp = highscores->getHighscores();
+        std::sort(temppp.begin(), temppp.end());
+
+        text_string += "1.   " + std::to_string(temppp[9]) + "\n";
+        text_string += "2.   " + std::to_string(temppp[8]) + "\n";
+        text_string += "3.   " + std::to_string(temppp[7]) + "\n";
+
+
         text_string +=  "\n\n";
         text_string += "Your Score: \n\n";
         world->getPlayercar()->increase_score(1);

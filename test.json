@@ -109,27 +109,11 @@
       "obstacle" 	: "Truck"
     },
     {
-      "distance"	: 1725,
-      "obstacle" 	: "Truck"
-    },
-    {
-      "distance"	: 1800,
-      "obstacle" 	: "Opponent"
+      "distance"    : 1725,
+      "obstacle"    : "Truck"
     },
     {
       "distance"	: 2200,
-      "obstacle" 	: "Opponent"
-    },
-    {
-      "distance"	: 2600,
-      "obstacle" 	: "Opponent"
-    },
-    {
-      "distance"	: 3000,
-      "obstacle" 	: "Opponent"
-    },
-    {
-      "distance"	: 4600,
       "obstacle" 	: "End"
     }
   ]
