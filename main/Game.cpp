@@ -276,19 +276,18 @@ void Game::run() {
         font.loadFromFile("Pixel-NoirCaps.ttf");
         text.setFont(font);
 
-        std::string text_string = "High Scores: \n\n";
+        std::string text_string = "Your Score: \n\n";
+        world->getPlayercar()->increase_score(1);
+        text_string += std::to_string(score);
+        text_string +=  "\n\n";
+
+        text_string += "High Scores: \n\n";
         std::vector<int> temppp = highscores->getHighscores();
         std::sort(temppp.begin(), temppp.end());
 
         text_string += "1.   " + std::to_string(temppp[9]) + "\n";
         text_string += "2.   " + std::to_string(temppp[8]) + "\n";
-        text_string += "3.   " + std::to_string(temppp[7]) + "\n";
-
-
-        text_string +=  "\n\n";
-        text_string += "Your Score: \n\n";
-        world->getPlayercar()->increase_score(1);
-        text_string += std::to_string(score) + "\n\n\n\n\n\n\n\n";
+        text_string += "3.   " + std::to_string(temppp[7]) + "\n\n\n\n\n\n\n\n\n";
 
         text_string += "Speed: ";
         text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
