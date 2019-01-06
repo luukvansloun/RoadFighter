@@ -8,7 +8,9 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <fstream>
 #include "Observer.h"
+#include "Entity.h"
 
 namespace roadfighter {
     class HighScore : public Observer {
@@ -28,6 +30,8 @@ namespace roadfighter {
         void setHighscores(const std::vector<int> &highscores);
 
         void update() override;
+
+        void write_to_file();
     };
 }
 

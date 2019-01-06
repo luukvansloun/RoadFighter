@@ -14,6 +14,7 @@
 #include <SFML/Graphics.hpp>
 #include <World.h>
 #include <Observer.h>
+#include <HighScore.h>
 
 #include "json.hpp"
 #include "Transformation.h"
@@ -51,6 +52,7 @@ private:
     std::vector<nlohmann::json> game_objects;
     bool EOG = false;
     int score = 0;
+    std::shared_ptr<roadfighter::HighScore> highscores;
 };
 
 

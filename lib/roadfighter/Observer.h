@@ -11,17 +11,14 @@
 
 class Subject;
 
-class Observer : public std::enable_shared_from_this<Observer> {
+class Observer {
 private:
-    std::shared_ptr<Observer> obs;
     std::shared_ptr<roadfighter::Entity> subject;
 
 public:
     Observer();
 
     void setSubject(std::shared_ptr<roadfighter::Entity> subj);
-
-    std::shared_ptr<Observer> getObserver();
 
     virtual void update() {};
 

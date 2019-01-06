@@ -21,6 +21,10 @@ Game::Game() {
     // Create Opponent Cars
     setup_opponents();
 
+    // Create HighScore object
+    this->highscores = std::make_shared<roadfighter::HighScore>();
+    highscores->setSubject(world->getPlayercar());
+
     // Read game from JSON file
     std::ifstream input("test.json");
 
@@ -322,6 +326,7 @@ void Game::end_of_game() {
     }
     else {
         if(this->world->move_player_up()){
+            highscores->write_to_file();
             exit(0);
         }
         else {

@@ -10,10 +10,6 @@ std::shared_ptr<roadfighter::Entity> Observer::getSubject() {
     return subject;
 }
 
-std::shared_ptr<Observer> Observer::getObserver() {
-    return shared_from_this();
-}
-
 void Observer::setSubject(std::shared_ptr<roadfighter::Entity> subj) {
     subject = subj;
 
