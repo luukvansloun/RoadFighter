@@ -9,16 +9,17 @@
 #include <memory>
 #include <chrono>
 #include <thread>
-#include <SFML/Graphics.hpp>
-#include <World.h>
 #include <fstream>
 #include <vector>
+#include <SFML/Graphics.hpp>
+#include <World.h>
+#include <Observer.h>
 
 #include "json.hpp"
 #include "Transformation.h"
 #include "../roadfighterSFML/SFMLFactory.h"
 
-class Game {
+class Game : public Observer {
 public:
     Game();
 
@@ -38,6 +39,8 @@ public:
 
     void end_of_game();
 
+    void update() override;
+
 private:
     std::shared_ptr<sf::RenderWindow> window;
     sf::View view;
@@ -47,6 +50,7 @@ private:
     sf::Sprite background;
     std::vector<nlohmann::json> game_objects;
     bool EOG = false;
+    int score = 0;
 };
 
 

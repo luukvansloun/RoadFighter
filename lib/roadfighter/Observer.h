@@ -7,20 +7,26 @@
 
 #include <iostream>
 #include <memory>
+#include "Entity.h"
 
 class Subject;
 
-class Observer : std::enable_shared_from_this<Observer> {
+class Observer : public std::enable_shared_from_this<Observer> {
 private:
-    std::shared_ptr<Subject> subject;
+    std::shared_ptr<Observer> obs;
+    std::shared_ptr<roadfighter::Entity> subject;
 
 public:
-    Observer(std::shared_ptr<Subject> subj);
+    Observer();
 
-    virtual void update() = 0;
+    void setSubject(std::shared_ptr<roadfighter::Entity> subj);
+
+    std::shared_ptr<Observer> getObserver();
+
+    virtual void update() {};
 
 protected:
-    std::shared_ptr<Subject> getSubject();
+    std::shared_ptr<roadfighter::Entity> getSubject();
 };
 
 

@@ -3,6 +3,7 @@
 //
 
 #include "PlayerCar.h"
+#include "Observer.h"
 
 // PLAYERCAR ENTITY CLASS
 
@@ -60,6 +61,25 @@ int roadfighter::PlayerCar::getBullets() const {
 
 void roadfighter::PlayerCar::setBullets(int bullets) {
     PlayerCar::bullets = bullets;
+}
+
+void roadfighter::PlayerCar::attach(std::shared_ptr<Observer> obs) {
+    observers.push_back(obs);
+}
+
+void roadfighter::PlayerCar::increase_score(int value) {
+    score += value;
+    notify();
+}
+
+int roadfighter::PlayerCar::getScore() {
+    return score;
+}
+
+void roadfighter::PlayerCar::notify() {
+    for(const auto& obs : observers) {
+        obs->update();
+    }
 }
 
 

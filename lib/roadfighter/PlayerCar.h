@@ -7,7 +7,10 @@
 
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "Entity.h"
+
+class Observer;
 
 namespace roadfighter {
     class PlayerCar : public Entity {
@@ -19,6 +22,8 @@ namespace roadfighter {
         int fuel = 100;
         bool shoot = false;
         int bullets = 25;
+        int score = 0;
+        std::vector<std::shared_ptr<Observer>> observers;
 
     public:
         std::string get_type() override;
@@ -55,6 +60,13 @@ namespace roadfighter {
 
         void setBullets(int bullets) override;
 
+        void increase_score(int value);
+
+        int getScore();
+
+        void attach(std::shared_ptr<Observer> obs);
+
+        void notify();
     };
 }
 

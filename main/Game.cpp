@@ -15,6 +15,9 @@ Game::Game() {
     this->world = std::make_shared<roadfighter::World>();
     world->setPlayercar(sfml_factory->create_playercar());
 
+    // Set Playercar as subject for Game High Score registration
+    this->setSubject(world->getPlayercar());
+
     // Create Opponent Cars
     setup_opponents();
 
@@ -137,9 +140,12 @@ void Game::add_entity(std::string type) {
     }
 }
 
+void Game::update() {
+    this->score = getSubject()->getScore();
+}
+
 void Game::run() {
     setupBackground();
-    int test = 0;
     int game_it = 0;
     int opp = 6;
     bool finish = false;
@@ -272,8 +278,8 @@ void Game::run() {
         }
         text_string +=  "\n\n";
         text_string += "Your Score: \n\n";
-        test += 1;
-        text_string += std::to_string(test) + "\n\n\n\n\n\n\n\n";
+        world->getPlayercar()->increase_score(1);
+        text_string += std::to_string(score) + "\n\n\n\n\n\n\n\n";
 
         text_string += "Speed: ";
         text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
@@ -323,6 +329,8 @@ void Game::end_of_game() {
         }
     }
 }
+
+
 
 
 

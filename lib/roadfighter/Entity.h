@@ -6,6 +6,8 @@
 #include <iostream>
 #include <memory>
 
+class Observer;
+
 namespace roadfighter {
     class Entity {
     public:
@@ -79,6 +81,14 @@ namespace roadfighter {
         virtual int getBullets() const {return 0;};
 
         virtual void setBullets(int bullets) {};
+
+        virtual void attach(const std::shared_ptr<Observer> obs) {};
+
+        virtual void update() {};
+
+        virtual int getScore() {return 0;};
+
+        virtual void increase_score(int value) {};
     };
 }
 
