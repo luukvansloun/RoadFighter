@@ -11,6 +11,7 @@
 #include <chrono>
 #include <thread>
 #include <algorithm>
+#include <cmath>
 #include "PlayerCar.h"
 #include "Random.h"
 

@@ -13,6 +13,10 @@ double roadfighter::PlayerCar::getSpeed() const {
 
 void roadfighter::PlayerCar::setSpeed(double speed) {
     PlayerCar::speed = speed;
+
+    if(PlayerCar::speed < 0) {
+        PlayerCar::speed = 0;
+    }
 }
 
 int roadfighter::PlayerCar::getMax_speed() const {
@@ -67,12 +71,15 @@ void roadfighter::PlayerCar::attach(std::shared_ptr<Observer> obs) {
     observers.push_back(obs);
 }
 
-void roadfighter::PlayerCar::increase_score(int value) {
+void roadfighter::PlayerCar::increase_score(double value) {
     score += value;
+    if(score < 0) {
+        score = 0;
+    }
     notify();
 }
 
-int roadfighter::PlayerCar::getScore() {
+double roadfighter::PlayerCar::getScore() {
     return score;
 }
 

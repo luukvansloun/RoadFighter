@@ -86,9 +86,9 @@ namespace roadfighter {
 
         virtual void update() {};
 
-        virtual int getScore() {return 0;};
+        virtual double getScore() {return 0;};
 
-        virtual void increase_score(int value) {};
+        virtual void increase_score(double value) {};
     };
 }
 

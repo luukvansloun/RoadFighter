@@ -17,16 +17,14 @@
 namespace roadfighter {
     class HighScore : public Observer {
     private:
-        int current_score = 0;
+        double current_score = 0;
         bool current_in_hs = false;
-        std::vector<int> highscores;
+        std::vector<double> highscores;
 
     public:
         HighScore();
 
-        const std::vector<int> &getHighscores() const;
-
-        void setHighscores(const std::vector<int> &highscores);
+        const std::vector<double> &getHighscores() const;
 
         void update() override;
 

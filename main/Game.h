@@ -49,7 +49,7 @@ private:
     sf::Sprite background;
     std::vector<nlohmann::json> game_objects;
     bool EOG = false;
-    int score = 0;
+    double score = 0;
     std::shared_ptr<roadfighter::HighScore> highscores;
 };
 

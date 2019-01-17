@@ -22,7 +22,7 @@ namespace roadfighter {
         int fuel = 100;
         bool shoot = false;
         int bullets = 25;
-        int score = 0;
+        double score = 0;
         std::vector<std::shared_ptr<Observer>> observers;
 
     public:
@@ -60,9 +60,9 @@ namespace roadfighter {
 
         void setBullets(int bullets) override;
 
-        void increase_score(int value);
+        void increase_score(double value);
 
-        int getScore();
+        double getScore();
 
         void attach(std::shared_ptr<Observer> obs);
 

@@ -14,18 +14,14 @@ roadfighter::HighScore::HighScore() {
     else {
         std::string score;
         while (getline(hsfile, score)) {
-            highscores.push_back(std::stoi(score));
+            highscores.push_back(std::stod(score));
         }
     }
     hsfile.close();
 }
 
-const std::vector<int> &roadfighter::HighScore::getHighscores() const {
+const std::vector<double> &roadfighter::HighScore::getHighscores() const {
     return highscores;
-}
-
-void roadfighter::HighScore::setHighscores(const std::vector<int> &highscores) {
-    HighScore::highscores = highscores;
 }
 
 void roadfighter::HighScore::update() {

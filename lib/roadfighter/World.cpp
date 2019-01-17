@@ -11,6 +11,7 @@ void roadfighter::World::move_player_right() {
     if(playercar->getX() + plus > float(0.025)) {
         playercar->setCrashed(true);
         playercar->setSpeed(0);
+        playercar->increase_score(-500);
     }
     else {
         playercar->setX(playercar->getX() + plus);
@@ -25,6 +26,7 @@ void roadfighter::World::move_player_left() {
     if(playercar->getX() - minus < float(-2.45)) {
         playercar->setCrashed(true);
         playercar->setSpeed(0);
+        playercar->increase_score(-500);
     }
     else {
         playercar->setX(playercar->getX() - minus);
@@ -34,7 +36,7 @@ void roadfighter::World::move_player_left() {
 }
 
 bool roadfighter::World::move_player_up() {
-    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.000375f);
+    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * float(0.000375));
 
     if(new_y > 4) {
         return true;
@@ -92,12 +94,14 @@ void roadfighter::World::update_all() {
                         else {
                             if(entity_one->get_type() == "Bullet") {
                                 if(entity_two->get_type() != "PlayerCar") {
+                                    entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_two->setCrash({true, "center", entity_one});
                                 }
                             }
                             else if(entity_two->get_type() == "Bullet") {
                                 if(entity_one->get_type() != "PlayerCar") {
+                                    entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_one->setCrash({true, "center", entity_two});
                                 }
@@ -111,6 +115,7 @@ void roadfighter::World::update_all() {
 
     // Check Player
     playercar->update(playercar->isCrashed());
+    playercar->increase_score(playercar->getSpeed() / 300);
     if(this->playercar->getCrash().crash) {
         this->crashing(playercar);
     }
@@ -140,6 +145,7 @@ void roadfighter::World::update_all() {
                 float y_inc = float(getPlayercar()->getSpeed() - opp->get()->getSpeed()) * 0.00075f;
                 if((opp->get()->getY() - y_inc) <= -3) {
                     opp = this->opponents.erase(opp);
+                    this->playercar->increase_score(500);
                 }
                 else {
                     opp->get()->setY(opp->get()->getY() - y_inc);
@@ -211,6 +217,9 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
+                if(entity->get_type() == "PlayerCar") {
+                    entity->increase_score(-250);
+                }
             }
             else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
                 entity->setSpeed(0);
@@ -242,6 +251,9 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
+                if(entity->get_type() == "PlayerCar") {
+                    entity->increase_score(-250);
+                }
             }
             else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
                 entity->setSpeed(0);
@@ -273,6 +285,7 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
+                this->playercar->increase_score(250);
             }
             entity->setSpeed(entity->getSpeed() - 25);
             entity->change_position();
