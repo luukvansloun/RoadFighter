@@ -26,8 +26,6 @@ namespace roadfighter {
     public:
         World();
 
-        virtual ~World();
-
         const std::shared_ptr<roadfighter::Entity> &getPlayercar() const;
 
         void setPlayercar(const std::shared_ptr<roadfighter::Entity> &playercar);

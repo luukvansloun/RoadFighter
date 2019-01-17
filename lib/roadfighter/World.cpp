@@ -4,8 +4,6 @@
 
 #include "World.h"
 
-roadfighter::World::~World() {}
-
 roadfighter::World::World() {}
 
 void roadfighter::World::move_player_right() {
@@ -36,7 +34,7 @@ void roadfighter::World::move_player_left() {
 }
 
 bool roadfighter::World::move_player_up() {
-    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.000375);
+    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.000375f);
 
     if(new_y > 4) {
         return true;
@@ -94,11 +92,13 @@ void roadfighter::World::update_all() {
                         else {
                             if(entity_one->get_type() == "Bullet") {
                                 if(entity_two->get_type() != "PlayerCar") {
+                                    entity_two->setHealth(entity_two->getHealth() - 1);
                                     entity_two->setCrash({true, "center", entity_one});
                                 }
                             }
-                            else {
+                            else if(entity_two->get_type() == "Bullet") {
                                 if(entity_one->get_type() != "PlayerCar") {
+                                    entity_one->setHealth(entity_one->getHealth() - 1);
                                     entity_one->setCrash({true, "center", entity_two});
                                 }
                             }
@@ -212,11 +212,11 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-//            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
-//                entity->setSpeed(0);
-//                entity->setCrash({false, "", nullptr});
-//                entity->setCrashed(true);
-//            }
+            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
+                entity->setSpeed(0);
+                entity->setCrash({false, "", nullptr});
+                entity->setCrashed(true);
+            }
             else {
                 entity->setX(new_x);
                 if(entity->get_type() == "PlayerCar") {
@@ -237,17 +237,17 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
             }
         }
         else if(entity->getCrash().direction == "left") {
-            float new_x = entity->getX() - 0.05;
+            float new_x = entity->getX() - 0.05f;
             if(new_x <= this->left_border) {
                 entity->setSpeed(0);
                 entity->setCrash({false, "", nullptr});
                 entity->setCrashed(true);
             }
-//            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
-//                entity->setSpeed(0);
-//                entity->setCrash({false, "", nullptr});
-//                entity->setCrashed(true);
-//            }
+            else if(entity->get_type() != "PlayerCar" and entity->getHealth() == 0) {
+                entity->setSpeed(0);
+                entity->setCrash({false, "", nullptr});
+                entity->setCrashed(true);
+            }
             else {
                 entity->setX(new_x);
                 if(entity->get_type() == "PlayerCar") {
@@ -279,7 +279,6 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
         }
     }
     else {
-        // TODO Animation for explosion
         entity->setCrash({false, "", nullptr});
     }
 }
@@ -299,12 +298,12 @@ bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> e
                                           std::shared_ptr<roadfighter::Entity> entity_two) {
 
     // Both entities with the y-coödinate plus it's height
-    float one_y_height = entity_one->getY() + (entity_one->getHeight() * 0.01);
-    float two_y_height = entity_two->getY() + (entity_two->getHeight() * 0.01);
+    float one_y_height = entity_one->getY() + (entity_one->getHeight() * 0.01f);
+    float two_y_height = entity_two->getY() + (entity_two->getHeight() * 0.01f);
 
     // Both entities with the x-coördinate plus it's width
-    float one_x_width = entity_one->getX() + (entity_one->getWidth() * 0.01);
-    float two_x_width = entity_two->getX() + (entity_two->getWidth() * 0.01);
+    float one_x_width = entity_one->getX() + (entity_one->getWidth() * 0.01f);
+    float two_x_width = entity_two->getX() + (entity_two->getWidth() * 0.01f);
 
     if(!entity_one->isCrashed() and !entity_two->isCrashed()) {
         // Check if Y-axes cross
