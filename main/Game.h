@@ -24,8 +24,6 @@ class Game : public Observer {
 public:
     Game();
 
-    virtual ~Game();
-
     void setupBackground();
 
     void run();

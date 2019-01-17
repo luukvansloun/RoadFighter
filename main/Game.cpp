@@ -46,41 +46,39 @@ Game::Game() {
     }
 }
 
-Game::~Game() {}
-
 void Game::setup_opponents() {
     for(int i = 0; i < 7; i++) {
         this->world->add_opponent(sfml_factory->create_racingcar());
     }
 
     // Opponent 1 start position
-    this->world->getOpponents()[0]->setX(-1.899);
+    this->world->getOpponents()[0]->setX(-1.899f);
     this->world->getOpponents()[0]->setY(1.2);
 
 
     // Opponent 2 start position
-    this->world->getOpponents()[1]->setX(-1.899);
+    this->world->getOpponents()[1]->setX(-1.899f);
     this->world->getOpponents()[1]->setY(0.2);
 
     // Opponent 3 start position
-    this->world->getOpponents()[2]->setX(-1.899);
-    this->world->getOpponents()[2]->setY(-0.8);
+    this->world->getOpponents()[2]->setX(-1.899f);
+    this->world->getOpponents()[2]->setY(-0.8f);
 
     // Opponent 4 start position
-    this->world->getOpponents()[3]->setX(-1.899);
-    this->world->getOpponents()[3]->setY(-1.8);
+    this->world->getOpponents()[3]->setX(-1.899f);
+    this->world->getOpponents()[3]->setY(-1.8f);
 
     // Opponent 5 start position
-    this->world->getOpponents()[4]->setX(-0.449);
+    this->world->getOpponents()[4]->setX(-0.449f);
     this->world->getOpponents()[4]->setY(1.2);
 
     // Opponent 6 start position
-    this->world->getOpponents()[5]->setX(-0.449);
+    this->world->getOpponents()[5]->setX(-0.449f);
     this->world->getOpponents()[5]->setY(0.2);
 
     // Opponent 7 start position
-    this->world->getOpponents()[6]->setX(-0.449);
-    this->world->getOpponents()[6]->setY(-0.8);
+    this->world->getOpponents()[6]->setX(-0.449f);
+    this->world->getOpponents()[6]->setY(-0.8f);
 
     // Change positions of all
     for(const auto& opponent : this->world->getOpponents()) {
