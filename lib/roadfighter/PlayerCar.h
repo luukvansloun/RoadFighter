@@ -21,7 +21,7 @@ namespace roadfighter {
         int health = 3;
         int fuel = 100;
         bool shoot = false;
-        int bullets = 25;
+        int bullets = 30;
         double score = 0;
         std::vector<std::shared_ptr<Observer>> observers;
 
