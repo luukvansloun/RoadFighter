@@ -354,9 +354,6 @@ void Game::run() {
                             if(world->getPlayercar()->getDistance() - distance_check >= 100) {
                                 finish = true;
                             }
-                            for(const auto& o : world->getOpponents()) {
-                                o->setSpeed(300);
-                            }
                         }
                         else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
 
