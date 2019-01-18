@@ -299,30 +299,26 @@ void Game::run() {
             counter.setFillColor(sf::Color::Red);
             counter.setOutlineThickness(1);
             counter.setOutlineColor(sf::Color::White);
-            counter.setCharacterSize(60);
+            counter.setCharacterSize(40);
 
             if(std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(1200)) {
                 counter.setString("3");
-                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
-                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+                counter.setPosition(303 - (counter.getLocalBounds().width / 2), 45);
             }
             else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(1200) and
                     std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(2200)) {
                 counter.setString("2");
-                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
-                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+                counter.setPosition(303 - (counter.getLocalBounds().width / 2), 45);
             }
             else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(2200) and
                     std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(3200)) {
                 counter.setString("1");
-                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
-                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+                counter.setPosition(303 - (counter.getLocalBounds().width / 2), 45);
             }
             else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(3200) and
                     std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(3700)) {
                 counter.setString("Start!");
-                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
-                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+                counter.setPosition(303 - (counter.getLocalBounds().width / 2), 45);
             }
             else {
                 started = true;
