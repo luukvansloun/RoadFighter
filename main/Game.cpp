@@ -147,8 +147,9 @@ void Game::run() {
     unsigned int game_it = 0;
     int opp = 6;
     bool running = false;
-    bool start = false;
+    bool started = false;
     std::chrono::steady_clock::time_point start_time;
+    std::chrono::steady_clock::time_point end_time;
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
@@ -159,80 +160,126 @@ void Game::run() {
     font.loadFromFile("Pixel-NoirCaps.ttf");
 
     while(this->window->isOpen()) {
+        auto end = std::chrono::steady_clock::now() + std::chrono::milliseconds(16);
+
         if(!running) {
-            if(start) {
-                // Create new world to overwrite the old one
-                this->world = std::make_shared<roadfighter::World>();
-                world->setPlayercar(sfml_factory->create_playercar());
-
-                // Set new Playercar as subject for Game High Score registration
-                this->setSubject(world->getPlayercar());
-
-                // Create new Opponent Cars
-                setup_opponents();
-
-                // Create new HighScore object
-                this->highscores = std::make_shared<roadfighter::HighScore>();
-                highscores->setSubject(world->getPlayercar());
-
-                // Reset variables
-                game_it = 0;
-                opp = 6;
-                running = false;
-                start = false;
-                finish = false;
-            }
-
-
+            sf::Text fuel;
+            sf::Text finished;
             sf::Text road;
-            road.setFont(font);
-            road.setString("ROAD");
-            road.setFillColor(sf::Color::Red);
-            road.setOutlineThickness(1);
-            road.setOutlineColor(sf::Color::White);
-            road.setCharacterSize(50);
-            road.setPosition((this->window->getView().getSize().x/2) - (road.getLocalBounds().width / 2), 150);
-
             sf::Text fighter;
-            fighter.setFont(font);
-            fighter.setString("FIGHTER");
-            fighter.setFillColor(sf::Color::Red);
-            fighter.setOutlineThickness(1);
-            fighter.setOutlineColor(sf::Color::White);
-            fighter.setCharacterSize(50);
-            fighter.setPosition((this->window->getView().getSize().x/2) - (fighter.getLocalBounds().width / 2), 225);
-
             sf::Text start_text;
-            start_text.setFont(font);
-            start_text.setString("Press Enter To Start");
-            start_text.setCharacterSize(16);
-            start_text.setPosition((this->window->getView().getSize().x/2) - (start_text.getLocalBounds().width / 2), 425);
 
-            window->draw(road);
-            window->draw(fighter);
-            window->draw(start_text);
+            if(std::chrono::steady_clock::now() - end_time <= std::chrono::milliseconds(5000)) {
+                if(this->world->getPlayercar()->getFuel() == 0) {
+                    fuel.setFont(font);
+
+                    std::string fuel_string1 = "You ran out of fuel!\n\n\n\n";
+                    fuel_string1 += "Your Score: " + std::to_string((int)round(this->score));
+
+                    fuel.setString(fuel_string1);
+                    fuel.setFillColor(sf::Color::Red);
+                    fuel.setOutlineThickness(1);
+                    fuel.setOutlineColor(sf::Color::White);
+                    fuel.setCharacterSize(35);
+                    fuel.setPosition((this->window->getView().getSize().x/2) - (fuel.getLocalBounds().width / 2), 150);
+
+                    window->draw(fuel);
+                }
+                if(finish) {
+                    finished.setFont(font);
+
+                    std::string finish_string = "Congratulations! You crossed the finish line!\n";
+                    finish_string += "Your placement: " + std::to_string(this->world->getEntities().size() + 1) + "\n\n\n";
+
+                    finish_string += "Placement Bonus: 50 x " + std::to_string(7 - this->world->getEntities().size());
+                    finish_string += "Fuel Bonus: 25 x " + std::to_string(this->world->getPlayercar()->getFuel()) +
+                            " = " + std::to_string(25 * this->world->getPlayercar()->getFuel());
+
+                    double score_addition = ((7 - this->world->getEntities().size()) * 50) +
+                            ((25 * this->world->getPlayercar()->getFuel() * 25));
+
+                    this->world->getPlayercar()->increase_score(score_addition);
+
+                    this->highscores->write_to_file();
+
+                    finish_string += "Your Score: " + std::to_string((int)round(this->score));
+
+                    finished.setString(finish_string);
+                    finished.setFillColor(sf::Color::Red);
+                    finished.setOutlineThickness(1);
+                    finished.setOutlineColor(sf::Color::White);
+                    finished.setCharacterSize(35);
+                    finished.setPosition((this->window->getView().getSize().x/2) - (finished.getLocalBounds().width / 2), 150);
+
+                    window->draw(finished);
+                }
+            }
+            else {
+                if(started) {
+                    // Create new world to overwrite the old one
+                    this->world = std::make_shared<roadfighter::World>();
+                    world->setPlayercar(sfml_factory->create_playercar());
+
+                    // Set new Playercar as subject for Game High Score registration
+                    this->setSubject(world->getPlayercar());
+
+                    // Create new Opponent Cars
+                    setup_opponents();
+
+                    // Create new HighScore object
+                    this->highscores = std::make_shared<roadfighter::HighScore>();
+                    highscores->setSubject(world->getPlayercar());
+
+                    // Reset variables
+                    game_it = 0;
+                    opp = 6;
+                    running = false;
+                    started = false;
+                }
+                else {
+                    road.setFont(font);
+                    road.setString("ROAD");
+                    road.setFillColor(sf::Color::Red);
+                    road.setOutlineThickness(1);
+                    road.setOutlineColor(sf::Color::White);
+                    road.setCharacterSize(50);
+                    road.setPosition((this->window->getView().getSize().x/2) - (road.getLocalBounds().width / 2), 150);
+
+                    fighter.setFont(font);
+                    fighter.setString("FIGHTER");
+                    fighter.setFillColor(sf::Color::Red);
+                    fighter.setOutlineThickness(1);
+                    fighter.setOutlineColor(sf::Color::White);
+                    fighter.setCharacterSize(50);
+                    fighter.setPosition((this->window->getView().getSize().x/2) - (fighter.getLocalBounds().width / 2), 225);
+
+                    start_text.setFont(font);
+                    start_text.setString("Press Enter To Start");
+                    start_text.setCharacterSize(16);
+                    start_text.setPosition((this->window->getView().getSize().x/2) - (start_text.getLocalBounds().width / 2), 425);
+
+                    sf::Event event;
+                    while(this->window->pollEvent(event)) {
+                        if(event.type == sf::Event::Closed) {
+                            this->window->close();
+                        }
+                        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+                            running = true;
+                            setupBackground();
+                            start_time = std::chrono::steady_clock::now();
+                        }
+                    }
+                    window->draw(road);
+                    window->draw(fighter);
+                    window->draw(start_text);
+                }
+            }
 
             // Display and clear the screen
             this->window->display();
             this->window->clear(sf::Color::Black);
-
-            sf::Event event;
-            while(this->window->pollEvent(event)) {
-                if(event.type == sf::Event::Closed) {
-                    this->window->close();
-                }
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-                    running = true;
-                    setupBackground();
-                    start_time = std::chrono::steady_clock::now();
-                }
-            }
         }
-
         else {
-            auto now = std::chrono::steady_clock::now();
-            auto end = now + std::chrono::milliseconds(16);
-
             sf::Text counter;
             counter.setFont(font);
             counter.setFillColor(sf::Color::Red);
@@ -264,7 +311,7 @@ void Game::run() {
                                     (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
             }
             else {
-                start = true;
+                started = true;
             }
 
             sf::Event event;
@@ -276,7 +323,7 @@ void Game::run() {
                 }
             }
 
-            if(start) {
+            if(started) {
                 one += std::chrono::milliseconds(16);
                 three += std::chrono::milliseconds(16);
 
@@ -286,7 +333,6 @@ void Game::run() {
                     if(this->world->getPlayercar()->getFuel() <= 0) {
                         highscores->write_to_file();
                         running = false;
-                        world->getPlayercar()->setSpeed(0);
                     }
                 }
 
@@ -373,7 +419,7 @@ void Game::run() {
                 world->update_all();
             }
 
-            if(!start) {
+            if(!started) {
                 world->start_update();
             }
 
@@ -385,7 +431,7 @@ void Game::run() {
             text.setFont(font);
 
             std::string text_string = "Your Score: \n\n";
-            if(!start) {
+            if(!started) {
                 // Showing zero due to possible remembrance of the old score in case of restart
                 text_string += "0";
             }
@@ -425,7 +471,7 @@ void Game::run() {
 
             window->draw(text);
 
-            if(!start) {
+            if(!started) {
                 window->draw(counter);
             }
 
@@ -433,12 +479,12 @@ void Game::run() {
             this->window->display();
             this->window->clear(sf::Color::Black);
 
-            // Wait until the next frame is due
-            std::this_thread::sleep_until(end);
-
-            // Game has ended due to finishing or fuel levels being zero
-            // TODO FIX ENDING SCREEN
+            if(!running) {
+                end_time = std::chrono::steady_clock::now();
+            }
         }
+        // Wait until the next frame is due
+        std::this_thread::sleep_until(end);
     }
 }
 
@@ -455,7 +501,6 @@ bool Game::end_of_game() {
     }
     else {
         if(this->world->move_player_up()){
-            highscores->write_to_file();
             return false;
         }
         else {

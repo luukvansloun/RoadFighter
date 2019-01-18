@@ -51,10 +51,10 @@ void roadfighter::HighScore::write_to_file() {
         std::sort(highscores.begin(), highscores.end());
         for(unsigned int i = 0; i < highscores.size(); i++) {
             if(i == highscores.size() - 1) {
-                hsfile << highscores[i];
+                hsfile << (int)round(highscores[i]);
             }
             else {
-                hsfile << highscores[i] << "\n";
+                hsfile << (int)round(highscores[i]) << "\n";
             }
         }
     }

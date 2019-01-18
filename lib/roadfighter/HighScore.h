@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <cmath>
 #include "Observer.h"
 #include "Entity.h"
 
