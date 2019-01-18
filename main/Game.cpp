@@ -182,7 +182,7 @@ void Game::run() {
 
                     sf::Text score;
                     score.setFont(font);
-                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score));
+                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score) - 1);
                     score.setString(score3_string);
                     score.setCharacterSize(16);
                     score.setPosition((this->window->getView().getSize().x/2) - (score.getLocalBounds().width / 2), 400);
@@ -217,7 +217,7 @@ void Game::run() {
 
                     sf::Text score3;
                     score3.setFont(font);
-                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score));
+                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score) - 1);
                     score3.setString(score3_string);
                     score3.setCharacterSize(16);
                     score3.setPosition((this->window->getView().getSize().x/2) - (score3.getLocalBounds().width / 2), 400);
@@ -255,6 +255,8 @@ void Game::run() {
                     opp = 6;
                     running = false;
                     started = false;
+                    finish = false;
+                    this->EOG = false;
                 }
                 else {
                     road.setFont(font);
@@ -397,17 +399,11 @@ void Game::run() {
                     }
                     // Increase player speed
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        // TODO Move to World
-                        if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                            world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
-                        }
+                        world->increase_speed();
                     }
                     // Decrease player speed
                     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        // TODO Move to World
-                        if(world->getPlayercar()->getSpeed() > 0) {
-                            world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
-                        }
+                        world->decrease_speed();
                     }
                     // Shoot bullet
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {

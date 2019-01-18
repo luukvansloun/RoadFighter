@@ -19,7 +19,7 @@ namespace roadfighter {
         const int max_speed = 300;
         double distance = 0;
         int health = 3;
-        int fuel = 2;
+        int fuel = 100;
         bool shoot = false;
         int bullets = 25;
         double score = 0;

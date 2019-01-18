@@ -37,6 +37,10 @@ namespace roadfighter {
 
         bool move_player_up();
 
+        void increase_speed();
+
+        void decrease_speed();
+
         const std::vector<std::shared_ptr<Entity>> &getEntities() const;
 
         void add_entity(std::shared_ptr<roadfighter::Entity> entity);

@@ -347,3 +347,15 @@ bool roadfighter::World::detect_collision(std::shared_ptr<roadfighter::Entity> e
     // No collision detected
     return false;
 }
+
+void roadfighter::World::increase_speed() {
+    if(this->playercar->getSpeed() < this->playercar->getMax_speed()) {
+        this->playercar->setSpeed(this->playercar->getSpeed() + 2.5);
+    }
+}
+
+void roadfighter::World::decrease_speed() {
+    if(this->playercar->getSpeed() > 0) {
+        this->playercar->setSpeed(this->playercar->getSpeed() - 7.5);
+    }
+}
