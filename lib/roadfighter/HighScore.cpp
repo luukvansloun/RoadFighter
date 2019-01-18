@@ -27,15 +27,9 @@ const std::vector<double> &roadfighter::HighScore::getHighscores() const {
 void roadfighter::HighScore::update() {
     current_score = getSubject()->getScore();
 
-    if(!current_in_hs) {
-        if(current_score > highscores[0]) {
-            current_in_hs = true;
-        }
-    }
-    else {
+    if(current_score > highscores[0]) {
         highscores[0] = current_score;
     }
-
 }
 
 void roadfighter::HighScore::write_to_file() {

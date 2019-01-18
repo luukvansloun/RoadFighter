@@ -24,7 +24,7 @@ Game::Game() {
     highscores->setSubject(world->getPlayercar());
 
     // Read game from JSON file
-    std::ifstream input("test.json");
+    std::ifstream input("game.json");
 
     if(!input.is_open()) {
         std::cout << "Couldn't open game json" << std::endl;
@@ -202,30 +202,22 @@ void Game::run() {
 
                     sf::Text score1;
                     score1.setFont(font);
-                    std::string score1_string =  "Your Placement: " + std::to_string(this->world->getEntities().size() + 1);
+                    std::string score1_string = "Fuel Bonus: 50 x " + std::to_string(this->world->getPlayercar()->getFuel()) +
+                                                " = " + std::to_string(50 * this->world->getPlayercar()->getFuel()) + "\n";
                     score1.setString(score1_string);
                     score1.setCharacterSize(16);
-                    score1.setPosition((this->window->getView().getSize().x/2) - (score1.getLocalBounds().width / 2), 300);
+                    score1.setPosition((this->window->getView().getSize().x/2) - (score1.getLocalBounds().width / 2), 350);
 
                     sf::Text score2;
                     score2.setFont(font);
-                    std::string score2_string = "Fuel Bonus: 25 x " + std::to_string(this->world->getPlayercar()->getFuel()) +
-                                                " = " + std::to_string(25 * this->world->getPlayercar()->getFuel()) + "\n";
+                    std::string score2_string = "Your Score: " + std::to_string((int)round(this->score) - 1);
                     score2.setString(score2_string);
                     score2.setCharacterSize(16);
-                    score2.setPosition((this->window->getView().getSize().x/2) - (score2.getLocalBounds().width / 2), 350);
-
-                    sf::Text score3;
-                    score3.setFont(font);
-                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score) - 1);
-                    score3.setString(score3_string);
-                    score3.setCharacterSize(16);
-                    score3.setPosition((this->window->getView().getSize().x/2) - (score3.getLocalBounds().width / 2), 400);
+                    score2.setPosition((this->window->getView().getSize().x/2) - (score2.getLocalBounds().width / 2), 400);
 
                     window->draw(finished);
                     window->draw(score1);
                     window->draw(score2);
-                    window->draw(score3);
                 }
                 sf::Event event;
                 while(this->window->pollEvent(event)) {
@@ -363,7 +355,12 @@ void Game::run() {
                     int distance_check = this->game_objects[game_it]["distance"];
                     if(distance_check <= world->getPlayercar()->getDistance()) {
                         if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
-                            finish = true;
+                            if(world->getPlayercar()->getDistance() - distance_check >= 100) {
+                                finish = true;
+                            }
+                            for(const auto& o : world->getOpponents()) {
+                                o->setSpeed(300);
+                            }
                         }
                         else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
 
@@ -517,7 +514,7 @@ bool Game::end_of_game() {
     }
     else {
         if(this->world->move_player_up()){
-            double score_addition = (25 * this->world->getPlayercar()->getFuel());
+            double score_addition = (50 * this->world->getPlayercar()->getFuel());
             this->world->getPlayercar()->increase_score(score_addition);
             this->highscores->write_to_file();
             return false;

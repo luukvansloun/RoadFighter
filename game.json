@@ -1,44 +1,488 @@
 {			
 "Elements"	:	[
-								{
-									"distance"	: 60,
-									"obstacle" 	: "Truck"
-								},
-								{
-									"distance"	: 120,
-									"obstacle" 	: "Lorry"
-								},
-								{
-									"distance"	: 150,
-									"obstacle" 	: "Opponent"
-								},
-								{
-									"distance"	: 200,
-									"obstacle" 	: "Truck"
-								},
-								{
-									"distance"	: 230,
-									"obstacle" 	: "Lorry"
-								},
-								{
-									"distance"	: 280,
-									"obstacle" 	: "Lorry"
-								},
-								{
-									"distance"	: 300,
-									"obstacle" 	: "Truck"
-								},
-								{
-									"distance"	: 340,
-									"obstacle" 	: "Lorry"
-								},
-								{
-									"distance"	: 400,
-									"obstacle" 	: "Lorry"
-								},
-								{
-									"distance"	: 520,
-									"obstacle" 	: "End"
-								}
+					{
+						"distance"	: 60,
+						"obstacle" 	: "Truck"
+					},
+					{
+						"distance"	: 100,
+						"obstacle" 	: "Lorry"
+					},
+                    {
+                      "distance"	: 140,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 160,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 190,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 230,
+                      "obstacle" 	: "Truck"
+                    },
+					{
+						"distance"	: 260,
+						"obstacle" 	: "Opponent"
+					},
+					{
+						"distance"	: 290,
+						"obstacle" 	: "Truck"
+					},
+					{
+						"distance"	: 340,
+						"obstacle" 	: "Lorry"
+					},
+					{
+						"distance"	: 355,
+						"obstacle" 	: "Lorry"
+					},
+					{
+						"distance"	: 390,
+						"obstacle" 	: "Truck"
+					},
+                    {
+                      "distance"	: 420,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 460,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 485,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 520,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 620,
+                      "obstacle" 	: "Opponent"
+                    },
+                    {
+                      "distance"	: 620,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 660,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 700,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 720,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 750,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 785,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 815,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 850,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 890,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 920,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 945,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1000,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1030,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1060,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1095,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1120,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1150,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1180,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1230,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1300,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1330,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1365,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1400,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1440,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1470,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1500,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1520,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1560,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1600,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1630,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1665,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1700,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1735,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1775,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1805,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1840,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1880,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 1915,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1940,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 1975,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2010,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2040,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2075,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2100,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2130,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2175,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2205,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2240,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2280,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2310,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2340,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2370,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2405,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2450,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2485,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2510,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2545,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2580,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2615,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2640,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2675,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2710,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2740,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2775,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2800,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2830,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2875,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 2910,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2935,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 2970,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3005,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3050,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3080,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3115,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3160,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3190,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3440,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3470,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3505,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3540,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3575,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3610,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3650,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3680,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3705,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3750,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3785,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3815,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3850,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 3890,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3930,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 3965,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4010,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4035,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4075,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4115,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4160,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4185,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4210,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4245,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4280,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4305,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4350,
+                      "obstacle" 	: "Truck"
+                    },
+                    {
+                      "distance"	: 4385,
+                      "obstacle" 	: "Lorry"
+                    },
+                    {
+                      "distance"	: 4600,
+                      "obstacle" 	: "End"
+                    }
 ]
 }
