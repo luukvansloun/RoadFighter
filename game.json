@@ -26,7 +26,7 @@
                     },
 					{
 						"distance"	: 260,
-						"obstacle" 	: "Opponent"
+						"obstacle" 	: "Lorry"
 					},
 					{
 						"distance"	: 290,
@@ -121,16 +121,8 @@
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 1095,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
                       "distance"	: 1120,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
-                      "distance"	: 1150,
-                      "obstacle" 	: "Lorry"
+                      "obstacle" 	: "Opponent"
                     },
                     {
                       "distance"	: 1180,
@@ -185,16 +177,8 @@
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 1665,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
                       "distance"	: 1700,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
-                      "distance"	: 1735,
-                      "obstacle" 	: "Lorry"
+                      "obstacle" 	: "Opponent"
                     },
                     {
                       "distance"	: 1775,
@@ -249,16 +233,8 @@
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 2205,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
                       "distance"	: 2240,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
-                      "distance"	: 2280,
-                      "obstacle" 	: "Lorry"
+                      "obstacle" 	: "Opponent"
                     },
                     {
                       "distance"	: 2310,
@@ -293,16 +269,8 @@
                       "obstacle" 	: "Truck"
                     },
                     {
-                      "distance"	: 2580,
-                      "obstacle" 	: "Lorry"
-                    },
-                    {
                       "distance"	: 2615,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
-                      "distance"	: 2640,
-                      "obstacle" 	: "Truck"
+                      "obstacle" 	: "Opponent"
                     },
                     {
                       "distance"	: 2675,
@@ -338,26 +306,22 @@
                     },
                     {
                       "distance"	: 2935,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
-                      "distance"	: 2970,
                       "obstacle" 	: "Lorry"
                     },
                     {
                       "distance"	: 3005,
-                      "obstacle" 	: "Truck"
+                      "obstacle" 	: "Opponent"
                     },
                     {
-                      "distance"	: 3050,
+                      "distance"	: 3065,
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 3080,
+                      "distance"	: 3090,
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 3115,
+                      "distance"	: 3125,
                       "obstacle" 	: "Lorry"
                     },
                     {
@@ -409,16 +373,8 @@
                       "obstacle" 	: "Lorry"
                     },
                     {
-                      "distance"	: 3785,
-                      "obstacle" 	: "Truck"
-                    },
-                    {
                       "distance"	: 3815,
-                      "obstacle" 	: "Lorry"
-                    },
-                    {
-                      "distance"	: 3850,
-                      "obstacle" 	: "Truck"
+                      "obstacle" 	: "Opponent"
                     },
                     {
                       "distance"	: 3890,

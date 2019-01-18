@@ -365,7 +365,7 @@ void Game::run() {
                         else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
 
 
-                            this->world->getOpponents()[opp]->decrease_speed(100);
+                            this->world->getOpponents()[opp]->decrease_speed(75);
                             opp -= 1;
 
                             game_it += 1;
