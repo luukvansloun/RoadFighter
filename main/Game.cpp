@@ -192,8 +192,8 @@ void Game::run() {
                 }
                 else if(finish) {
                     finished.setFont(font);
-                    std::string congrats = "Congratulations!\nYou Finished!!";
-                    finished.setString(congrats);
+                    std::string finished_string = "You Finished!";
+                    finished.setString(finished_string);
                     finished.setFillColor(sf::Color::Red);
                     finished.setOutlineThickness(1);
                     finished.setOutlineColor(sf::Color::White);
