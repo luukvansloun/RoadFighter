@@ -172,10 +172,7 @@ void Game::run() {
             if(std::chrono::steady_clock::now() - end_time <= std::chrono::milliseconds(5000)) {
                 if(this->world->getPlayercar()->getFuel() == 0) {
                     fuel.setFont(font);
-
-                    std::string fuel_string1 = "You ran out of fuel!\n\n\n\n";
-                    fuel_string1 += "Your Score: " + std::to_string((int)round(this->score));
-
+                    std::string fuel_string1 = "You Ran Out of Fuel!\n\n\n\n";
                     fuel.setString(fuel_string1);
                     fuel.setFillColor(sf::Color::Red);
                     fuel.setOutlineThickness(1);
@@ -183,35 +180,52 @@ void Game::run() {
                     fuel.setCharacterSize(35);
                     fuel.setPosition((this->window->getView().getSize().x/2) - (fuel.getLocalBounds().width / 2), 150);
 
+                    sf::Text score;
+                    score.setFont(font);
+                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score));
+                    score.setString(score3_string);
+                    score.setCharacterSize(16);
+                    score.setPosition((this->window->getView().getSize().x/2) - (score.getLocalBounds().width / 2), 400);
+
                     window->draw(fuel);
+                    window->draw(score);
                 }
-                if(finish) {
+                else if(finish) {
                     finished.setFont(font);
-
-                    std::string finish_string = "Congratulations! You crossed the finish line!\n";
-                    finish_string += "Your placement: " + std::to_string(this->world->getEntities().size() + 1) + "\n\n\n";
-
-                    finish_string += "Placement Bonus: 50 x " + std::to_string(7 - this->world->getEntities().size());
-                    finish_string += "Fuel Bonus: 25 x " + std::to_string(this->world->getPlayercar()->getFuel()) +
-                            " = " + std::to_string(25 * this->world->getPlayercar()->getFuel());
-
-                    double score_addition = ((7 - this->world->getEntities().size()) * 50) +
-                            ((25 * this->world->getPlayercar()->getFuel() * 25));
-
-                    this->world->getPlayercar()->increase_score(score_addition);
-
-                    this->highscores->write_to_file();
-
-                    finish_string += "Your Score: " + std::to_string((int)round(this->score));
-
-                    finished.setString(finish_string);
+                    std::string congrats = "Congratulations!\nYou Finished!!";
+                    finished.setString(congrats);
                     finished.setFillColor(sf::Color::Red);
                     finished.setOutlineThickness(1);
                     finished.setOutlineColor(sf::Color::White);
                     finished.setCharacterSize(35);
                     finished.setPosition((this->window->getView().getSize().x/2) - (finished.getLocalBounds().width / 2), 150);
 
+                    sf::Text score1;
+                    score1.setFont(font);
+                    std::string score1_string =  "Your Placement: " + std::to_string(this->world->getEntities().size() + 1);
+                    score1.setString(score1_string);
+                    score1.setCharacterSize(16);
+                    score1.setPosition((this->window->getView().getSize().x/2) - (score1.getLocalBounds().width / 2), 300);
+
+                    sf::Text score2;
+                    score2.setFont(font);
+                    std::string score2_string = "Fuel Bonus: 25 x " + std::to_string(this->world->getPlayercar()->getFuel()) +
+                                                " = " + std::to_string(25 * this->world->getPlayercar()->getFuel()) + "\n";
+                    score2.setString(score2_string);
+                    score2.setCharacterSize(16);
+                    score2.setPosition((this->window->getView().getSize().x/2) - (score2.getLocalBounds().width / 2), 350);
+
+                    sf::Text score3;
+                    score3.setFont(font);
+                    std::string score3_string = "Your Score: " + std::to_string((int)round(this->score));
+                    score3.setString(score3_string);
+                    score3.setCharacterSize(16);
+                    score3.setPosition((this->window->getView().getSize().x/2) - (score3.getLocalBounds().width / 2), 400);
+
                     window->draw(finished);
+                    window->draw(score1);
+                    window->draw(score2);
+                    window->draw(score3);
                 }
             }
             else {
@@ -501,6 +515,9 @@ bool Game::end_of_game() {
     }
     else {
         if(this->world->move_player_up()){
+            double score_addition = (25 * this->world->getPlayercar()->getFuel());
+            this->world->getPlayercar()->increase_score(score_addition);
+            this->highscores->write_to_file();
             return false;
         }
         else {
