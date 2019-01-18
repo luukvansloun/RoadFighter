@@ -144,7 +144,7 @@ void Game::update() {
 }
 
 void Game::run() {
-    int game_it = 0;
+    unsigned int game_it = 0;
     int opp = 6;
     bool running = false;
     bool start = false;

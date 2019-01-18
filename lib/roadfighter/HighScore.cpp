@@ -49,7 +49,7 @@ void roadfighter::HighScore::write_to_file() {
     else {
         hsfile.clear();
         std::sort(highscores.begin(), highscores.end());
-        for(int i = 0; i < highscores.size(); i++) {
+        for(unsigned int i = 0; i < highscores.size(); i++) {
             if(i == highscores.size() - 1) {
                 hsfile << highscores[i];
             }
