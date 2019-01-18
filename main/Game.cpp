@@ -227,6 +227,12 @@ void Game::run() {
                     window->draw(score2);
                     window->draw(score3);
                 }
+                sf::Event event;
+                while(this->window->pollEvent(event)) {
+                    if(event.type == sf::Event::Closed) {
+                        this->window->close();
+                    }
+                }
             }
             else {
                 if(started) {
