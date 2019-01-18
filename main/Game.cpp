@@ -286,6 +286,7 @@ void Game::run() {
                     if(this->world->getPlayercar()->getFuel() <= 0) {
                         highscores->write_to_file();
                         running = false;
+                        world->getPlayercar()->setSpeed(0);
                     }
                 }
 
@@ -436,9 +437,7 @@ void Game::run() {
             std::this_thread::sleep_until(end);
 
             // Game has ended due to finishing or fuel levels being zero
-//            if(!running) {
-//
-//            }
+            // TODO FIX ENDING SCREEN
         }
     }
 }
