@@ -36,7 +36,7 @@ public:
 
     void finish_background();
 
-    void end_of_game();
+    bool end_of_game();
 
     void update() override;
 

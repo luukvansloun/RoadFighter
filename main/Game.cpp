@@ -8,8 +8,6 @@ Game::Game() {
     // Create Game window
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "RoadFighter");
 
-//    window->setKeyRepeatEnabled(false);
-
     // Create Factory for creating SFML object entities
     this->sfml_factory = std::make_shared<roadfighterSFML::SFMLFactory>(this->window);
     this->world = std::make_shared<roadfighter::World>();
@@ -162,6 +160,30 @@ void Game::run() {
 
     while(this->window->isOpen()) {
         if(!running) {
+            if(start) {
+                // Create new world to overwrite the old one
+                this->world = std::make_shared<roadfighter::World>();
+                world->setPlayercar(sfml_factory->create_playercar());
+
+                // Set new Playercar as subject for Game High Score registration
+                this->setSubject(world->getPlayercar());
+
+                // Create new Opponent Cars
+                setup_opponents();
+
+                // Create new HighScore object
+                this->highscores = std::make_shared<roadfighter::HighScore>();
+                highscores->setSubject(world->getPlayercar());
+
+                // Reset variables
+                game_it = 0;
+                opp = 6;
+                running = false;
+                start = false;
+                finish = false;
+            }
+
+
             sf::Text road;
             road.setFont(font);
             road.setString("ROAD");
@@ -241,6 +263,7 @@ void Game::run() {
             else {
                 start = true;
             }
+
 
             if(start) {
                 one += std::chrono::milliseconds(16);
@@ -340,7 +363,7 @@ void Game::run() {
                     update_background();
                 }
                 else {
-                    end_of_game();
+                    running = end_of_game();
                 }
 
                 // Update Entity and Opponent Positions
@@ -359,16 +382,29 @@ void Game::run() {
             text.setFont(font);
 
             std::string text_string = "Your Score: \n\n";
-            text_string += std::to_string((int)round(score));
+            if(!start) {
+                // Showing zero due to possible remembrance of the old score in case of restart
+                text_string += "0";
+            }
+            else {
+                text_string += std::to_string((int)round(score));
+            }
             text_string +=  "\n\n";
 
             text_string += "High Scores: \n\n";
             std::vector<double> temppp = highscores->getHighscores();
             std::sort(temppp.begin(), temppp.end());
 
-            text_string += "1.   " + std::to_string((int)round(temppp[9])) + "\n";
-            text_string += "2.   " + std::to_string((int)round(temppp[8])) + "\n";
-            text_string += "3.   " + std::to_string((int)round(temppp[7])) + "\n\n\n\n\n\n\n\n\n";
+            text_string += "1.    " + std::to_string((int)round(temppp[9])) + "\n";
+            text_string += "2.    " + std::to_string((int)round(temppp[8])) + "\n";
+            text_string += "3.    " + std::to_string((int)round(temppp[7])) + "\n";
+            text_string += "4.    " + std::to_string((int)round(temppp[6])) + "\n";
+            text_string += "5.    " + std::to_string((int)round(temppp[5])) + "\n";
+            text_string += "6.    " + std::to_string((int)round(temppp[4])) + "\n";
+            text_string += "7.    " + std::to_string((int)round(temppp[3])) + "\n";
+            text_string += "8.    " + std::to_string((int)round(temppp[2])) + "\n";
+            text_string += "9.    " + std::to_string((int)round(temppp[1])) + "\n";
+            text_string += "10.   " + std::to_string((int)round(temppp[0])) + "\n\n\n";
 
             text_string += "Speed: ";
             text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
@@ -400,23 +436,25 @@ void Game::run() {
     }
 }
 
-void Game::end_of_game() {
+bool Game::end_of_game() {
     if(!this->EOG) {
-
         this->background.setPosition(0, this->background.getPosition().y +
                                         float(world->getPlayercar()->getSpeed() * 0.075));
         if(this->background.getPosition().y >= -20) {
             finish_background();
             this->EOG = true;
         }
+
+        return true;
     }
     else {
         if(this->world->move_player_up()){
             highscores->write_to_file();
-            exit(0);
+            return false;
         }
         else {
             this->world->getPlayercar()->change_position();
+            return true;
         }
     }
 }
