@@ -239,6 +239,9 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 if(entity->get_type() == "PlayerCar") {
                     if(entity->getCrash().type->get_type() == "Truck") {
                         entity->setSpeed(entity->getSpeed() - 25);
+                        if(entity->getSpeed() == 0) {
+                            entity->setCrash({false, "", nullptr});
+                        }
                     }
                     else if(entity->getCrash().type->get_type() == "Lorry" or
                             entity->getCrash().type->get_type() == "RacingCar") {
@@ -273,6 +276,9 @@ void roadfighter::World::crashing(std::shared_ptr<roadfighter::Entity> entity) {
                 if(entity->get_type() == "PlayerCar") {
                     if(entity->getCrash().type->get_type() == "Truck") {
                         entity->setSpeed(entity->getSpeed() - 25);
+                        if(entity->getSpeed() == 0) {
+                            entity->setCrash({false, "", nullptr});
+                        }
                     }
                     else if(entity->getCrash().type->get_type() == "Lorry" or
                             entity->getCrash().type->get_type() == "RacingCar") {
