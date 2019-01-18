@@ -437,7 +437,7 @@ void Game::run() {
             std::this_thread::sleep_until(end);
 
             // Game has ended due to finishing or fuel levels being zero
-            // TODO FIX ENDING SCREEN SCORE ANIMATION
+            // TODO FIX ENDING SCREEN
         }
     }
 }
