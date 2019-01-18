@@ -204,7 +204,7 @@ void Game::run() {
 
             sf::Text start_text;
             start_text.setFont(font);
-            start_text.setString("Press Any Key To Start");
+            start_text.setString("Press Enter To Start");
             start_text.setCharacterSize(16);
             start_text.setPosition((this->window->getView().getSize().x/2) - (start_text.getLocalBounds().width / 2), 425);
 
@@ -218,7 +218,10 @@ void Game::run() {
 
             sf::Event event;
             while(this->window->pollEvent(event)) {
-                if(event.type == sf::Event::KeyPressed) {
+                if(event.type == sf::Event::Closed) {
+                    this->window->close();
+                }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                     running = true;
                     setupBackground();
                     start_time = std::chrono::steady_clock::now();
@@ -264,6 +267,14 @@ void Game::run() {
                 start = true;
             }
 
+            sf::Event event;
+
+            while(this->window->pollEvent(event)) {
+                // Check if window is closed
+                if (event.type == sf::Event::Closed) {
+                    this->window->close();
+                }
+            }
 
             if(start) {
                 one += std::chrono::milliseconds(16);
@@ -273,12 +284,10 @@ void Game::run() {
                     one = std::chrono::milliseconds(0);
                     this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
                     if(this->world->getPlayercar()->getFuel() <= 0) {
-                        std::cout << "Out of fuel" << std::endl;
+                        highscores->write_to_file();
                         running = false;
                     }
                 }
-
-                sf::Event event;
 
                 if(game_it < this->game_objects.size()) {
                     // Time frame equals the time the next object should be build
@@ -309,13 +318,6 @@ void Game::run() {
 
                 // Update distance travelled: 16 milliseconds (per tick) times the speed
                 this->world->getPlayercar()->update_distance(0.0044 * this->world->getPlayercar()->getSpeed());
-
-                while(this->window->pollEvent(event)) {
-                    // Check if window is closed
-                    if (event.type == sf::Event::Closed) {
-                        this->window->close();
-                    }
-                }
 
                 if(!world->getPlayercar()->isCrashed()) {
                     // Move player to the right
@@ -392,19 +394,19 @@ void Game::run() {
             text_string +=  "\n\n";
 
             text_string += "High Scores: \n\n";
-            std::vector<double> temppp = highscores->getHighscores();
-            std::sort(temppp.begin(), temppp.end());
+            std::vector<double> temp_scores = highscores->getHighscores();
+            std::sort(temp_scores.begin(), temp_scores.end());
 
-            text_string += "1.    " + std::to_string((int)round(temppp[9])) + "\n";
-            text_string += "2.    " + std::to_string((int)round(temppp[8])) + "\n";
-            text_string += "3.    " + std::to_string((int)round(temppp[7])) + "\n";
-            text_string += "4.    " + std::to_string((int)round(temppp[6])) + "\n";
-            text_string += "5.    " + std::to_string((int)round(temppp[5])) + "\n";
-            text_string += "6.    " + std::to_string((int)round(temppp[4])) + "\n";
-            text_string += "7.    " + std::to_string((int)round(temppp[3])) + "\n";
-            text_string += "8.    " + std::to_string((int)round(temppp[2])) + "\n";
-            text_string += "9.    " + std::to_string((int)round(temppp[1])) + "\n";
-            text_string += "10.   " + std::to_string((int)round(temppp[0])) + "\n\n\n";
+            text_string += "1.    " + std::to_string((int)round(temp_scores[9])) + "\n";
+            text_string += "2.    " + std::to_string((int)round(temp_scores[8])) + "\n";
+            text_string += "3.    " + std::to_string((int)round(temp_scores[7])) + "\n";
+            text_string += "4.    " + std::to_string((int)round(temp_scores[6])) + "\n";
+            text_string += "5.    " + std::to_string((int)round(temp_scores[5])) + "\n";
+            text_string += "6.    " + std::to_string((int)round(temp_scores[4])) + "\n";
+            text_string += "7.    " + std::to_string((int)round(temp_scores[3])) + "\n";
+            text_string += "8.    " + std::to_string((int)round(temp_scores[2])) + "\n";
+            text_string += "9.    " + std::to_string((int)round(temp_scores[1])) + "\n";
+            text_string += "10.   " + std::to_string((int)round(temp_scores[0])) + "\n\n\n";
 
             text_string += "Speed: ";
             text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
@@ -432,6 +434,11 @@ void Game::run() {
 
             // Wait until the next frame is due
             std::this_thread::sleep_until(end);
+
+            // Game has ended due to finishing or fuel levels being zero
+//            if(!running) {
+//
+//            }
         }
     }
 }
