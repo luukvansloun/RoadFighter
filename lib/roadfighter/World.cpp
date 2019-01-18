@@ -71,6 +71,14 @@ void roadfighter::World::add_opponent(std::shared_ptr<roadfighter::Entity> oppon
     this->opponents.push_back(opponent);
 }
 
+void roadfighter::World::start_update() {
+    playercar->update(playercar->isCrashed());
+
+    for(const auto& opponent : this->opponents) {
+        opponent->update(opponent->isCrashed());
+    }
+}
+
 void roadfighter::World::update_all() {
     auto all_entities = this->entities;
     all_entities.insert(all_entities.begin(), this->opponents.begin(), this->opponents.end());

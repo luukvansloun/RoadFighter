@@ -87,7 +87,6 @@ void Game::setup_opponents() {
 }
 
 void Game::setupBackground() {
-
     if(!this->bgTexture.loadFromFile("./sprites/BG2.png")) {
         std::cout << "Could not load background image" << std::endl;
     }
@@ -147,171 +146,257 @@ void Game::update() {
 }
 
 void Game::run() {
-    setupBackground();
     int game_it = 0;
     int opp = 6;
+    bool running = false;
+    bool start = false;
+    std::chrono::steady_clock::time_point start_time;
     bool finish = false;
     auto one = std::chrono::milliseconds(0);
     auto two = std::chrono::milliseconds(750);
     auto three = std::chrono::milliseconds(0);
     auto four = std::chrono::milliseconds(250);
 
+    sf::Font font;
+    font.loadFromFile("Pixel-NoirCaps.ttf");
+
     while(this->window->isOpen()) {
-        auto now = std::chrono::steady_clock::now();
-        auto end = now + std::chrono::milliseconds(16);
+        if(!running) {
+            sf::Text road;
+            road.setFont(font);
+            road.setString("ROAD");
+            road.setFillColor(sf::Color::Red);
+            road.setOutlineThickness(1);
+            road.setOutlineColor(sf::Color::White);
+            road.setCharacterSize(50);
+            road.setPosition((this->window->getView().getSize().x/2) - (road.getLocalBounds().width / 2), 150);
 
-        one += std::chrono::milliseconds(16);
-        three += std::chrono::milliseconds(16);
+            sf::Text fighter;
+            fighter.setFont(font);
+            fighter.setString("FIGHTER");
+            fighter.setFillColor(sf::Color::Red);
+            fighter.setOutlineThickness(1);
+            fighter.setOutlineColor(sf::Color::White);
+            fighter.setCharacterSize(50);
+            fighter.setPosition((this->window->getView().getSize().x/2) - (fighter.getLocalBounds().width / 2), 225);
 
-        if(one >= two) {
-            one = std::chrono::milliseconds(0);
-            this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
-            if(this->world->getPlayercar()->getFuel() <= 0) {
-                std::cout << "Out of fuel" << std::endl;
-                exit(0);
+            sf::Text start_text;
+            start_text.setFont(font);
+            start_text.setString("Press Any Key To Start");
+            start_text.setCharacterSize(16);
+            start_text.setPosition((this->window->getView().getSize().x/2) - (start_text.getLocalBounds().width / 2), 425);
+
+            window->draw(road);
+            window->draw(fighter);
+            window->draw(start_text);
+
+            // Display and clear the screen
+            this->window->display();
+            this->window->clear(sf::Color::Black);
+
+            sf::Event event;
+            while(this->window->pollEvent(event)) {
+                if(event.type == sf::Event::KeyPressed) {
+                    running = true;
+                    setupBackground();
+                    start_time = std::chrono::steady_clock::now();
+                }
             }
         }
 
-        sf::Event event;
+        else {
+            auto now = std::chrono::steady_clock::now();
+            auto end = now + std::chrono::milliseconds(16);
 
-        if(game_it < this->game_objects.size()) {
-            // Time frame equals the time the next object should be build
-            int distance_check = this->game_objects[game_it]["distance"];
-            if(distance_check <= world->getPlayercar()->getDistance()) {
-                if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
-                    finish = true;
-                }
-                else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
+            sf::Text counter;
+            counter.setFont(font);
+            counter.setFillColor(sf::Color::Red);
+            counter.setOutlineThickness(1);
+            counter.setOutlineColor(sf::Color::White);
+            counter.setCharacterSize(60);
 
+            if(std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(1200)) {
+                counter.setString("3");
+                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
+                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+            }
+            else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(1200) and
+                    std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(2200)) {
+                counter.setString("2");
+                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
+                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+            }
+            else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(2200) and
+                    std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(3200)) {
+                counter.setString("1");
+                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
+                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+            }
+            else if(std::chrono::steady_clock::now() - start_time >= std::chrono::milliseconds(3200) and
+                    std::chrono::steady_clock::now() - start_time < std::chrono::milliseconds(3700)) {
+                counter.setString("Start!");
+                counter.setPosition((this->window->getView().getSize().x/2) - (counter.getLocalBounds().width / 2),
+                                    (this->window->getView().getSize().y/2) - (counter.getLocalBounds().height / 2));
+            }
+            else {
+                start = true;
+            }
 
-                    this->world->getOpponents()[opp]->decrease_speed(100);
-                    opp -= 1;
+            if(start) {
+                one += std::chrono::milliseconds(16);
+                three += std::chrono::milliseconds(16);
 
-                    game_it += 1;
-                }
-
-                else {
-                    if(world->getEntities().size() < 3) {
-                        add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
+                if(one >= two) {
+                    one = std::chrono::milliseconds(0);
+                    this->world->getPlayercar()->setFuel(this->world->getPlayercar()->getFuel() - 1);
+                    if(this->world->getPlayercar()->getFuel() <= 0) {
+                        std::cout << "Out of fuel" << std::endl;
+                        running = false;
                     }
-
-                    // Update to next
-                    game_it += 1;
                 }
-            }
-        }
 
-        // Update distance travelled: 16 milliseconds (per tick) times the speed
-        this->world->getPlayercar()->update_distance(0.0044 * this->world->getPlayercar()->getSpeed());
+                sf::Event event;
 
-        while(this->window->pollEvent(event)) {
-            // Check if window is closed
-            if (event.type == sf::Event::Closed) {
-                this->window->close();
-            }
-        }
+                if(game_it < this->game_objects.size()) {
+                    // Time frame equals the time the next object should be build
+                    int distance_check = this->game_objects[game_it]["distance"];
+                    if(distance_check <= world->getPlayercar()->getDistance()) {
+                        if(this->game_objects[game_it]["obstacle"].get<std::string>() == "End") {
+                            finish = true;
+                        }
+                        else if(this->game_objects[game_it]["obstacle"].get<std::string>() == "Opponent") {
 
-        if(!world->getPlayercar()->isCrashed()) {
-            // Move player to the right
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                world->move_player_right();
-            }
-            // Move player to the left
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                world->move_player_left();
-            }
-            // Increase player speed
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                // TODO Move to World
-                if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
-                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
-                }
-            }
-            // Decrease player speed
-            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                // TODO Move to World
-                if(world->getPlayercar()->getSpeed() > 0) {
-                    world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
-                }
-            }
-            // Shoot bullet
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                if(!world->getPlayercar()->isShoot()) {
-                    world->getPlayercar()->setShoot(true);
-                }
-                else {
-                    if(three >= four) {
-                        three = std::chrono::seconds(0);
-                        if(world->getPlayercar()->getBullets() > 0) {
-                            add_entity("Bullet");
-                            world->getPlayercar()->setBullets(world->getPlayercar()->getBullets() - 1);
-                            world->getPlayercar()->setShoot(false);
+
+                            this->world->getOpponents()[opp]->decrease_speed(100);
+                            opp -= 1;
+
+                            game_it += 1;
+                        }
+
+                        else {
+                            if(world->getEntities().size() < 3) {
+                                add_entity(this->game_objects[game_it]["obstacle"].get<std::string>());
+                            }
+
+                            // Update to next
+                            game_it += 1;
                         }
                     }
                 }
+
+                // Update distance travelled: 16 milliseconds (per tick) times the speed
+                this->world->getPlayercar()->update_distance(0.0044 * this->world->getPlayercar()->getSpeed());
+
+                while(this->window->pollEvent(event)) {
+                    // Check if window is closed
+                    if (event.type == sf::Event::Closed) {
+                        this->window->close();
+                    }
+                }
+
+                if(!world->getPlayercar()->isCrashed()) {
+                    // Move player to the right
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                        world->move_player_right();
+                    }
+                    // Move player to the left
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                        world->move_player_left();
+                    }
+                    // Increase player speed
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                        // TODO Move to World
+                        if(world->getPlayercar()->getSpeed() < world->getPlayercar()->getMax_speed()) {
+                            world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() + 2.5);
+                        }
+                    }
+                    // Decrease player speed
+                    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                        // TODO Move to World
+                        if(world->getPlayercar()->getSpeed() > 0) {
+                            world->getPlayercar()->setSpeed(world->getPlayercar()->getSpeed() - 7.5);
+                        }
+                    }
+                    // Shoot bullet
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                        if(!world->getPlayercar()->isShoot()) {
+                            world->getPlayercar()->setShoot(true);
+                        }
+                        else {
+                            if(three >= four) {
+                                three = std::chrono::seconds(0);
+                                if(world->getPlayercar()->getBullets() > 0) {
+                                    add_entity("Bullet");
+                                    world->getPlayercar()->setBullets(world->getPlayercar()->getBullets() - 1);
+                                    world->getPlayercar()->setShoot(false);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Move Background
+                if(!finish) {
+                    update_background();
+                }
+                else {
+                    end_of_game();
+                }
+
+                // Update Entity and Opponent Positions
+                world->update_all();
             }
+
+            if(!start) {
+                world->start_update();
+            }
+
+            // Draw
+            this->window->draw(this->background);
+            world->draw();
+
+            sf::Text text;
+            text.setFont(font);
+
+            std::string text_string = "Your Score: \n\n";
+            text_string += std::to_string((int)round(score));
+            text_string +=  "\n\n";
+
+            text_string += "High Scores: \n\n";
+            std::vector<double> temppp = highscores->getHighscores();
+            std::sort(temppp.begin(), temppp.end());
+
+            text_string += "1.   " + std::to_string((int)round(temppp[9])) + "\n";
+            text_string += "2.   " + std::to_string((int)round(temppp[8])) + "\n";
+            text_string += "3.   " + std::to_string((int)round(temppp[7])) + "\n\n\n\n\n\n\n\n\n";
+
+            text_string += "Speed: ";
+            text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
+
+            text_string += "Fuel: ";
+            text_string += std::to_string(this->world->getPlayercar()->getFuel())  + "\n\n\n\n";
+
+            text_string += "Bullets: ";
+            text_string += std::to_string(this->world->getPlayercar()->getBullets());
+
+            text.setString(text_string);
+
+            text.setCharacterSize(11);
+            text.setPosition(600, 50);
+
+            window->draw(text);
+
+            if(!start) {
+                window->draw(counter);
+            }
+
+            // Display and clear the screen
+            this->window->display();
+            this->window->clear(sf::Color::Black);
+
+            // Wait until the next frame is due
+            std::this_thread::sleep_until(end);
         }
-
-        // Move Background
-        if(!finish) {
-            update_background();
-        }
-        else {
-            end_of_game();
-        }
-
-        // Update Entity and Opponent Positions
-        world->update_all();
-
-        // Draw
-        this->window->draw(this->background);
-        world->draw();
-
-        // TEMP FUEL CHECK
-
-        sf::Text text;
-        sf::Font font;
-        font.loadFromFile("Pixel-NoirCaps.ttf");
-        text.setFont(font);
-
-        std::string text_string = "Your Score: \n\n";
-        text_string += std::to_string((int)round(score));
-        text_string +=  "\n\n";
-
-        text_string += "High Scores: \n\n";
-        std::vector<double> temppp = highscores->getHighscores();
-        std::sort(temppp.begin(), temppp.end());
-
-        text_string += "1.   " + std::to_string((int)round(temppp[9])) + "\n";
-        text_string += "2.   " + std::to_string((int)round(temppp[8])) + "\n";
-        text_string += "3.   " + std::to_string((int)round(temppp[7])) + "\n\n\n\n\n\n\n\n\n";
-
-        text_string += "Speed: ";
-        text_string += std::to_string(int(this->world->getPlayercar()->getSpeed())) + "km/h"  + "\n\n\n\n";
-
-        text_string += "Fuel: ";
-        text_string += std::to_string(this->world->getPlayercar()->getFuel())  + "\n\n\n\n";
-
-        text_string += "Bullets: ";
-        text_string += std::to_string(this->world->getPlayercar()->getBullets());
-
-        text.setString(text_string);
-
-        text.setCharacterSize(11);
-        text.setPosition(600, 50);
-
-        window->draw(text);
-
-        // TEMP FUEL CHECK
-
-
-
-        // Display and clear the screen
-        this->window->display();
-        this->window->clear(sf::Color::Black);
-
-        // Wait until the next frame is due
-        std::this_thread::sleep_until(end);
     }
 }
 
