@@ -45,7 +45,7 @@ class SFMLFactory : public roadfighter::EntityFactory {
         * @brief Constructor for the SFMLFactory Class
         * @post SFMLFactory object has been destroyed
         */
-        virtual ~SFMLFactory();
+        virtual ~SFMLFactory()=default;
 
         /**
         * @fn std::shared_ptr<roadfighter::Entity> create_playercar()

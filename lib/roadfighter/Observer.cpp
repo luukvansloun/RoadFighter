@@ -4,8 +4,6 @@
 
 #include "Observer.h"
 
-Observer::Observer() {}
-
 std::shared_ptr<roadfighter::Entity> Observer::getSubject() {
     return subject;
 }

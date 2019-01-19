@@ -18,7 +18,7 @@
 
 class Transformation {
 private:
-    Transformation();
+    Transformation()=default;
 
 public:
     Transformation(Transformation const&) = delete;

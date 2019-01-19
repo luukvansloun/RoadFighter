@@ -42,7 +42,7 @@ namespace roadfighter {
         * @brief Constructor for the World Class
         * @post New World object has been created
         */
-        World();
+        World()=default;
 
         /**
         * @fn const std::shared_ptr<roadfighter::Entity> &getPlayercar() const

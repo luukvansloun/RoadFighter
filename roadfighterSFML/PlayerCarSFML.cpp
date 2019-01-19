@@ -46,8 +46,6 @@ void roadfighterSFML::PlayerCarSFML::change_position() {
     this->sprite.setPosition(co.first, co.second);
 }
 
-roadfighterSFML::PlayerCarSFML::~PlayerCarSFML() {}
-
 void roadfighterSFML::PlayerCarSFML::draw() {
     this->window->draw(this->sprite);
 }

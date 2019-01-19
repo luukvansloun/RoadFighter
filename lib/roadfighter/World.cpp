@@ -4,8 +4,6 @@
 
 #include "World.h"
 
-roadfighter::World::World() {}
-
 void roadfighter::World::move_player_right() {
     float plus = 0.0375;
     if(playercar->getX() + plus > float(0.025)) {
@@ -36,7 +34,7 @@ void roadfighter::World::move_player_left() {
 }
 
 bool roadfighter::World::move_player_up() {
-    float new_y = getPlayercar()->getY() + (getPlayercar()->getSpeed() * float(0.000375));
+    auto new_y = float(getPlayercar()->getY() + (getPlayercar()->getSpeed() * 0.000375f));
 
     if(new_y > 4) {
         return true;

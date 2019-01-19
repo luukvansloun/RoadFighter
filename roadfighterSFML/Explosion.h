@@ -42,7 +42,7 @@ namespace roadfighterSFML {
         * @brief Destructor for the Explosion Class
         * @post Explosion object has been destroyed
         */
-        virtual ~Explosion();
+        virtual ~Explosion()=default;
 
         sf::IntRect texture_rect;
 

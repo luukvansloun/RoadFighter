@@ -49,7 +49,7 @@ namespace roadfighterSFML {
         * @brief Destructor for the RacingCarSFML Class
         * @post RacingCarSFML object has been destroyed
         */
-        virtual ~RacingCarSFML();
+        virtual ~RacingCarSFML()=default;
 
         /**
         * @fn void change_position()

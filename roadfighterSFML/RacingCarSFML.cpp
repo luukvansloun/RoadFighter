@@ -39,8 +39,6 @@ void roadfighterSFML::RacingCarSFML::draw() {
     this->window->draw(this->sprite);
 }
 
-roadfighterSFML::RacingCarSFML::~RacingCarSFML() {}
-
 float roadfighterSFML::RacingCarSFML::getWidth() const {
     return width;
 }

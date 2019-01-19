@@ -29,7 +29,7 @@ public:
     * @brief Constructor for the Observer Class
     * @post New Observer object has been created
     */
-    Observer();
+    Observer()=default;
 
     /**
     * @fn void setSubject(std::shared_ptr<roadfighter::Entity> subj)

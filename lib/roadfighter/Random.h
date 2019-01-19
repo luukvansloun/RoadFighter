@@ -19,7 +19,7 @@
 
 class Random {
 private:
-    Random();
+    Random()=default;
 
 public:
     Random(Random const&) = delete;

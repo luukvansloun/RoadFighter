@@ -9,8 +9,6 @@ roadfighterSFML::SFMLFactory::SFMLFactory(std::shared_ptr<sf::RenderWindow> wind
     this->window = window;
 }
 
-roadfighterSFML::SFMLFactory::~SFMLFactory() {}
-
 // Create Entity Functions
 
 std::shared_ptr<roadfighter::Entity> roadfighterSFML::SFMLFactory::create_playercar() {

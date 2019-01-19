@@ -4,8 +4,6 @@
 
 #include "Random.h"
 
-Random::Random() {};
-
 float Random::get_random_x() {
     auto leftmost_x = float(-2.45);
     float rightmost_x = 0.025;

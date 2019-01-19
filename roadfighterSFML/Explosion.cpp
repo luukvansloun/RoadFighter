@@ -14,7 +14,6 @@ roadfighterSFML::Explosion::Explosion() {
     texture_rect.height = 81;
 }
 
-roadfighterSFML::Explosion::~Explosion() {}
 
 void roadfighterSFML::Explosion::Update() {
     current_time += std::chrono::milliseconds(16);
