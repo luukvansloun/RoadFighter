@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classroadfighter_1_1EntityFactory.html" title="This Class contains all the functionalities of the Entity Factory. " alt="" coords="5,5,175,32"/>
+<area shape="rect" id="node2" href="$classroadfighterSFML_1_1SFMLFactory.html" title="This Class contains the functions for creating SFML objects. " alt="" coords="223,5,428,32"/>
+</map>

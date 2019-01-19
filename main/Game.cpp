@@ -389,11 +389,11 @@ void Game::run() {
                     }
                     // Increase player speed
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        world->increase_speed();
+                        world->incr_speed();
                     }
                     // Decrease player speed
                     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        world->decrease_speed();
+                        world->decr_speed();
                     }
                     // Shoot bullet
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {

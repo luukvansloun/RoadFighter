@@ -25,8 +25,11 @@
 #include "LorrySFML.h"
 #include "BulletSFML.h"
 
+/**
+* @namespace roadfighterSFML
+* @brief This Namespace contains all elements to complete the graphical aspect of the roadfighter library
+*/
 namespace roadfighterSFML {
-
 class SFMLFactory : public roadfighter::EntityFactory {
     public:
         /**

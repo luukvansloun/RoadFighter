@@ -21,8 +21,11 @@
 #include <Transformation.h>
 #include "Explosion.h"
 
+/**
+* @namespace roadfighterSFML
+* @brief This Namespace contains all elements to complete the graphical aspect of the roadfighter library
+*/
 namespace roadfighterSFML {
-
     class PlayerCarSFML : public roadfighter::PlayerCar {
     private:
         float width;

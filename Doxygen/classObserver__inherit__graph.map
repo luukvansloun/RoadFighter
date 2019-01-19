@@ -1,0 +1,4 @@
+<map id="Observer" name="Observer">
+<area shape="rect" id="node2" href="$classGame.html" title="This Class contains all the functionalities to run the Game. " alt="" coords="5,80,63,107"/>
+<area shape="rect" id="node3" href="$classroadfighter_1_1HighScore.html" title="This Class contains all the functionalities of the HighScore System. " alt="" coords="87,80,239,107"/>
+</map>

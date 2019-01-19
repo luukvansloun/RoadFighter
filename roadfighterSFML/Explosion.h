@@ -17,6 +17,10 @@
 #include <chrono>
 #include <SFML/Graphics.hpp>
 
+/**
+* @namespace roadfighterSFML
+* @brief This Namespace contains all elements to complete the graphical aspect of the roadfighter library
+*/
 namespace roadfighterSFML {
     class Explosion {
     private:

@@ -1,0 +1,4 @@
+<map id="roadfighter::PlayerCar" name="roadfighter::PlayerCar">
+<area shape="rect" id="node3" href="$classroadfighterSFML_1_1PlayerCarSFML.html" title="This Class contains all the SFML functionalities for the Player car. " alt="" coords="5,155,224,181"/>
+<area shape="rect" id="node2" href="$classroadfighter_1_1Entity.html" title="This Class contains all the functionalities of the Entity object. " alt="" coords="52,5,177,32"/>
+</map>
