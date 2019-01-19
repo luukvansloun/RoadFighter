@@ -1,6 +1,14 @@
-//
-// Created by luuk on 10-12-18.
-//
+/**
+ * @file TruckSFML.h
+ *
+ * @brief Header file for TruckSFML class
+ *
+ * @class roadfighterSFML::TruckSFML
+ *
+ * @brief This Class contains all the SFML functionalities for Trucks.
+ *
+ * @authors Luuk van Sloun
+ */
 
 #ifndef ROADFIGHTER_TRUCKSFML_H
 #define ROADFIGHTER_TRUCKSFML_H
@@ -24,18 +32,52 @@ namespace roadfighterSFML {
         std::shared_ptr<roadfighterSFML::Explosion> explosion;
 
     public:
+        /**
+        * @fn TruckSFML(std::shared_ptr<sf::RenderWindow> window)
+        * @param std::shared_ptr<sf::RenderWindow> window
+        * @brief Constructor for the TruckSFML Class
+        * @post New TruckSFML object has been created
+        */
         TruckSFML(std::shared_ptr<sf::RenderWindow> window);
 
-        void change_position();
+        /**
+        * @fn void change_position()
+        * @brief Relocates to the new pixel coördinates calculated from the used coördinate system
+        */
+        void change_position() override;
 
-        void draw();
+        /**
+        * @fn void draw()
+        * @brief Calls the SFML draw functionality
+        */
+        void draw() override;
 
-        float getWidth() const;
+        /**
+        * @fn float getWidth()
+        * @brief Returns the SFML object width
+        * @return float
+        */
+        float getWidth() const override;
 
-        float getHeight() const;
+        /**
+        * @fn float getHeight()
+        * @brief Returns the SFML object height
+        * @return float
+        */
+        float getHeight() const override;
 
+        /**
+        * @fn void update(bool crashed)
+        * @param bool crashed
+        * @brief Calls the Explosion update function in case of a 'crash'
+        */
         void update(bool crashed) override;
 
+        /**
+        * @fn bool explosion_finished()
+        * @brief Returns True if the Explosion animation has finished
+        * @return bool
+        */
         bool explosion_finished() override;
     };
 }

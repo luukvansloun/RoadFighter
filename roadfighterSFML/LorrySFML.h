@@ -1,6 +1,14 @@
-//
-// Created by luuk on 10-12-18.
-//
+/**
+ * @file LorrySFML.h
+ *
+ * @brief Header file for LorrySFML class
+ *
+ * @class roadfighterSFML::LorrySFML
+ *
+ * @brief This Class contains all the SFML functionalities for Lorries.
+ *
+ * @authors Luuk van Sloun
+ */
 
 #ifndef ROADFIGHTER_LORRYSFML_H
 #define ROADFIGHTER_LORRYSFML_H
@@ -24,18 +32,52 @@ namespace roadfighterSFML {
         std::shared_ptr<roadfighterSFML::Explosion> explosion;
 
     public:
+        /**
+        * @fn LorrySFML(std::shared_ptr<sf::RenderWindow> window)
+        * @param std::shared_ptr<sf::RenderWindow> window
+        * @brief Constructor for the LorrySFML Class
+        * @post New LorrySFML object has been created
+        */
         LorrySFML(std::shared_ptr<sf::RenderWindow> window);
 
-        void change_position();
+        /**
+        * @fn void change_position()
+        * @brief Relocates to the new pixel coördinates calculated from the used coördinate system
+        */
+        void change_position() override;
 
-        void draw();
+        /**
+        * @fn void draw()
+        * @brief Calls the SFML draw functionality
+        */
+        void draw() override;
 
-        float getWidth() const;
+        /**
+        * @fn float getWidth() const override
+        * @brief Returns the SFML object width
+        * @return float
+        */
+        float getWidth() const override;
 
-        float getHeight() const;
+        /**
+        * @fn float getHeight()
+        * @brief Returns the SFML object height
+        * @return float
+        */
+        float getHeight() const override;
 
+        /**
+        * @fn void update(bool crashed)
+        * @param bool crashed
+        * @brief Calls the Explosion update function in case of a 'crash'
+        */
         void update(bool crashed) override;
 
+        /**
+        * @fn bool explosion_finished()
+        * @brief Returns True if the Explosion animation has finished
+        * @return bool
+        */
         bool explosion_finished() override;
     };
 }
